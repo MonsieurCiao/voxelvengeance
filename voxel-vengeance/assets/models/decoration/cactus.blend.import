@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dwaik8afe2dgb"
-path="res://.godot/imported/woodbox.blend-1c78248c560e51ccd75ee33621c4589a.scn"
+uid="uid://c35wjpnvvxgig"
+path="res://.godot/imported/cactus.blend-7f3e603e42faa3325c76dd570b90660d.scn"
 
 [deps]
 
-source_file="res://assets/models/woodbox.blend"
-dest_files=["res://.godot/imported/woodbox.blend-1c78248c560e51ccd75ee33621c4589a.scn"]
+source_file="res://assets/models/decoration/cactus.blend"
+dest_files=["res://.godot/imported/cactus.blend-7f3e603e42faa3325c76dd570b90660d.scn"]
 
 [params]
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://evqpfl5bkqbi"]
 
-[ext_resource type="PackedScene" uid="uid://dwaik8afe2dgb" path="res://assets/models/woodbox.blend" id="1_b3wxb"]
+[ext_resource type="PackedScene" uid="uid://dwaik8afe2dgb" path="res://assets/models/decoration/woodbox.blend" id="1_b3wxb"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_b3wxb"]
 
