@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://evqpfl5bkqbi"]
+
+[ext_resource type="PackedScene" uid="uid://dwaik8afe2dgb" path="res://assets/models/woodbox.blend" id="1_b3wxb"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_b3wxb"]
+
+[node name="woodbox" type="Node3D"]
+
+[node name="woodbox" parent="." instance=ExtResource("1_b3wxb")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="woodbox"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="woodbox/StaticBody3D"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+shape = SubResource("BoxShape3D_b3wxb")

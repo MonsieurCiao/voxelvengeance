@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://d20mph0y372ct"]
+
+[ext_resource type="PackedScene" uid="uid://bgxgyy2qk1asd" path="res://assets/models/barrel.blend" id="1_rdemj"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rdemj"]
+
+[node name="barrel" type="Node3D"]
+
+[node name="barrel" parent="." instance=ExtResource("1_rdemj")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="barrel"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="barrel/StaticBody3D"]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)
+shape = SubResource("BoxShape3D_rdemj")

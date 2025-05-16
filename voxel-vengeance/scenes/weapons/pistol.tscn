@@ -1,0 +1,80 @@
+[gd_scene load_steps=7 format=3 uid="uid://ds7nop426fpju"]
+
+[ext_resource type="PackedScene" uid="uid://blq43804hderl" path="res://assets/models/pistol.blend" id="1_bmquw"]
+[ext_resource type="Script" uid="uid://bibvhm7q5prgf" path="res://scripts/shoot.gd" id="2_r3071"]
+[ext_resource type="PackedScene" uid="uid://ckx4hhut66byo" path="res://scenes/animation/weapon_muzzle_flash.tscn" id="3_60a84"]
+
+[sub_resource type="Animation" id="Animation_rpfgx"]
+resource_name = "shoot"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.4),
+"transitions": PackedFloat32Array(0.500001, 0.500001, 0.406127),
+"update": 0,
+"values": [Vector3(0, 0, 1.5708), Vector3(0.610865, 0, 1.5708), Vector3(0, 0, 1.5708)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.11, 0.4),
+"transitions": PackedFloat32Array(0.31864, 0.31864, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.621572), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_37wq5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 1.5708)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ps2nd"]
+_data = {
+&"RESET": SubResource("Animation_37wq5"),
+&"shoot": SubResource("Animation_rpfgx")
+}
+
+[node name="pistol" type="Node3D"]
+script = ExtResource("2_r3071")
+
+[node name="pistol" parent="." instance=ExtResource("1_bmquw")]
+transform = Transform3D(-8.74228e-09, -0.2, 0, 0.2, -8.74228e-09, 0, 0, 0, 0.2, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="pistol"]
+libraries = {
+&"": SubResource("AnimationLibrary_ps2nd")
+}
+
+[node name="sparks" parent="." instance=ExtResource("3_60a84")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -0.413119)
