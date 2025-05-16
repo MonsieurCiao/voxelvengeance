@@ -9,9 +9,8 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_3vyb7"]
 size = Vector3(0.6, 1.8, 0.6)
 
-[node name="PLAYER" type="CharacterBody3D" node_paths=PackedStringArray("camera_pivot")]
+[node name="PLAYER" type="CharacterBody3D"]
 script = ExtResource("1_3vyb7")
-camera_pivot = NodePath("")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.6, 0, 0, 0, 1.8, 0, 0, 0, 0.6, 0, 0.917827, 0)
