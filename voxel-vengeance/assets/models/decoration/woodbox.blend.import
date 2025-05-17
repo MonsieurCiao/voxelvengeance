@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bx603tifhkmut"
-path="res://.godot/imported/ak47.blend-2a9069d1326cec3d72a274a5ffbe3224.scn"
+uid="uid://dwaik8afe2dgb"
+path="res://.godot/imported/woodbox.blend-d33a7640de9a917b5fcfd83140ea935f.scn"
 
 [deps]
 
-source_file="res://assets/models/ak47.blend"
-dest_files=["res://.godot/imported/ak47.blend-2a9069d1326cec3d72a274a5ffbe3224.scn"]
+source_file="res://assets/models/decoration/woodbox.blend"
+dest_files=["res://.godot/imported/woodbox.blend-d33a7640de9a917b5fcfd83140ea935f.scn"]
 
 [params]
 

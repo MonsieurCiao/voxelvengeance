@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://ds7nop426fpju"]
 
-[ext_resource type="PackedScene" uid="uid://blq43804hderl" path="res://assets/models/pistol.blend" id="1_bmquw"]
+[ext_resource type="PackedScene" uid="uid://blq43804hderl" path="res://assets/models/weapons/pistol.blend" id="1_bmquw"]
 [ext_resource type="Script" uid="uid://bibvhm7q5prgf" path="res://scripts/shoot.gd" id="2_r3071"]
 [ext_resource type="PackedScene" uid="uid://ckx4hhut66byo" path="res://scenes/animation/weapon_muzzle_flash.tscn" id="3_60a84"]
 

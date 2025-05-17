@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cy1w1e6sayjtj"]
 
-[ext_resource type="PackedScene" uid="uid://5hjin4o3d1yn" path="res://assets/models/lantern.blend" id="1_iumsh"]
+[ext_resource type="PackedScene" uid="uid://5hjin4o3d1yn" path="res://assets/models/decoration/lantern.blend" id="1_iumsh"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_26vo7"]
 size = Vector3(0.234863, 3.20966, 0.191895)
