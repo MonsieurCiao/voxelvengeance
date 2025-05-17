@@ -1,6 +1,5 @@
 [gd_scene load_steps=13 format=3 uid="uid://d2yfp1tb8a8o1"]
 
-
 [ext_resource type="PackedScene" uid="uid://bmnfojq3xd4ad" path="res://scenes/player.tscn" id="1_o5qli"]
 [ext_resource type="PackedScene" uid="uid://ds3ieo3rb4j0a" path="res://scenes/menus/pause_menu.tscn" id="1_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://evqpfl5bkqbi" path="res://scenes/decoration/woodbox.tscn" id="2_0wfyh"]
@@ -83,9 +82,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0192618, 0.877228, 0.980087
 [node name="lantern" parent="." instance=ExtResource("4_jyhfs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.19762, 0.5, 0.211462)
 
-
 [node name="Cactus" parent="." instance=ExtResource("7_o6xl0")]
 transform = Transform3D(0.508576, 0, -0.861017, 0, 1, 0, 0.861017, 0, 0.508576, 4.81236, 0.273469, -2.09927)
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("1_o6xl0")]
