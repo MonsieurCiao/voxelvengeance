@@ -58,10 +58,15 @@ common/physics_interpolation=true
 [rendering]
 
 lights_and_shadows/directional_shadow/size=8192
+<<<<<<< Updated upstream
 anti_aliasing/quality/msaa_3d=1
 anti_aliasing/quality/screen_space_aa=1
 <<<<<<< Updated upstream
 =======
+=======
+anti_aliasing/quality/msaa_3d=3
+anti_aliasing/quality/screen_space_aa=1
+>>>>>>> Stashed changes
 lights_and_shadows/positional_shadow/atlas_size=8192
 esc={
 "deadzone": 0.2,
