@@ -33,7 +33,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_rpfgx"]
 resource_name = "shoot"
-length = 0.4
+length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -41,7 +41,7 @@ tracks/0/path = NodePath(".:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.4),
+"times": PackedFloat32Array(0, 0.1, 0.3),
 "transitions": PackedFloat32Array(0.500001, 0.500001, 0.406127),
 "update": 0,
 "values": [Vector3(0, 0, 1.5708), Vector3(0.610865, 0, 1.5708), Vector3(0, 0, 1.5708)]
@@ -53,7 +53,7 @@ tracks/1/path = NodePath(".:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.11, 0.4),
+"times": PackedFloat32Array(0, 0.11, 0.3),
 "transitions": PackedFloat32Array(0.31864, 0.31864, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, 0, 0.621572), Vector3(0, 0, 0)]
