@@ -40,7 +40,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, 5)
 camera_pivot = NodePath("../CameraController")
 
 [node name="pistol" parent="PLAYER" instance=ExtResource("2_tbgi4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.596581, 1.09619, -0.891432)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.596581, 1.09619, -0.578362)
 
 [node name="CameraController" type="Node3D" parent="."]
 script = ExtResource("3_tefeu")
