@@ -10,6 +10,8 @@ func _process(delta: float) -> void:
 	global_position = player.global_position
 
 func _input(event: InputEvent) -> void:
+	if not player.input_enabled:
+		return
 	if event is InputEventMouseMotion:
 		#rotation.x -= event.relative.y / 1000 * sensitivity
 		rotation.y -= event.relative.x / 1000 * sensitivity
