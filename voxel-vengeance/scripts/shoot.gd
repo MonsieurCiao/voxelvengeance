@@ -11,6 +11,7 @@ var shootCooldown = 0.4
 var bullet = load("res://scenes/weapons/pistolBullet.tscn")
 var bulletInstance
 @onready var gun_barrel = $pistol/RayCast3D
+@onready var player: CharacterBody3D = $".."
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -18,7 +19,7 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	#actual SHOOTING
-	if event.is_action_pressed("shoot") && isShooting == false:
+	if event.is_action_pressed("shoot") && isShooting == false && player.input_enabled == true:
 		# check if is in wall
 		if not isBarrelClear(camera, gun_barrel):
 			return
