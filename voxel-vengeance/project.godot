@@ -15,6 +15,14 @@ run/main_scene="uid://d2yfp1tb8a8o1"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
+[debug]
+
+settings/stdout/print_fps=true
+
+[display]
+
+window/vsync/vsync_mode=0
+
 [input]
 
 forward={
@@ -49,12 +57,19 @@ esc={
 ]
 }
 
+[physics]
+
+common/physics_interpolation=true
+
 [rendering]
 
+lights_and_shadows/directional_shadow/size=8192
 anti_aliasing/quality/msaa_3d=3
 anti_aliasing/quality/screen_space_aa=1
+lights_and_shadows/positional_shadow/atlas_size=8192
 esc={
 "deadzone": 0.2,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194305,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 ]
 }
+<<<<<<<Updatedupstreamanti_aliasing/quality/msaa_3d=1
