@@ -8,6 +8,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	global_position = player.global_position
+	
 
 func _input(event: InputEvent) -> void:
 	if not player.input_enabled:
