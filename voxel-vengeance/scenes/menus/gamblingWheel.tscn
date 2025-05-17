@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbbhdpoqm3rmm"]
+
+[ext_resource type="PackedScene" uid="uid://ibwhusf3kej5" path="res://assets/models/menu/gamblingWheel.blend" id="1_v1xut"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uloaj"]
+size = Vector3(1.95502, 3.00928, 0.712463)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="gamblingWheel" parent="." instance=ExtResource("1_v1xut")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="gamblingWheel"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="gamblingWheel/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00204468, 1.50806, 0.059906)
+shape = SubResource("BoxShape3D_uloaj")
