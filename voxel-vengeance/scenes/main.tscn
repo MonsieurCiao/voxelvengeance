@@ -6,6 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://ds7nop426fpju" path="res://scenes/weapons/pistol.tscn" id="2_tbgi4"]
 [ext_resource type="Script" uid="uid://baw12ml61sky4" path="res://scripts/camera_controller.gd" id="3_tefeu"]
 [ext_resource type="PackedScene" uid="uid://cy1w1e6sayjtj" path="res://scenes/decoration/lantern.tscn" id="4_jyhfs"]
+<<<<<<< Updated upstream
+=======
+[ext_resource type="PackedScene" path="res://scenes/decoration/cactus.tscn" id="7_o6xl0"]
+>>>>>>> Stashed changes
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sgp6g"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
