@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bxm5yatlhai6n"]
+
+[ext_resource type="PackedScene" uid="uid://b1v41iyssovpw" path="res://assets/models/decoration/fence2.blend" id="1_762h7"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hra8t"]
+size = Vector3(0.194824, 1.96988, 5.24381)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="fence2" parent="." instance=ExtResource("1_762h7")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="fence2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="fence2/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0212402, 0.97728, -0.211857)
+shape = SubResource("BoxShape3D_hra8t")

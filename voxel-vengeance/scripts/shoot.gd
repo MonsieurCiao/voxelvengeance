@@ -4,7 +4,7 @@ extends Node3D
 
 
 var isShooting = false
-var shootCooldown = 0.4
+@export var shootCooldown: float
 @onready var camera: Camera3D = $"../../CameraController/Camera3D"
 
 #bullets
@@ -31,7 +31,7 @@ func _input(event: InputEvent) -> void:
 		var bullet_container = get_tree().get_current_scene().get_node("Bullets")
 		bullet_container.add_child(bulletInstance)
 
-		await get_tree().create_timer(0.4).timeout
+		await get_tree().create_timer(shootCooldown).timeout
 		isShooting = false
 
 func isBarrelClear(camera: Node3D, gun_barrel: Node3D) -> bool:
