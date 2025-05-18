@@ -63,7 +63,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.693015, 5)
 camera_pivot = NodePath("../CameraController")
 
 [node name="weaponSpawner" type="Node3D" parent="PLAYER"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.870526, -0.68163)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, -0.682)
 script = ExtResource("2_jbj1t")
 pistol = ExtResource("2_tbgi4")
 ak47 = ExtResource("4_muem4")
