@@ -78,7 +78,7 @@ func shootRay():
 	var space = get_world_3d().direct_space_state
 
 	# Step 1: Cast a ray forward from the player
-	var from = global_transform.origin + Vector3.UP * 1.2
+	var from = global_transform.origin 
 	var direction = -global_transform.basis.z.normalized()
 	var to = from + direction * rayLength
 
