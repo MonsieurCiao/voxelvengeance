@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://uxlv3hu17vgt"]
+[gd_scene load_steps=12 format=3 uid="uid://s4fwf51f3tb0"]
 
 [ext_resource type="PackedScene" uid="uid://bx603tifhkmut" path="res://assets/models/weapons/ak47.blend" id="1_b1as7"]
 [ext_resource type="PackedScene" uid="uid://ckx4hhut66byo" path="res://scenes/animation/weapon_muzzle_flash.tscn" id="1_bbty4"]

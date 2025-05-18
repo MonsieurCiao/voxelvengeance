@@ -29,8 +29,9 @@ func _process(delta: float) -> void:
 		if Input.is_action_just_pressed("shoot") && isShooting == false && player.input_enabled == true:
 			bulletShoot()
 
-
 func bulletShoot():
+		await get_tree().create_timer(shootCooldown).timeout
+		isShooting = false
 	# check if is in wall
 	if not isBarrelClear(camera, gun_barrel):
 		return
