@@ -1,32 +1,47 @@
 extends Control
 
 var paused = false
+var inPauseMenu = false
+var inGame = true
 
 func _ready() -> void:
-	$AnimationPlayer.play("RESET")
-
+	$PanelPlayer.play("RESET")
+	$BlurPlayer.play("RESET")
+	
+	hide()
 func resume():
 	#capture mouse
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	inGame = true
 	paused = false
-	$AnimationPlayer.play_backwards("blur")
+	
 	var player = get_tree().get_first_node_in_group("Player")
 	if player:
 		player.input_enabled = true
-
+		
+	$PanelPlayer.play_backwards("panel")
+	$BlurPlayer.play_backwards("blur")
+	await [ $BlurPlayer.animation_finished, $PanelPlayer.animation_finished ]
+	hide()
+	
 func pause():
 	#free mouse
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	inGame = false
 	paused = true
-	$AnimationPlayer.play("blur")
+	inPauseMenu = true
+	show()
+	$BlurPlayer.play("blur")
+	$PanelPlayer.play("panel")
 	var player = get_tree().get_first_node_in_group("Player")
+	
 	if player:
 		player.input_enabled = false
 	
 func testEsc():
-	if Input.is_action_just_pressed("esc") and paused == false:
+	if Input.is_action_just_pressed("esc") and paused == false and inGame:
 		pause()
-	elif Input.is_action_just_pressed("esc") and paused == true:
+	elif Input.is_action_just_pressed("esc") and paused == true and inPauseMenu:
 		resume()
 
 
@@ -35,11 +50,14 @@ func _on_resume_pressed() -> void:
 
 
 func _on_settings_pressed() -> void:
-	pass # Replace with function body.
-
+	inPauseMenu = false
+	$PanelPlayer.play_backwards("panel")
+	$'../SettingsMenu'.show()
+	$"../SettingsMenu/AnimationPlayer".play("panel")
 
 func _on_leave_pressed() -> void:
 	get_tree().quit()
 
 func _process(delta: float) -> void:
 	testEsc()
+	pass

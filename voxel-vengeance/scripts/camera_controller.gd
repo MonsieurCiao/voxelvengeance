@@ -1,10 +1,11 @@
 extends Node3D
 
-@export var sensitivity := .5
+var sensitivity := .5
 @onready var player: CharacterBody3D = $"../PLAYER"
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	pass
 
 func _process(delta: float) -> void:
 	global_position = player.global_position
