@@ -1,6 +1,4 @@
-
 [gd_scene load_steps=23 format=3 uid="uid://d2yfp1tb8a8o1"]
-
 
 [ext_resource type="PackedScene" uid="uid://bmnfojq3xd4ad" path="res://scenes/player.tscn" id="1_o5qli"]
 [ext_resource type="PackedScene" uid="uid://ds3ieo3rb4j0a" path="res://scenes/menus/pause_menu.tscn" id="1_o6xl0"]
@@ -11,16 +9,13 @@
 [ext_resource type="Texture2D" uid="uid://ur5v855a316h" path="res://assets/crosshair.svg" id="4_85g3d"]
 [ext_resource type="Script" uid="uid://c74mi7313djo3" path="res://scripts/cameraScript.gd" id="4_choun"]
 [ext_resource type="PackedScene" uid="uid://cy1w1e6sayjtj" path="res://scenes/decoration/lantern.tscn" id="4_jyhfs"]
-
-[ext_resource type="PackedScene" path="res://scenes/decoration/cactus.tscn" id="7_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://b00l872ksbyw1" path="res://scenes/menus/settings_menu.tscn" id="6_jbj1t"]
 [ext_resource type="PackedScene" uid="uid://c16bc8sgbrxf0" path="res://scenes/decoration/cactus.tscn" id="7_o6xl0"]
-
-[ext_resource type="PackedScene" path="res://scenes/menus/gambling_wheel_spinning.tscn" id="9_85g3d"]
-[ext_resource type="PackedScene" path="res://scenes/decoration/fence_1.tscn" id="10_trceg"]
-[ext_resource type="PackedScene" path="res://scenes/decoration/fence_2.tscn" id="11_a8y0u"]
-[ext_resource type="PackedScene" path="res://scenes/decoration/fence_3.tscn" id="12_jkv2x"]
-[ext_resource type="PackedScene" path="res://scenes/decoration/fence_4.tscn" id="13_jbj1t"]
+[ext_resource type="PackedScene" uid="uid://cl0xeultds0dy" path="res://scenes/menus/gambling_wheel_spinning.tscn" id="9_85g3d"]
+[ext_resource type="PackedScene" uid="uid://dgtdlxwqhwve4" path="res://scenes/decoration/fence_1.tscn" id="10_trceg"]
+[ext_resource type="PackedScene" uid="uid://bxm5yatlhai6n" path="res://scenes/decoration/fence_2.tscn" id="11_a8y0u"]
+[ext_resource type="PackedScene" uid="uid://dqoj4ugmgutjt" path="res://scenes/decoration/fence_3.tscn" id="12_jkv2x"]
+[ext_resource type="PackedScene" uid="uid://b5mta4y8v464p" path="res://scenes/decoration/fence_4.tscn" id="13_jbj1t"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sgp6g"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -136,13 +131,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.7141, 0.526163, 3.8611)
 [node name="fence2" parent="Deko" instance=ExtResource("10_trceg")]
 transform = Transform3D(0.0219022, 0, -0.99976, 0, 1, 0, 0.99976, 0, 0.0219022, 0.186203, 0.526163, 11.4149)
 
-
 [node name="Node3D2" parent="Deko" instance=ExtResource("11_a8y0u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.6463, 0.477721, -1.06282)
 
 [node name="Node3D6" parent="Deko" instance=ExtResource("11_a8y0u")]
 transform = Transform3D(-0.13779, 0, -0.990461, 0, 1, 0, 0.990461, 0, -0.13779, 9.96967, 0.477722, 11.5704)
-
 
 [node name="Node3D3" parent="Deko" instance=ExtResource("12_jkv2x")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.7476, 0.508817, 9.03916)
@@ -155,7 +148,6 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 15.088
 
 [node name="Node3D4" parent="Deko" instance=ExtResource("12_jkv2x")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.7476, 0.508817, -6.42404)
-
 
 [node name="Node3D8" parent="Deko" instance=ExtResource("13_jbj1t")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.8287, 0.508817, -11.4502)
