@@ -4,7 +4,8 @@ extends CharacterBody3D
 @onready var mesh: MeshInstance3D = $MeshInstance3D
 @onready var ray: RayCast3D = $RayCast3D
 @onready var particles: GPUParticles3D = $GPUParticles3D
-@onready var weapon_spawner: Node3D = $"../../PLAYER/weaponSpawner"
+
+@onready var weapon_spawner = get_node("/root/main/multiplayerManager/PLAYER/weaponSpawner")
 var hit := false
 var bulletSpeed
 var bulletDamage

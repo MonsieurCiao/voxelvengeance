@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://ds3ieo3rb4j0a"]
 
-[ext_resource type="Script" uid="uid://drbanbl5jdii4" path="res://scripts/pause_menu.gd" id="1_7unhi"]
-[ext_resource type="Shader" uid="uid://bmlvyf87mhpn5" path="res://scripts/shaders/pause_menu.gdshader" id="1_fwndu"]
+[ext_resource type="Script" uid="uid://bh31orjv2cdt7" path="res://scripts/pause_menu.gd" id="1_7unhi"]
+[ext_resource type="Shader" path="res://scripts/shaders/pause_menu.gdshader" id="1_fwndu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7unhi"]
 shader = ExtResource("1_fwndu")
@@ -42,6 +42,21 @@ _data = {
 &"blur": SubResource("Animation_fwndu")
 }
 
+[sub_resource type="Animation" id="Animation_2wrho"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PanelContainer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_gsnt3"]
 resource_name = "panel"
 length = 0.3
@@ -72,7 +87,6 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 0)]
 }
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gh0u6"]
 _data = {
 &"RESET": SubResource("Animation_2wrho"),
@@ -128,6 +142,17 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Settings"
 
+[node name="Host" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Host
+"
+
+[node name="Join" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Join"
+
 [node name="Leave" type="Button" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
@@ -145,4 +170,6 @@ libraries = {
 
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Host" to="." method="host"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Join" to="." method="join"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Leave" to="." method="_on_leave_pressed"]
