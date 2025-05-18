@@ -1,17 +1,14 @@
+[gd_scene load_steps=23 format=3 uid="uid://d2yfp1tb8a8o1"]
 
-[gd_scene load_steps=25 format=3 uid="uid://d2yfp1tb8a8o1"]
-
+[ext_resource type="Script" uid="uid://pi86mq30ks6i" path="res://scripts/sceneManager.gd" id="1_jkv2x"]
 [ext_resource type="PackedScene" uid="uid://bmnfojq3xd4ad" path="res://scenes/player.tscn" id="1_o5qli"]
 [ext_resource type="PackedScene" uid="uid://ds3ieo3rb4j0a" path="res://scenes/menus/pause_menu.tscn" id="1_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://evqpfl5bkqbi" path="res://scenes/decoration/woodbox.tscn" id="2_0wfyh"]
-[ext_resource type="Script" uid="uid://ddex5l8owvq3u" path="res://scenes/weaponSkript.gd" id="2_jbj1t"]
 [ext_resource type="PackedScene" uid="uid://d20mph0y372ct" path="res://scenes/decoration/barrel.tscn" id="2_sugp2"]
-[ext_resource type="PackedScene" uid="uid://ds7nop426fpju" path="res://scenes/weapons/pistol.tscn" id="2_tbgi4"]
 [ext_resource type="Script" uid="uid://baw12ml61sky4" path="res://scripts/camera_controller.gd" id="3_tefeu"]
 [ext_resource type="Texture2D" uid="uid://ur5v855a316h" path="res://assets/crosshair.svg" id="4_85g3d"]
 [ext_resource type="Script" uid="uid://c74mi7313djo3" path="res://scripts/cameraScript.gd" id="4_choun"]
 [ext_resource type="PackedScene" uid="uid://cy1w1e6sayjtj" path="res://scenes/decoration/lantern.tscn" id="4_jyhfs"]
-[ext_resource type="PackedScene" uid="uid://uxlv3hu17vgt" path="res://scenes/weapons/ak_47.tscn" id="4_muem4"]
 [ext_resource type="PackedScene" uid="uid://b00l872ksbyw1" path="res://scenes/menus/settings_menu.tscn" id="6_jbj1t"]
 [ext_resource type="PackedScene" uid="uid://c16bc8sgbrxf0" path="res://scenes/decoration/cactus.tscn" id="7_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://cl0xeultds0dy" path="res://scenes/menus/gambling_wheel_spinning.tscn" id="9_85g3d"]
@@ -50,6 +47,8 @@ shading_mode = 0
 albedo_color = Color(0.976471, 0.32549, 0.329412, 1)
 
 [node name="main" type="Node3D"]
+script = ExtResource("1_jkv2x")
+PlayerScene = ExtResource("1_o5qli")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_0wfyh")
@@ -58,16 +57,6 @@ environment = SubResource("Environment_0wfyh")
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
 light_color = Color(1, 0.923881, 0.910825, 1)
 shadow_enabled = true
-
-[node name="PLAYER" parent="." node_paths=PackedStringArray("camera_pivot") groups=["Player"] instance=ExtResource("1_o5qli")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.693015, 5)
-camera_pivot = NodePath("../CameraController")
-
-[node name="weaponSpawner" type="Node3D" parent="PLAYER"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, -0.682)
-script = ExtResource("2_jbj1t")
-pistol = ExtResource("2_tbgi4")
-ak47 = ExtResource("4_muem4")
 
 [node name="CameraController" type="Node3D" parent="."]
 script = ExtResource("3_tefeu")
@@ -201,3 +190,11 @@ transform = Transform3D(-0.99929, 0, -0.0376728, 0, 1, 0, 0.0376728, 0, -0.99929
 
 [node name="Node3D20" parent="Deko" instance=ExtResource("13_jbj1t")]
 transform = Transform3D(-0.99929, 0, -0.0376728, 0, 1, 0, 0.0376728, 0, -0.99929, -16.3974, 0.508817, 10.2262)
+
+[node name="SpawnLocation" type="Node3D" parent="."]
+
+[node name="0" type="Node3D" parent="SpawnLocation" groups=["PlayerSpawnPoint"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.98223, 4.2624, 0)
+
+[node name="1" type="Node3D" parent="SpawnLocation" groups=["PlayerSpawnPoint"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.37524, 4.2624, 7.29963)
