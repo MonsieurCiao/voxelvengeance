@@ -75,7 +75,7 @@ emission_energy_multiplier = 3.0
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.174797), -0.918903, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_ivc8v"]
+[sub_resource type="CurveTexture" id="CurveTexture_60a84"]
 curve = SubResource("Curve_60a84")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_60a84"]
@@ -83,7 +83,7 @@ spread = 24.398
 initial_velocity_min = 13.0
 initial_velocity_max = 20.0
 scale_min = 0.2
-scale_curve = SubResource("CurveTexture_ivc8v")
+scale_curve = SubResource("CurveTexture_60a84")
 
 [sub_resource type="BoxMesh" id="BoxMesh_ivc8v"]
 size = Vector3(0.1, 0.1, 0.1)
@@ -91,16 +91,16 @@ size = Vector3(0.1, 0.1, 0.1)
 [node name="pistol" type="Node3D"]
 script = ExtResource("2_r3071")
 
-[node name="pistol" parent="." instance=ExtResource("1_bmquw")]
+[node name="weapon" parent="." instance=ExtResource("1_bmquw")]
 transform = Transform3D(-7.23998e-07, -0.2, 0, 0.2, -7.23998e-07, 0, 0, 0, 0.2, 0, 0, 0)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="pistol"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="weapon"]
 libraries = {
 &"": SubResource("AnimationLibrary_ps2nd")
 }
 
-[node name="RayCast3D" type="RayCast3D" parent="pistol"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.404414, -1.46398e-06, -4.12845)
+[node name="RayCast3D" type="RayCast3D" parent="weapon"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.404414, -1.46398e-06, -2.18479)
 target_position = Vector3(0, 0, -1)
 
 [node name="sparks" parent="." instance=ExtResource("3_60a84")]

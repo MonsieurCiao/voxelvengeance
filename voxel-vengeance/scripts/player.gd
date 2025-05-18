@@ -19,9 +19,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if not input_enabled:
 		return
-	
-	shootRay()
-	
+		
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -50,32 +48,3 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 	
-func shootRay(): 
-	var rayLength = 10.0
-	var space = get_world_3d().direct_space_state
-
-	# Step 1: Cast a ray forward from the player
-	var from = global_transform.origin + Vector3.UP * 1.2
-	var direction = -global_transform.basis.z.normalized()
-	var to = from + direction * rayLength
-
-	var forward_query = PhysicsRayQueryParameters3D.create(from, to)
-	var forward_result = space.intersect_ray(forward_query)
-
-	if forward_result:
-		crosshair.hide()
-		crosshair_3d.show()
-		crosshair_3d.position = forward_result.position
-		# switch crosshair
-		
-	else:
-		crosshair.show()
-		crosshair_3d.hide()
-		# cast a ray downward from the end point
-		var down_from = to + Vector3.UP * 1.0
-		var down_to = down_from + Vector3.DOWN * rayLength
-		var down_query = PhysicsRayQueryParameters3D.create(down_from, down_to)
-		var down_result = space.intersect_ray(down_query)
-
-		if down_result:
-			crosshair.position = down_result.position + Vector3.UP * 0.01

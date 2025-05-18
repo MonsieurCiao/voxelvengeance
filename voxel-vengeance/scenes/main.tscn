@@ -1,26 +1,23 @@
-
-[gd_scene load_steps=23 format=3 uid="uid://d2yfp1tb8a8o1"]
-
+[gd_scene load_steps=24 format=3 uid="uid://d2yfp1tb8a8o1"]
 
 [ext_resource type="PackedScene" uid="uid://bmnfojq3xd4ad" path="res://scenes/player.tscn" id="1_o5qli"]
 [ext_resource type="PackedScene" uid="uid://ds3ieo3rb4j0a" path="res://scenes/menus/pause_menu.tscn" id="1_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://evqpfl5bkqbi" path="res://scenes/decoration/woodbox.tscn" id="2_0wfyh"]
+[ext_resource type="Script" uid="uid://ddex5l8owvq3u" path="res://scenes/weaponSkript.gd" id="2_jbj1t"]
 [ext_resource type="PackedScene" uid="uid://d20mph0y372ct" path="res://scenes/decoration/barrel.tscn" id="2_sugp2"]
 [ext_resource type="PackedScene" uid="uid://ds7nop426fpju" path="res://scenes/weapons/pistol.tscn" id="2_tbgi4"]
 [ext_resource type="Script" uid="uid://baw12ml61sky4" path="res://scripts/camera_controller.gd" id="3_tefeu"]
 [ext_resource type="Texture2D" uid="uid://ur5v855a316h" path="res://assets/crosshair.svg" id="4_85g3d"]
 [ext_resource type="Script" uid="uid://c74mi7313djo3" path="res://scripts/cameraScript.gd" id="4_choun"]
 [ext_resource type="PackedScene" uid="uid://cy1w1e6sayjtj" path="res://scenes/decoration/lantern.tscn" id="4_jyhfs"]
-
-[ext_resource type="PackedScene" path="res://scenes/decoration/cactus.tscn" id="7_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://b00l872ksbyw1" path="res://scenes/menus/settings_menu.tscn" id="6_jbj1t"]
 [ext_resource type="PackedScene" uid="uid://c16bc8sgbrxf0" path="res://scenes/decoration/cactus.tscn" id="7_o6xl0"]
-
-[ext_resource type="PackedScene" path="res://scenes/menus/gambling_wheel_spinning.tscn" id="9_85g3d"]
-[ext_resource type="PackedScene" path="res://scenes/decoration/fence_1.tscn" id="10_trceg"]
-[ext_resource type="PackedScene" path="res://scenes/decoration/fence_2.tscn" id="11_a8y0u"]
-[ext_resource type="PackedScene" path="res://scenes/decoration/fence_3.tscn" id="12_jkv2x"]
-[ext_resource type="PackedScene" path="res://scenes/decoration/fence_4.tscn" id="13_jbj1t"]
+[ext_resource type="PackedScene" uid="uid://uxlv3hu17vgt" path="res://scenes/weapons/ak_47.tscn" id="4_muem4"]
+[ext_resource type="PackedScene" uid="uid://cl0xeultds0dy" path="res://scenes/menus/gambling_wheel_spinning.tscn" id="9_85g3d"]
+[ext_resource type="PackedScene" uid="uid://dgtdlxwqhwve4" path="res://scenes/decoration/fence_1.tscn" id="10_trceg"]
+[ext_resource type="PackedScene" uid="uid://bxm5yatlhai6n" path="res://scenes/decoration/fence_2.tscn" id="11_a8y0u"]
+[ext_resource type="PackedScene" uid="uid://dqoj4ugmgutjt" path="res://scenes/decoration/fence_3.tscn" id="12_jkv2x"]
+[ext_resource type="PackedScene" uid="uid://b5mta4y8v464p" path="res://scenes/decoration/fence_4.tscn" id="13_jbj1t"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sgp6g"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -65,9 +62,11 @@ shadow_enabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.693015, 5)
 camera_pivot = NodePath("../CameraController")
 
-[node name="pistol" parent="PLAYER" instance=ExtResource("2_tbgi4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0445476, 1.09619, -0.878157)
-shootCooldown = 0.3
+[node name="weaponSpawner" type="Node3D" parent="PLAYER"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.870526, -0.68163)
+script = ExtResource("2_jbj1t")
+pistol = ExtResource("2_tbgi4")
+ak47 = ExtResource("4_muem4")
 
 [node name="CameraController" type="Node3D" parent="."]
 script = ExtResource("3_tefeu")
