@@ -4,11 +4,29 @@ extends Node
 
 
 var isShooting = false
+<<<<<<< Updated upstream
 var shootCooldown = 0.4
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	print("Start")
+=======
+@onready var camera = get_node("/root/main/CameraController/Camera3D")
+
+#bullets
+var bullet = load("res://scenes/weapons/pistolBullet.tscn")
+var bulletInstance
+@onready var gun_barrel = $weapon/RayCast3D
+@onready var player: CharacterBody3D = $"../.."
+@onready var weapon_spawner: Node3D = $".."
+
+@onready var crosshair = get_node("/root/main/crosshair")
+@onready var crosshair_3d = get_node("/root/main/Crosshair3d")
+
+func _ready():
+	crosshair.hide()
+	crosshair_3d.hide()
+>>>>>>> Stashed changes
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("shoot") && isShooting == false:
