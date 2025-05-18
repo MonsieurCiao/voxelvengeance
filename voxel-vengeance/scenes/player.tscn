@@ -22,9 +22,6 @@ properties/1/replication_mode = 1
 
 [node name="PLAYER" type="CharacterBody3D"]
 script = ExtResource("1_3vyb7")
-dash_speed = null
-dash_duration = null
-dash_cooldownTime = null
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.6, 0, 0, 0, 1.8, 0, 0, 0, 0.6, 0, 0.917827, 0)

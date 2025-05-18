@@ -1,7 +1,5 @@
 extends Node3D
 
-@export var sensitivity := .5
-@onready var player: CharacterBody3D = $"../PLAYER"
 var sensitivity := .5
 var player
 @onready var multiplayer_manager: Node3D = $"../multiplayerManager"
