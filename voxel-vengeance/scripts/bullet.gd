@@ -1,15 +1,20 @@
 extends CharacterBody3D
 
-@export var damage = 10.0
-@export var speed = 70.0
 
 @onready var mesh: MeshInstance3D = $MeshInstance3D
 @onready var ray: RayCast3D = $RayCast3D
 @onready var particles: GPUParticles3D = $GPUParticles3D
+@onready var weapon_spawner: Node3D = $"../../PLAYER/weaponSpawner"
 var hit := false
+var bulletSpeed
+var bulletDamage
+
+func _ready() -> void:
+	bulletSpeed = weapon_spawner.bulletSpeed
+	bulletDamage = weapon_spawner.bulletDamage
 
 func _physics_process(delta: float) -> void:
-	var collision = move_and_collide(transform.basis * Vector3(0,0, -speed) * delta)
+	var collision = move_and_collide(transform.basis * Vector3(0,0, -bulletSpeed) * delta)
 	if collision and not hit:
 		hit = true
 		mesh.visible = false

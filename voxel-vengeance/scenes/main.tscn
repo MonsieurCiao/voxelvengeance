@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://d2yfp1tb8a8o1"]
+[gd_scene load_steps=25 format=3 uid="uid://d2yfp1tb8a8o1"]
 
 [ext_resource type="PackedScene" uid="uid://bmnfojq3xd4ad" path="res://scenes/player.tscn" id="1_o5qli"]
 [ext_resource type="PackedScene" uid="uid://ds3ieo3rb4j0a" path="res://scenes/menus/pause_menu.tscn" id="1_o6xl0"]
@@ -11,6 +11,10 @@
 [ext_resource type="Script" uid="uid://c74mi7313djo3" path="res://scripts/cameraScript.gd" id="4_choun"]
 [ext_resource type="PackedScene" uid="uid://cy1w1e6sayjtj" path="res://scenes/decoration/lantern.tscn" id="4_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://uxlv3hu17vgt" path="res://scenes/weapons/ak_47.tscn" id="4_muem4"]
+<<<<<<< Updated upstream
+=======
+[ext_resource type="PackedScene" path="res://scenes/menus/settings_menu.tscn" id="6_jbj1t"]
+>>>>>>> Stashed changes
 [ext_resource type="PackedScene" path="res://scenes/decoration/cactus.tscn" id="7_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://cl0xeultds0dy" path="res://scenes/menus/gambling_wheel_spinning.tscn" id="9_85g3d"]
 [ext_resource type="PackedScene" uid="uid://dgtdlxwqhwve4" path="res://scenes/decoration/fence_1.tscn" id="10_trceg"]
