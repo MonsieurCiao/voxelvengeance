@@ -1,8 +1,16 @@
+<<<<<<< Updated upstream
 [gd_scene load_steps=22 format=3 uid="uid://d2yfp1tb8a8o1"]
+=======
+[gd_scene load_steps=29 format=3 uid="uid://d2yfp1tb8a8o1"]
+>>>>>>> Stashed changes
 
 [ext_resource type="PackedScene" uid="uid://bmnfojq3xd4ad" path="res://scenes/player.tscn" id="1_o5qli"]
 [ext_resource type="PackedScene" uid="uid://ds3ieo3rb4j0a" path="res://scenes/menus/pause_menu.tscn" id="1_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://evqpfl5bkqbi" path="res://scenes/decoration/woodbox.tscn" id="2_0wfyh"]
+<<<<<<< Updated upstream
+=======
+[ext_resource type="Script" uid="uid://bh0ega5rx8qi4" path="res://scripts/weaponSkript.gd" id="2_jbj1t"]
+>>>>>>> Stashed changes
 [ext_resource type="PackedScene" uid="uid://d20mph0y372ct" path="res://scenes/decoration/barrel.tscn" id="2_sugp2"]
 [ext_resource type="PackedScene" uid="uid://ds7nop426fpju" path="res://scenes/weapons/pistol.tscn" id="2_tbgi4"]
 [ext_resource type="Script" uid="uid://baw12ml61sky4" path="res://scripts/camera_controller.gd" id="3_tefeu"]
@@ -16,12 +24,27 @@
 [ext_resource type="Script" uid="uid://c74mi7313djo3" path="res://scripts/cameraScript.gd" id="4_choun"]
 >>>>>>> Stashed changes
 [ext_resource type="PackedScene" uid="uid://cy1w1e6sayjtj" path="res://scenes/decoration/lantern.tscn" id="4_jyhfs"]
+<<<<<<< Updated upstream
 [ext_resource type="PackedScene" path="res://scenes/decoration/cactus.tscn" id="7_o6xl0"]
 [ext_resource type="PackedScene" path="res://scenes/menus/gambling_wheel_spinning.tscn" id="9_85g3d"]
 [ext_resource type="PackedScene" path="res://scenes/decoration/fence_1.tscn" id="10_trceg"]
 [ext_resource type="PackedScene" path="res://scenes/decoration/fence_2.tscn" id="11_a8y0u"]
 [ext_resource type="PackedScene" path="res://scenes/decoration/fence_3.tscn" id="12_jkv2x"]
 [ext_resource type="PackedScene" path="res://scenes/decoration/fence_4.tscn" id="13_jbj1t"]
+=======
+[ext_resource type="PackedScene" uid="uid://uxlv3hu17vgt" path="res://scenes/weapons/ak_47.tscn" id="4_muem4"]
+[ext_resource type="PackedScene" path="res://scenes/menus/settings_menu.tscn" id="6_jbj1t"]
+[ext_resource type="PackedScene" path="res://scenes/decoration/cactus.tscn" id="7_o6xl0"]
+[ext_resource type="PackedScene" uid="uid://cl0xeultds0dy" path="res://scenes/menus/gambling_wheel_spinning.tscn" id="9_85g3d"]
+[ext_resource type="PackedScene" uid="uid://dgtdlxwqhwve4" path="res://scenes/decoration/fence_1.tscn" id="10_trceg"]
+[ext_resource type="PackedScene" uid="uid://bxm5yatlhai6n" path="res://scenes/decoration/fence_2.tscn" id="11_a8y0u"]
+[ext_resource type="PackedScene" uid="uid://dqoj4ugmgutjt" path="res://scenes/decoration/fence_3.tscn" id="12_jkv2x"]
+[ext_resource type="PackedScene" uid="uid://b5mta4y8v464p" path="res://scenes/decoration/fence_4.tscn" id="13_jbj1t"]
+[ext_resource type="PackedScene" uid="uid://b3we2iiulhdvh" path="res://assets/models/decoration/rail1.blend" id="19_jscy8"]
+[ext_resource type="PackedScene" uid="uid://dcnt4s1oqlckv" path="res://assets/models/decoration/rail2.blend" id="20_pm3ni"]
+[ext_resource type="PackedScene" uid="uid://blg876vyx67gx" path="res://assets/models/decoration/rail3.blend" id="21_y6deb"]
+[ext_resource type="PackedScene" uid="uid://ceq8evre7aet6" path="res://scenes/decoration/lore.tscn" id="22_jscy8"]
+>>>>>>> Stashed changes
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sgp6g"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -59,9 +82,17 @@ shadow_enabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.509205, 5)
 camera_pivot = NodePath("../CameraController")
 
+<<<<<<< Updated upstream
 [node name="pistol" parent="PLAYER" instance=ExtResource("2_tbgi4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0445476, 1.09619, -0.878157)
 shootCooldown = 0.3
+=======
+[node name="weaponSpawner" type="Node3D" parent="PLAYER"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0282826, 1.2, -0.682)
+script = ExtResource("2_jbj1t")
+pistol = ExtResource("2_tbgi4")
+ak47 = ExtResource("4_muem4")
+>>>>>>> Stashed changes
 
 [node name="CameraController" type="Node3D" parent="."]
 script = ExtResource("3_tefeu")
@@ -198,3 +229,18 @@ transform = Transform3D(-0.99929, 0, -0.0376728, 0, 1, 0, 0.0376728, 0, -0.99929
 
 [node name="Node3D20" parent="Deko" instance=ExtResource("13_jbj1t")]
 transform = Transform3D(-0.99929, 0, -0.0376728, 0, 1, 0, 0.0376728, 0, -0.99929, -16.3974, 0.508817, 10.2262)
+
+[node name="rail1" parent="." instance=ExtResource("19_jscy8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.7092, 0.6, 3.07063)
+
+[node name="rail4" parent="." instance=ExtResource("19_jscy8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.1988, 0.6, 3.07063)
+
+[node name="rail2" parent="." instance=ExtResource("20_pm3ni")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.6955, 0.6, 3.06348)
+
+[node name="rail3" parent="." instance=ExtResource("21_y6deb")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -9.20233, 0.6, 3.08518)
+
+[node name="Node3D" parent="." instance=ExtResource("22_jscy8")]
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, -11, 1.33858, 3)

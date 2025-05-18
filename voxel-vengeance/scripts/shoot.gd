@@ -31,8 +31,27 @@ func _input(event: InputEvent) -> void:
 		var bullet_container = get_tree().get_current_scene().get_node("Bullets")
 		bullet_container.add_child(bulletInstance)
 
+<<<<<<< Updated upstream
 		await get_tree().create_timer(shootCooldown).timeout
 		isShooting = false
+=======
+
+func bulletShoot():
+	print(weapon_spawner.shootCooldown)
+	# check if is in wall
+	if not isBarrelClear(camera, gun_barrel):
+		return
+	isShooting = true
+	animation_player.play("shoot")
+	_shootParticles()
+	bulletInstance = bullet.instantiate()
+	bulletInstance.position = gun_barrel.global_position
+	bulletInstance.transform.basis = gun_barrel.global_transform.basis
+	var bullet_container = get_tree().get_current_scene().get_node("Bullets")
+	bullet_container.add_child(bulletInstance)
+	await get_tree().create_timer(weapon_spawner.shootCooldown).timeout
+	isShooting = false
+>>>>>>> Stashed changes
 
 func isBarrelClear(camera: Node3D, gun_barrel: Node3D) -> bool:
 	var from = camera.global_transform.origin
