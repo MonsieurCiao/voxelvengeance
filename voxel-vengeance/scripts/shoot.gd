@@ -30,8 +30,7 @@ func _process(delta: float) -> void:
 			bulletShoot()
 
 func bulletShoot():
-		await get_tree().create_timer(shootCooldown).timeout
-		isShooting = false
+	isShooting = false
 	# check if is in wall
 	if not isBarrelClear(camera, gun_barrel):
 		return
