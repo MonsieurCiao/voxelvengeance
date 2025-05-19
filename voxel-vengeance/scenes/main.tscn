@@ -6,10 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://d20mph0y372ct" path="res://scenes/decoration/barrel.tscn" id="2_sugp2"]
 [ext_resource type="Script" uid="uid://baw12ml61sky4" path="res://scripts/camera_controller.gd" id="3_tefeu"]
 [ext_resource type="Texture2D" uid="uid://ur5v855a316h" path="res://assets/crosshair.svg" id="4_85g3d"]
-[ext_resource type="Script" path="res://scripts/cameraScript.gd" id="4_choun"]
+[ext_resource type="Script" uid="uid://c74mi7313djo3" path="res://scripts/cameraScript.gd" id="4_choun"]
 [ext_resource type="PackedScene" uid="uid://cy1w1e6sayjtj" path="res://scenes/decoration/lantern.tscn" id="4_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://b00l872ksbyw1" path="res://scenes/menus/settings_menu.tscn" id="6_jbj1t"]
-[ext_resource type="PackedScene" path="res://scenes/decoration/cactus.tscn" id="7_o6xl0"]
+[ext_resource type="PackedScene" uid="uid://c16bc8sgbrxf0" path="res://scenes/decoration/cactus.tscn" id="7_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://cl0xeultds0dy" path="res://scenes/menus/gambling_wheel_spinning.tscn" id="9_85g3d"]
 [ext_resource type="PackedScene" uid="uid://dgtdlxwqhwve4" path="res://scenes/decoration/fence_1.tscn" id="10_trceg"]
 [ext_resource type="PackedScene" uid="uid://bxm5yatlhai6n" path="res://scenes/decoration/fence_2.tscn" id="11_a8y0u"]
@@ -57,6 +57,7 @@ script = ExtResource("1_pm3ni")
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="multiplayerManager"]
 _spawnable_scenes = PackedStringArray("uid://bmnfojq3xd4ad")
 spawn_path = NodePath("..")
+spawn_limit = 2
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_0wfyh")
