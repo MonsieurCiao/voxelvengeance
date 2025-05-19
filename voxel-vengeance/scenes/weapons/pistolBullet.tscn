@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://ckvtt1kjkumus"]
 
-[ext_resource type="Script" uid="uid://cepqu0iospfml" path="res://scripts/bullet.gd" id="1_ks1fn"]
+[ext_resource type="Script" uid="uid://c3jjeqlu6i0y8" path="res://scripts/bullet.gd" id="1_ks1fn"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_m73g3"]
 size = Vector3(0.25, 0.25, 0.5)
@@ -37,6 +37,7 @@ wall_min_slide_angle = 0.0
 script = ExtResource("1_ks1fn")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+layers = 2
 cast_shadow = 0
 mesh = SubResource("BoxMesh_m73g3")
 surface_material_override/0 = SubResource("StandardMaterial3D_m73g3")
