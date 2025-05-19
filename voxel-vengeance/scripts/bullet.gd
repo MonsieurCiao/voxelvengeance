@@ -5,12 +5,20 @@ extends CharacterBody3D
 @onready var ray: RayCast3D = $RayCast3D
 @onready var particles: GPUParticles3D = $GPUParticles3D
 
-@onready var weapon_spawner = get_node("/root/main/multiplayerManager/PLAYER/weaponSpawner")
+
+var weapon_spawner
 var hit := false
 var bulletSpeed
 var bulletDamage
 
 func _ready() -> void:
+	#weapon_spawner = get_node("/root/main/multiplayerManager/"+ str(MultiplayerManager.authorityID) + "/weaponSpawner")
+	weapon_spawner = get_node("/root/main/multiplayerManager/1/weaponSpawner")
+	print(str(MultiplayerManager.authorityID))
+	if not weapon_spawner:
+		print("weapon_spawner not found")
+	elif weapon_spawner:
+		print("weapon spawner found")
 	bulletSpeed = weapon_spawner.bulletSpeed
 	bulletDamage = weapon_spawner.bulletDamage
 
