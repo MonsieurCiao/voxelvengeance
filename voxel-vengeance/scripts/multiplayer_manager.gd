@@ -27,6 +27,7 @@ func _ready():
 
 func host() -> void:
 	peer.create_server(1811)
+	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
 	multiplayer.multiplayer_peer = peer
 	#function called to all other clients
 	multiplayer.peer_connected.connect(
@@ -44,6 +45,7 @@ func host() -> void:
 
 func join() -> void:
 	peer.create_client("zocki.servebeer.com", 1811) # ADDRESS
+	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
 	multiplayer.multiplayer_peer = peer
 	
 
@@ -63,6 +65,6 @@ func remove_player(peer_id):
 		player.queue_free()
 
 func connected_to_server():
-	pass
+	print("Connected to Server")
 func connection_failed():
-	pass
+	print("Connection failed")
