@@ -32,12 +32,12 @@ size = Vector3(0.1, 0.1, 0.1)
 size = Vector3(0.2, 0.2, 0.5)
 
 [node name="Bullet" type="CharacterBody3D"]
+collision_layer = 2
 slide_on_ceiling = false
 wall_min_slide_angle = 0.0
 script = ExtResource("1_ks1fn")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-layers = 2
 cast_shadow = 0
 mesh = SubResource("BoxMesh_m73g3")
 surface_material_override/0 = SubResource("StandardMaterial3D_m73g3")

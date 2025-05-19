@@ -105,6 +105,7 @@ func shootRay():
 		var down_from = to + Vector3.UP * 1.0
 		var down_to = down_from + Vector3.DOWN * rayLength
 		var down_query = PhysicsRayQueryParameters3D.create(down_from, down_to)
+		down_query.collision_mask = 0xFFFFFFFF & ~(1 << 1)
 		var down_result = space.intersect_ray(down_query)
 		if down_result:
 			crosshair.position = down_result.position + Vector3.UP * 0.01
