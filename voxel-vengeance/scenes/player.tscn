@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://bmnfojq3xd4ad"]
 
 [ext_resource type="Script" uid="uid://c5nfme3rxg3u" path="res://scripts/player.gd" id="1_3vyb7"]
-[ext_resource type="Script" path="res://scripts/weaponSkript.gd" id="2_dqkch"]
+[ext_resource type="Script" uid="uid://bh0ega5rx8qi4" path="res://scripts/weaponSkript.gd" id="2_dqkch"]
 [ext_resource type="PackedScene" uid="uid://ds7nop426fpju" path="res://scenes/weapons/pistol.tscn" id="3_qlg0r"]
 [ext_resource type="PackedScene" uid="uid://dq87arw8jeqam" path="res://scenes/weapons/ak_47.tscn" id="4_tuyoq"]
 
