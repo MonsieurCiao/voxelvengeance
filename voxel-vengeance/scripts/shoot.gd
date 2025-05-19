@@ -66,6 +66,14 @@ func bulletShoot():
 	bulletInstance = bullet.instantiate()
 	bulletInstance.position = gun_barrel.global_position
 	bulletInstance.transform.basis = gun_barrel.global_transform.basis
+	
+	weapon_spawner = get_node("/root/main/multiplayerManager/"+ str(MultiplayerManager.authorityID) + "/weaponSpawner")
+	print(MultiplayerManager)
+	var bulletSpeed = weapon_spawner.bulletSpeed
+	var bulletDamage = weapon_spawner.bulletDamage
+	bulletInstance.bulletSpeed = bulletSpeed
+	bulletInstance.bulletDamage = bulletDamage
+	
 	bulletInstance.set_multiplayer_authority(get_multiplayer_authority())
 	var bullet_container = get_tree().get_current_scene().get_node("Bullets")
 	bullet_container.add_child(bulletInstance)

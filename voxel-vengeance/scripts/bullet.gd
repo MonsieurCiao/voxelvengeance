@@ -8,18 +8,15 @@ extends CharacterBody3D
 
 var weapon_spawner
 var hit := false
-var bulletSpeed
-var bulletDamage
+var bulletSpeed: float
+var bulletDamage: float
 
 
 
 func _enter_tree() -> void:
 	if not is_multiplayer_authority():
 		return
-	weapon_spawner = get_node("/root/main/multiplayerManager/"+ str(MultiplayerManager.authorityID) + "/weaponSpawner")
-	print(MultiplayerManager)
-	bulletSpeed = weapon_spawner.bulletSpeed
-	bulletDamage = weapon_spawner.bulletDamage
+	
 
 func _physics_process(delta: float) -> void:
 	if not is_multiplayer_authority():

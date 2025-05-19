@@ -5,8 +5,8 @@ extends Node3D
 
 var shootCooldown
 var autofire
-var bulletSpeed
-var bulletDamage
+var bulletSpeed: float
+var bulletDamage: float
 
 func _input(event: InputEvent) -> void:
 	if not is_multiplayer_authority(): return
