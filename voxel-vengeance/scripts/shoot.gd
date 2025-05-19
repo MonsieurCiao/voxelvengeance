@@ -79,7 +79,8 @@ func bulletShoot():
 	bulletInstance.set_multiplayer_authority(get_multiplayer_authority())
 	var bullet_container = get_tree().get_current_scene().get_node("Bullets")
 	bullet_container.add_child(bulletInstance)
-	crosshair_scene.makeCrosshairBigger(shrinkSpeed, growSpeed, maxSpread)
+	if is_multiplayer_authority():
+		crosshair_scene.makeCrosshairBigger(shrinkSpeed, growSpeed, maxSpread)
 	
 	await get_tree().create_timer(shootCooldown).timeout
 	isShooting = false
