@@ -11,14 +11,18 @@ var hit := false
 var bulletSpeed
 var bulletDamage
 
-func _ready() -> void:
+#func _ready() -> void:
 	#weapon_spawner = get_node("/root/main/multiplayerManager/"+ str(MultiplayerManager.authorityID) + "/weaponSpawner")
-	weapon_spawner = get_node("/root/main/multiplayerManager/1/weaponSpawner")
-	print(str(MultiplayerManager.authorityID))
-	if not weapon_spawner:
-		print("weapon_spawner not found")
-	elif weapon_spawner:
-		print("weapon spawner found")
+	#weapon_spawner = get_node("/root/main/multiplayerManager/1/weaponSpawner")
+	#print(str(MultiplayerManager.authorityID))
+	#if not weapon_spawner:
+	#	print("weapon_spawner not found")
+	#elif weapon_spawner:
+	#	print("weapon spawner found")
+
+func _enter_tree() -> void:
+	weapon_spawner = get_node("/root/main/multiplayerManager/"+ str(MultiplayerManager.authorityID) + "/weaponSpawner")
+	print(MultiplayerManager)
 	bulletSpeed = weapon_spawner.bulletSpeed
 	bulletDamage = weapon_spawner.bulletDamage
 

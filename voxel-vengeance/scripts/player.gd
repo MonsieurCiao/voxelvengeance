@@ -14,12 +14,9 @@ var input_enabled := true
 @onready var crosshair_3d = get_node("/root/main/Crosshair3d/")
 @onready var mesh_instance_3d: MeshInstance3D = $MeshInstance3D
 
-var multiplayerManager: Node3D = null
-
 func _enter_tree() -> void:
 	set_multiplayer_authority(int(str(name)))
-	var multiplayerManager = get_node("/root/main/multiplayerManager")
-	multiplayerManager.authorityID = int(str(name))
+	MultiplayerManager.authorityID = int(str(name))
 
 func _ready() -> void:
 	crosshair.hide()

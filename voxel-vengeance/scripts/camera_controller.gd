@@ -2,7 +2,6 @@ extends Node3D
 
 var sensitivity := .5
 var player
-@onready var multiplayer_manager: Node3D = $"../multiplayerManager"
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -11,8 +10,8 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if player:
 		global_position = player.global_position
-	elif multiplayer_manager.authorityID:
-		player = get_node("/root/main/multiplayerManager/" + str(multiplayer_manager.authorityID))
+	elif MultiplayerManager.authorityID:
+		player = get_node("/root/main/multiplayerManager/" + str(MultiplayerManager.authorityID))
 		print(player)
 
 func _input(event: InputEvent) -> void:
