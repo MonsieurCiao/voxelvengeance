@@ -55,6 +55,7 @@ func _on_settings_pressed() -> void:
 	$'../SettingsMenu'.show()
 	$"../SettingsMenu/AnimationPlayer".play("panel")
 
+
 func _on_leave_pressed() -> void:
 	get_tree().quit()
 
