@@ -10,8 +10,6 @@ var dash_timer := 0.0
 var dash_cooldown := 0.0
 var input_enabled := true
 @onready var camera_pivot = get_node("/root/main/CameraController/")
-@onready var crosshair = get_node("/root/main/crosshair/")
-@onready var crosshair_3d = get_node("/root/main/Crosshair3d/")
 @onready var mesh_instance_3d: MeshInstance3D = $MeshInstance3D
 
 func _enter_tree() -> void:
@@ -21,9 +19,8 @@ func _enter_tree() -> void:
 
 
 func _ready() -> void:
-	crosshair.hide()
-	crosshair_3d.hide()
-	position = Vector3(RandomNumberGenerator.new().randf_range(-2, 16),1,0)
+	position = Vector3(RandomNumberGenerator.new().randf_range(-2, 16), 1, 0)
+
 
 func _physics_process(delta: float) -> void:
 	if is_multiplayer_authority():
