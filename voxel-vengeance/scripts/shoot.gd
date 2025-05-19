@@ -11,14 +11,36 @@ var bulletInstance
 @onready var player: CharacterBody3D = $"../.."
 @onready var weapon_spawner: Node3D = $".."
 
-@onready var crosshair = get_node("/root/main/crosshair")
-@onready var crosshair_3d = get_node("/root/main/Crosshair3d")
-
+@onready var crosshair_scene = get_node("/root/main/Crosshairs/std_crosshair")
+@onready var wallCrosshair = get_node("/root/main/Crosshairs/wallCrosshair/")
 var isShooting = false
+var crosshair
+
+var rayLength
+var shrinkSpeed
+var growSpeed
+var maxSpread
+
+var crosshair_weapon_assignment = {
+	"std_crosshair": {
+		"ak47": {"distance": 10, "shrinkSpeed": 20, "growSpeed": 20, "maxSpread": 5},
+		"pistol" : {"distance": 5, "shrinkSpeed": 20, "growSpeed": 10, "maxSpread": 3}
+		},
+	"pump_crosshair": {
+		}
+}
 
 func _ready():
-	crosshair.hide()
-	crosshair_3d.hide()
+	crosshair = null
+	for crosshairItem in crosshair_weapon_assignment:
+		get_node("/root/main/Crosshairs/" + str(crosshairItem)).hide()
+		for item in crosshair_weapon_assignment[crosshairItem]:
+			if Main.currentWeapon == item:
+				crosshair = get_node("/root/main/Crosshairs/" + str(crosshairItem))
+				rayLength = crosshair_weapon_assignment[crosshairItem][item]["distance"]
+				shrinkSpeed = crosshair_weapon_assignment[crosshairItem][item]["shrinkSpeed"]
+				growSpeed = crosshair_weapon_assignment[crosshairItem][item]["growSpeed"]
+				maxSpread = crosshair_weapon_assignment[crosshairItem][item]["maxSpread"]
 
 func _process(delta: float) -> void:
 	shootRay()
@@ -41,6 +63,7 @@ func bulletShoot():
 	bulletInstance.transform.basis = gun_barrel.global_transform.basis
 	var bullet_container = get_tree().get_current_scene().get_node("Bullets")
 	bullet_container.add_child(bulletInstance)
+	crosshair_scene.makeCrosshairBigger(shrinkSpeed, growSpeed, maxSpread)
 	await get_tree().create_timer(weapon_spawner.shootCooldown).timeout
 	isShooting = false
 
@@ -60,7 +83,6 @@ func _shootParticles() -> void:
 	sparks.emitting = false
 
 func shootRay(): 
-	var rayLength = 10.0
 	var space = get_world_3d().direct_space_state
 	var from = global_transform.origin 
 	var direction = -global_transform.basis.z.normalized()
@@ -71,14 +93,15 @@ func shootRay():
 
 	if forward_result:
 		crosshair.hide()
-		crosshair_3d.show()
-		crosshair_3d.position = forward_result.position
+		wallCrosshair.show()
+		wallCrosshair.position = forward_result.position
 	else:
 		crosshair.show()
-		crosshair_3d.hide()
+		wallCrosshair.hide()
 		var down_from = to + Vector3.UP * 1.0
 		var down_to = down_from + Vector3.DOWN * rayLength
 		var down_query = PhysicsRayQueryParameters3D.create(down_from, down_to)
 		var down_result = space.intersect_ray(down_query)
 		if down_result:
 			crosshair.position = down_result.position + Vector3.UP * 0.01
+		crosshair.rotation = player.rotation

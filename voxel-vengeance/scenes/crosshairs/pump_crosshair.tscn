@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://d2qbbiqybvvob"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ley1j"]
+albedo_color = Color(0.44895, 1.30555e-06, 9.62615e-08, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1s3ko"]
+material = SubResource("StandardMaterial3D_ley1j")
+
+[node name="pump_crosshair" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.145, 0, 0, 0)
+mesh = SubResource("PlaneMesh_1s3ko")
