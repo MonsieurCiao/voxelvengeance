@@ -21,6 +21,8 @@ var shrinkSpeed
 var growSpeed
 var maxSpread
 
+var shootCooldown: float
+
 var crosshair_weapon_assignment = {
 	"std_crosshair": {
 		"ak47": {"distance": 10, "shrinkSpeed": 20, "growSpeed": 20, "maxSpread": 5},
@@ -78,7 +80,8 @@ func bulletShoot():
 	var bullet_container = get_tree().get_current_scene().get_node("Bullets")
 	bullet_container.add_child(bulletInstance)
 	crosshair_scene.makeCrosshairBigger(shrinkSpeed, growSpeed, maxSpread)
-	await get_tree().create_timer(weapon_spawner.shootCooldown).timeout
+	
+	await get_tree().create_timer(shootCooldown).timeout
 	isShooting = false
 
 func isBarrelClear(camera: Node3D, gun_barrel: Node3D) -> bool:
