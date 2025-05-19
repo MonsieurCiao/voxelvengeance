@@ -31,4 +31,5 @@ func summonWeaponWithProperties(weaponName, cooldown, position, automaticFire, b
 		clear_all_children(self)
 		var instance = get(weaponName).instantiate()
 		instance.transform.origin = position
+		instance.set_multiplayer_authority(get_multiplayer_authority())
 		add_child(instance)

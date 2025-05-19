@@ -17,11 +17,13 @@ var input_enabled := true
 func _enter_tree() -> void:
 	set_multiplayer_authority(int(str(name)))
 	MultiplayerManager.authorityID = int(str(name))
+	$weaponSpawner.set_multiplayer_authority(int(str(name)))
+
 
 func _ready() -> void:
 	crosshair.hide()
 	crosshair_3d.hide()
-	position = Vector3(RandomNumberGenerator.new().randf_range(-2, 16),0,0)
+	position = Vector3(RandomNumberGenerator.new().randf_range(-2, 16),1,0)
 
 func _physics_process(delta: float) -> void:
 	if is_multiplayer_authority():

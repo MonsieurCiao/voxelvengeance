@@ -17,10 +17,14 @@ var bulletInstance
 var isShooting = false
 
 func _ready():
+	if not is_multiplayer_authority():
+		return
 	crosshair.hide()
 	crosshair_3d.hide()
 
 func _process(delta: float) -> void:
+	if not is_multiplayer_authority(): 
+		return
 	shootRay()
 	if weapon_spawner.autofire:
 		if Input.is_action_pressed("shoot") and not isShooting and player.input_enabled:

@@ -54,6 +54,7 @@ func add_player(nodeName):
 		return
 	var playerinstance = PLAYER.instantiate()
 	playerinstance.name = nodeName
+	#playerinstance.set_multiplayer_authority(int(nodeName))
 	add_child(playerinstance)
 
 func remove_player(peer_id):
