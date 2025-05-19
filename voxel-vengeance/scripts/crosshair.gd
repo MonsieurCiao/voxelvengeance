@@ -7,9 +7,9 @@ var target_offset := 0.0
 var velocity := 0.0
 
 # Tweakbare Parameter
-var MAX_SPREAD_PER_SHOT = 0
-var SMOOTH_SPEED = 0
-var SHRINK_RATE = 0
+var MAX_SPREAD_PER_SHOT = 0.0
+var SMOOTH_SPEED = 0.0
+var SHRINK_RATE = 0.0
 
 func _process(delta: float) -> void:
 	# Zielposition reduziert sich kontinuierlich = smooth zurückgehen

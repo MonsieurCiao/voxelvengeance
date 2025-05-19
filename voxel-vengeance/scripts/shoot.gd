@@ -55,7 +55,7 @@ func _process(delta: float) -> void:
 		if Input.is_action_just_pressed("shoot") and not isShooting and player.input_enabled:
 			bulletShoot.rpc()
 
-@rpc("call_remote")
+@rpc("call_local")
 func bulletShoot():
 	isShooting = false
 	if not isBarrelClear(camera, gun_barrel):
