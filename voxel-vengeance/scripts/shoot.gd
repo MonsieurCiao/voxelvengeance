@@ -50,11 +50,12 @@ func _process(delta: float) -> void:
 	shootRay()
 	if weapon_spawner.autofire:
 		if Input.is_action_pressed("shoot") and not isShooting and player.input_enabled:
-			bulletShoot()
+			bulletShoot.rpc()
 	else:
 		if Input.is_action_just_pressed("shoot") and not isShooting and player.input_enabled:
-			bulletShoot()
+			bulletShoot.rpc()
 
+@rpc("call_remote")
 func bulletShoot():
 	isShooting = false
 	if not isBarrelClear(camera, gun_barrel):
@@ -65,6 +66,7 @@ func bulletShoot():
 	bulletInstance = bullet.instantiate()
 	bulletInstance.position = gun_barrel.global_position
 	bulletInstance.transform.basis = gun_barrel.global_transform.basis
+	bulletInstance.set_multiplayer_authority(get_multiplayer_authority())
 	var bullet_container = get_tree().get_current_scene().get_node("Bullets")
 	bullet_container.add_child(bulletInstance)
 	crosshair_scene.makeCrosshairBigger(shrinkSpeed, growSpeed, maxSpread)
