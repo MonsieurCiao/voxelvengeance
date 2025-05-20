@@ -5,6 +5,8 @@ extends CharacterBody3D
 @onready var ray: RayCast3D = $RayCast3D
 @onready var particles: GPUParticles3D = $GPUParticles3D
 
+#Sound
+@onready var hitSound = get_node("/root/main/multiplayerManager/" + str(MultiplayerManager.authorityID) + "/Sounds/hitSound")
 
 var weapon_spawner
 var hit := false
@@ -23,7 +25,9 @@ func _physics_process(delta: float) -> void:
 	if collision and not hit:
 		var hitPlayer = collision.get_collider()
 		if hitPlayer.has_method("takeDamage"):
+			hitSound.play()
 			hitPlayer.takeDamage.rpc_id(hitPlayer.get_multiplayer_authority(), bulletDamage)
+			hitPlayer.playHitSound.rpc_id(hitPlayer.get_multiplayer_authority())
 		
 		hit = true
 		mesh.visible = false

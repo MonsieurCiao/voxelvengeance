@@ -3,6 +3,7 @@ extends Node3D
 @onready var animation_player: AnimationPlayer = $weapon/AnimationPlayer
 @onready var sparks: GPUParticles3D = $sparks
 @onready var camera = get_node("/root/main/CameraController/Camera3D")
+@onready var shootSound = get_node("/root/main/multiplayerManager/" + str(MultiplayerManager.authorityID) + "/Sounds/shootSound")
 
 # Bullets
 var bullet = load("res://scenes/weapons/pistolBullet.tscn")
@@ -62,12 +63,14 @@ func _process(delta: float) -> void:
 
 @rpc("call_local")
 func bulletShoot():
-	isShooting = false
 	if not isBarrelClear(camera, gun_barrel):
 		return
 	isShooting = true
+	
 	animation_player.play("shoot")
 	_shootParticles()
+	shootSound.play()
+	
 	bulletInstance = bullet.instantiate()
 	bulletInstance.position = gun_barrel.global_position
 	bulletInstance.transform.basis = gun_barrel.global_transform.basis

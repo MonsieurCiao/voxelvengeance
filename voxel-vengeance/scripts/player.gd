@@ -14,6 +14,9 @@ var input_enabled := true
 @onready var camera_pivot = get_node("/root/main/CameraController/")
 @onready var mesh_instance_3d: MeshInstance3D = $MeshInstance3D
 
+#Sounds
+@onready var hurtSound = $Sounds/hurtSound
+
 func _enter_tree() -> void:
 	set_multiplayer_authority(int(str(name)))
 	MultiplayerManager.authorityID = int(str(name))
@@ -84,3 +87,8 @@ func takeDamage(damage:float):
 	if health <= 0:
 		health = max_health
 		position = Vector3(0, 1, 0)
+		
+@rpc("any_peer")
+func playHitSound():
+	hurtSound.play()
+	
