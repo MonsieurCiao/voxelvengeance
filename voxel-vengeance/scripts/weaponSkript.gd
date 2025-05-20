@@ -20,15 +20,14 @@ func clear_all_children(node: Node) -> void:
 		child.free()
 
 @rpc("call_local")
-func summonWeaponWithProperties(weaponName, cooldown, position, automaticFire, bspeed, damage):
-		bulletSpeed = bspeed
-		bulletDamage = damage
+func summonWeaponWithProperties(weaponName, cooldown, bposition, automaticFire, bspeed, damage):
 		Main.currentWeapon = weaponName
-		shootCooldown = cooldown
-		autofire = automaticFire
 		clear_all_children(self)
 		var instance = get(weaponName).instantiate()
-		instance.transform.origin = position
+		instance.bulletSpeed = bspeed
+		instance.autofire = automaticFire
+		instance.bulletDamage = damage
+		instance.transform.origin = bposition
 		instance.shootCooldown = cooldown
 		instance.set_multiplayer_authority(get_multiplayer_authority())
 		add_child(instance)

@@ -9,6 +9,8 @@ func _ready():
 	#function called to server, not to the other clients (not sure if this is supposed to be here)
 	multiplayer.connected_to_server.connect(connected_to_server)	
 	multiplayer.connection_failed.connect(connection_failed)
+	multiplayer.peer_disconnected.connect(peer_disconnected)
+	multiplayer.peer_connected.connect(peer_connected)
 	
 	if "--server" in OS.get_cmdline_args():
 		peer.create_server(1811)
@@ -33,7 +35,7 @@ func host() -> void:
 	multiplayer.peer_connected.connect(
 		func(peerID):
 			#client
-			print("PeerID " + str(peerID) + " joined.")
+			print("A Player for " + str(peerID) + " was succesfully created.")
 			add_player(str(peerID))
 	)
 	#host
@@ -65,6 +67,10 @@ func remove_player(peer_id):
 		player.queue_free()
 
 func connected_to_server():
-	print("Connected to Server")
+	print("Succesfully connected to Server.")
 func connection_failed():
-	print("Connection failed")
+	print("You can't connect to this Server.")
+func peer_disconnected(id):
+	print("Player with ID " + str(id) + "disconnected from the game.")
+func peer_connected(id):
+	print("Player with ID " + str(id) + " joined the game.")

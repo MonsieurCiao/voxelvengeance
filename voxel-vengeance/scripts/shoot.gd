@@ -20,6 +20,9 @@ var rayLength
 var shrinkSpeed
 var growSpeed
 var maxSpread
+var autofire
+var bulletSpeed
+var bulletDamage
 
 var shootCooldown: float
 
@@ -50,7 +53,7 @@ func _process(delta: float) -> void:
 	if not is_multiplayer_authority():
 		return
 	shootRay()
-	if weapon_spawner.autofire:
+	if autofire:
 		if Input.is_action_pressed("shoot") and not isShooting and player.input_enabled:
 			bulletShoot.rpc()
 	else:
@@ -71,8 +74,6 @@ func bulletShoot():
 	
 	weapon_spawner = get_node("/root/main/multiplayerManager/"+ str(MultiplayerManager.authorityID) + "/weaponSpawner")
 	print(MultiplayerManager)
-	var bulletSpeed = weapon_spawner.bulletSpeed
-	var bulletDamage = weapon_spawner.bulletDamage
 	bulletInstance.bulletSpeed = bulletSpeed
 	bulletInstance.bulletDamage = bulletDamage
 	
