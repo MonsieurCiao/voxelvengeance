@@ -2,6 +2,8 @@ extends CharacterBody3D
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
+const max_health := 50.0
+var health: float
 @export var dash_speed := 10.0
 @export var dash_duration := 0.2
 @export var dash_cooldownTime := 3.0
@@ -16,6 +18,7 @@ func _enter_tree() -> void:
 	set_multiplayer_authority(int(str(name)))
 	MultiplayerManager.authorityID = int(str(name))
 	$weaponSpawner.set_multiplayer_authority(int(str(name)))
+	health = max_health
 
 
 func _ready() -> void:
@@ -74,3 +77,10 @@ func _physics_process(delta: float) -> void:
 			velocity.z = move_toward(velocity.z, dash_velocity.z, SPEED)
 
 		move_and_slide()
+
+@rpc("any_peer")
+func takeDamage(damage:float):
+	health -= damage
+	if health <= 0:
+		health = max_health
+		position = Vector3(0, 1, 0)
