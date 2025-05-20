@@ -3,7 +3,8 @@ extends CharacterBody3D
 
 @onready var mesh: MeshInstance3D = $MeshInstance3D
 @onready var ray: RayCast3D = $RayCast3D
-@onready var particles: GPUParticles3D = $GPUParticles3D
+@onready var player_hit: GPUParticles3D = $particles/player_hit
+@onready var wall_hit: GPUParticles3D = $particles/wall_hit
 
 #Sound
 @onready var hitSound = get_node("/root/main/multiplayerManager/" + str(MultiplayerManager.authorityID) + "/Sounds/hitSound")
@@ -27,11 +28,12 @@ func _physics_process(delta: float) -> void:
 		if hitPlayer.has_method("takeDamage"):
 			hitSound.play()
 			hitPlayer.takeDamage.rpc_id(hitPlayer.get_multiplayer_authority(), bulletDamage)
-			hitPlayer.playHitSound.rpc_id(hitPlayer.get_multiplayer_authority())
+			player_hit.emitting = true
+		else:
+			wall_hit.emitting = true
 		
 		hit = true
 		mesh.visible = false
-		particles.emitting = true
 		await get_tree().create_timer(1.0).timeout
 		queue_free()
 

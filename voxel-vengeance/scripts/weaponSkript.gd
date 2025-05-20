@@ -11,7 +11,7 @@ var bulletDamage: float
 func _input(event: InputEvent) -> void:
 	if not is_multiplayer_authority(): return
 	if Input.is_key_pressed(KEY_1) and Main.currentWeapon != "pistol":
-		summonWeaponWithProperties.rpc("pistol", 0.3, Vector3(0,0,-.2), false, 70, 10)
+		summonWeaponWithProperties.rpc("pistol", 0.3, Vector3(0,0,-.2), false, 200, 10)
 	if Input.is_key_pressed(KEY_2) and Main.currentWeapon != "ak47":
 		summonWeaponWithProperties.rpc("ak47", 0.1, Vector3(0.4,0,0), true, 140, 5)
 
