@@ -19,8 +19,6 @@ func _enter_tree() -> void:
 	
 
 func _physics_process(delta: float) -> void:
-	if not is_multiplayer_authority():
-		return
 	var collision = move_and_collide(transform.basis * Vector3(0,0, -bulletSpeed) * delta)
 	if collision and not hit:
 		hit = true
