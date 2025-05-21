@@ -1,10 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://bmnfojq3xd4ad"]
+[gd_scene load_steps=11 format=3 uid="uid://bmnfojq3xd4ad"]
 
 [ext_resource type="Script" uid="uid://c5nfme3rxg3u" path="res://scripts/player.gd" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://bh0ega5rx8qi4" path="res://scripts/weaponSkript.gd" id="2_dqkch"]
 [ext_resource type="PackedScene" uid="uid://ds7nop426fpju" path="res://scenes/weapons/pistol.tscn" id="3_qlg0r"]
 [ext_resource type="PackedScene" uid="uid://dq87arw8jeqam" path="res://scenes/weapons/ak_47.tscn" id="4_tuyoq"]
-[ext_resource type="AudioStream" uid="uid://x7gtwvjw2y21" path="res://sound/8 Bit Hit Hurt Sound.wav" id="6_tuyoq"]
+[ext_resource type="AudioStream" uid="uid://bnuuv6n06fjoc" path="res://sound/hurtSound.wav" id="5_qlg0r"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_u8vuu"]
 
@@ -20,6 +20,16 @@ properties/0/replication_mode = 1
 properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 1
+properties/2/path = NodePath("weaponSpawner:rotation")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_tuyoq"]
+random_pitch = 1.12
+random_volume_offset_db = 2.37
+streams_count = 1
+stream_0/stream = ExtResource("5_qlg0r")
+stream_0/weight = 0.0
 
 [node name="PLAYER" type="CharacterBody3D"]
 script = ExtResource("1_3vyb7")
@@ -55,7 +65,7 @@ replication_config = SubResource("SceneReplicationConfig_dqkch")
 visible = false
 
 [node name="hurtSound" type="AudioStreamPlayer3D" parent="Sounds"]
-stream = ExtResource("6_tuyoq")
+stream = SubResource("AudioStreamRandomizer_tuyoq")
 volume_db = -0.5
 
 [node name="hitSound" type="AudioStreamPlayer3D" parent="Sounds"]
