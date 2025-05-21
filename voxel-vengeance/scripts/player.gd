@@ -41,7 +41,7 @@ func _physics_process(delta: float) -> void:
 		
 		# rotate character
 		var target_rot = camera_pivot.global_rotation.y
-		rotation.y = lerp_angle(rotation.y, target_rot, delta*20) # lerp angle to prevent "jumps"
+		rotation.y = lerp_angle(rotation.y, target_rot, delta* 40) # lerp angle to prevent "jumps"
 		
 		
 		var input_dir := Input.get_vector("left", "right", "forward", "backward")
