@@ -36,8 +36,10 @@ func _physics_process(delta: float) -> void:
 			hitPlayer.takeDamage.rpc_id(hitPlayer.get_multiplayer_authority(), bulletDamage)
 			player_hit.emitting = true
 			var damageNumbersInst = DAMAGE_NUMBERS.instantiate()
+			var pos = position
 			damageNumbersInst.damageNum = bulletDamage
-			add_child(damageNumbersInst)
+			damageNumbersInst.position = pos
+			get_node("/root/main").add_child(damageNumbersInst)
 		else:
 			wall_hit.emitting = true
 		

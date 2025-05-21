@@ -48,7 +48,7 @@ func host() -> void:
 	
 
 func join() -> void:
-	peer.create_client("zocki.servebeer.com", 1811) # ADDRESS
+	peer.create_client("localhost", 1811) # ADDRESS
 	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
 	multiplayer.multiplayer_peer = peer
 	
