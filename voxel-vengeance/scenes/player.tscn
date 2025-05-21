@@ -26,6 +26,7 @@ properties/2/replication_mode = 1
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_tuyoq"]
 random_pitch = 1.12
+random_volume_offset_db = 2.37
 streams_count = 1
 stream_0/stream = ExtResource("5_qlg0r")
 stream_0/weight = 0.0

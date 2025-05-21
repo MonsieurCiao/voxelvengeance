@@ -88,6 +88,7 @@ func _physics_process(delta: float) -> void:
 func takeDamage(damage:float):
 	health -= damage
 	hurtSound.play()
+	if hurtSound: print("hurt sound")
 	if health <= 0:
 		health = max_health
 		position = Vector3(0, 1, 0)
