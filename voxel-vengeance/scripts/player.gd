@@ -15,7 +15,7 @@ var input_enabled := true
 @onready var mesh_instance_3d: MeshInstance3D = $MeshInstance3D
 
 #Sounds
-@onready var hurtSound = $Sounds/hurtSound
+@onready var hurtSound = $"Sounds/hurtSound"
 
 func _enter_tree() -> void:
 	set_multiplayer_authority(int(str(name)))
@@ -41,7 +41,7 @@ func _physics_process(delta: float) -> void:
 		
 		# rotate character
 		var target_rot = camera_pivot.global_rotation.y
-		rotation.y = lerp_angle(rotation.y, target_rot, delta* 40) # lerp angle to prevent "jumps"
+		rotation.y = lerp_angle(rotation.y, target_rot, delta * 40) # lerp angle to prevent "jumps"
 		
 		
 		var input_dir := Input.get_vector("left", "right", "forward", "backward")
@@ -87,11 +87,8 @@ func _physics_process(delta: float) -> void:
 @rpc("any_peer")
 func takeDamage(damage:float):
 	health -= damage
+	hurtSound.play()
 	if health <= 0:
 		health = max_health
 		position = Vector3(0, 1, 0)
-		
-@rpc("any_peer")
-func playHitSound():
-	hurtSound.play()
 	

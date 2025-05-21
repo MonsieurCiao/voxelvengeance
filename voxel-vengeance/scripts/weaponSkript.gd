@@ -8,10 +8,13 @@ var autofire
 var bulletSpeed: float
 var bulletDamage: float
 @onready var camera = get_node("/root/main/CameraController")
+@onready var player = $".."
 
 func _process(delta: float) -> void:
+	if not is_multiplayer_authority(): return
 	var camera_yaw = camera.global_rotation.y
-	global_rotation = Vector3(0, camera_yaw, 0)
+	var targetRot = camera.global_rotation.y - player.global_rotation.y 
+	rotation = Vector3(0, targetRot, 0)
 
 func _input(event: InputEvent) -> void:
 	if not is_multiplayer_authority(): return

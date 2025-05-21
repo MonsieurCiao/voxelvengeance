@@ -9,9 +9,6 @@ extends CharacterBody3D
 
 const DAMAGE_NUMBERS = preload("res://scenes/damageNumbers.tscn")
 
-#Sound
-@onready var hitSound = get_node("/root/main/multiplayerManager/" + str(MultiplayerManager.authorityID) + "/Sounds/hitSound")
-
 var weapon_spawner
 var hit := false
 var bulletSpeed: float
@@ -36,7 +33,6 @@ func _physics_process(delta: float) -> void:
 	if collision and not hit:
 		var hitPlayer = collision.get_collider()
 		if hitPlayer.has_method("takeDamage"):
-			hitSound.play()
 			hitPlayer.takeDamage.rpc_id(hitPlayer.get_multiplayer_authority(), bulletDamage)
 			player_hit.emitting = true
 			var damageNumbersInst = DAMAGE_NUMBERS.instantiate()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://ds7nop426fpju"]
+[gd_scene load_steps=14 format=3 uid="uid://ds7nop426fpju"]
 
 [ext_resource type="PackedScene" uid="uid://blq43804hderl" path="res://assets/models/weapons/pistol.blend" id="1_bmquw"]
 [ext_resource type="Script" uid="uid://bibvhm7q5prgf" path="res://scripts/shoot.gd" id="2_r3071"]
@@ -89,6 +89,11 @@ scale_curve = SubResource("CurveTexture_60a84")
 [sub_resource type="BoxMesh" id="BoxMesh_ivc8v"]
 size = Vector3(0.1, 0.1, 0.1)
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ivc8v"]
+random_pitch = 1.24
+streams_count = 1
+stream_0/stream = ExtResource("5_61dc8")
+
 [node name="pistol" type="Node3D"]
 script = ExtResource("2_r3071")
 
@@ -117,6 +122,6 @@ draw_pass_1 = SubResource("BoxMesh_ivc8v")
 [node name="sounds" type="Node3D" parent="."]
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="sounds"]
-stream = ExtResource("5_61dc8")
+stream = SubResource("AudioStreamRandomizer_ivc8v")
 max_polyphony = 2
 bus = &"WeaponSounds"
