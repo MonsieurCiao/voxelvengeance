@@ -2,6 +2,21 @@
 
 [ext_resource type="Script" uid="uid://ek42fjq8ljfm" path="res://scripts/settings_menu.gd" id="1_hayap"]
 
+[sub_resource type="Animation" id="Animation_7i3iu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PanelContainer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_hayap"]
 resource_name = "panel"
 length = 0.3
@@ -16,21 +31,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_7i3iu"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PanelContainer:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_s2d1y"]
@@ -77,18 +77,40 @@ size_flags_vertical = 8
 theme_override_font_sizes/font_size = 30
 text = "Back"
 
-[node name="hBox" type="HBoxContainer" parent="PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="hBox" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/separation = 200
 alignment = 1
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/hBox"]
+[node name="sensitivity" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/hBox"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "sensitivity"
 
-[node name="HSlider" type="HSlider" parent="PanelContainer/MarginContainer/hBox"]
+[node name="sensitivitySlider" type="HSlider" parent="PanelContainer/MarginContainer/VBoxContainer/hBox"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+min_value = 0.1
+max_value = 10.0
+step = 0.1
+value = 0.5
+
+[node name="hBox2" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 200
+alignment = 1
+
+[node name="sfx volume" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/hBox2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "sfx volume"
+
+[node name="sfxVolumeSlider" type="HSlider" parent="PanelContainer/MarginContainer/VBoxContainer/hBox2"]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 min_value = 0.1
@@ -102,4 +124,6 @@ libraries = {
 }
 
 [connection signal="pressed" from="PanelContainer/MarginContainer/Back" to="." method="_on_back_pressed"]
-[connection signal="value_changed" from="PanelContainer/MarginContainer/hBox/HSlider" to="." method="_on_h_slider_value_changed"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/hBox/sensitivitySlider" to="." method="_on_sensitivity_slider_value_changed"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/hBox/sensitivitySlider" to="." method="_on_h_slider_value_changed"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/hBox2/sfxVolumeSlider" to="." method="_on_h_slider_value_changed"]
