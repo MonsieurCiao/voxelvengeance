@@ -38,7 +38,7 @@ func pause():
 	if player:
 		player.input_enabled = false
 	
-func testEsc():
+func testEsc(): # Rework dis shit
 	if Input.is_action_just_pressed("esc") and paused == false and inGame:
 		pause()
 	elif Input.is_action_just_pressed("esc") and paused == true and inPauseMenu:

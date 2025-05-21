@@ -119,4 +119,4 @@ draw_pass_1 = SubResource("BoxMesh_ivc8v")
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="sounds"]
 stream = ExtResource("5_61dc8")
 max_polyphony = 2
-bus = &"weapon_sounds"
+bus = &"WeaponSounds"

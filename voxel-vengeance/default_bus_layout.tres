@@ -1,9 +1,9 @@
-[gd_resource type="AudioBusLayout" format=3 uid="uid://cfhj57wo0vqac"]
+[gd_resource type="AudioBusLayout" format=3 uid="uid://cj4l7a1lx662l"]
 
 [resource]
-bus/1/name = &"weapon_sounds"
+bus/1/name = &"WeaponSounds"
 bus/1/solo = false
 bus/1/mute = false
 bus/1/bypass_fx = false
-bus/1/volume_db = -15.1981
+bus/1/volume_db = -10.0741
 bus/1/send = &"Master"

@@ -120,4 +120,4 @@ target_position = Vector3(0, 0, -1)
 stream = ExtResource("4_hh3i5")
 attenuation_model = 3
 max_polyphony = 5
-bus = &"weapon_sounds"
+bus = &"WeaponSounds"

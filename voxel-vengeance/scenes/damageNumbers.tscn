@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://fxicnbtmmatg"]
 
-[ext_resource type="Script" uid="uid://bwsey77wg8afj" path="res://scripts/damage_numbers.gd" id="1_ogs86"]
+[ext_resource type="Script" path="res://scripts/damage_numbers.gd" id="1_ogs86"]
 [ext_resource type="FontFile" uid="uid://b0trkqwjftagq" path="res://assets/RobotoSlab-ExtraBold.ttf" id="2_xtr5o"]
 
 [sub_resource type="Animation" id="Animation_82rtb"]

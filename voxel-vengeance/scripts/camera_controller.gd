@@ -1,6 +1,6 @@
 extends Node3D
 
-var sensitivity := .5
+var sensitivity := 1
 var player
 
 func _ready() -> void:
