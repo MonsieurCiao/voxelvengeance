@@ -21,21 +21,42 @@ var rayLength
 var shrinkSpeed
 var growSpeed
 var maxSpread
+var cooldown
+var spawnPosition
 var autofire
 var bulletSpeed
-var bulletDamage
+var damage: int
 
 var shootCooldown: float
 
 var crosshair_weapon_assignment = {
 	"std_crosshair": {
-		"ak47": {"distance": 10, "shrinkSpeed": 20, "growSpeed": 20, "maxSpread": 5},
-		"pistol": {"distance": 5, "shrinkSpeed": 20, "growSpeed": 10, "maxSpread": 3}
+		"ak47": {
+			"distance": 10,
+			"shrinkSpeed": 20,
+			"growSpeed": 20,
+			"maxSpread": 5,
+			"cooldown": 0.2,
+			"spawnPosition": Vector3(0.4,0,0),
+			"autofire": true,
+			"bulletSpeed":140,
+			"damage": 5
+				},
+		"pistol": {
+			"distance": 5,
+			"shrinkSpeed": 20,
+			"growSpeed": 10,
+			"maxSpread": 3,
+			"cooldown": 0.3,
+			"spawnPosition": Vector3(0,0,-.2),
+			"autofire": false,
+			"bulletSpeed":200,
+			"damage": 10
+			}
 		},
 	"pump_crosshair": {
 		}
 }
-
 func _ready():
 	if not is_multiplayer_authority():
 		return
@@ -49,20 +70,26 @@ func _ready():
 				shrinkSpeed = crosshair_weapon_assignment[crosshairItem][item]["shrinkSpeed"]
 				growSpeed = crosshair_weapon_assignment[crosshairItem][item]["growSpeed"]
 				maxSpread = crosshair_weapon_assignment[crosshairItem][item]["maxSpread"]
+				cooldown = crosshair_weapon_assignment[crosshairItem][item]["cooldown"]
+				spawnPosition = crosshair_weapon_assignment[crosshairItem][item]["spawnPosition"]
+				autofire = crosshair_weapon_assignment[crosshairItem][item]["autofire"]
+				bulletSpeed = crosshair_weapon_assignment[crosshairItem][item]["bulletSpeed"]
+				damage = crosshair_weapon_assignment[crosshairItem][item]["damage"]
 
 func _process(delta: float) -> void:
+	print(damage)
 	if not is_multiplayer_authority():
 		return
 	shootRay()
 	if autofire:
 		if Input.is_action_pressed("shoot") and not isShooting and player.input_enabled:
-			bulletShoot.rpc()
+			bulletShoot.rpc(bulletSpeed,damage, cooldown)
 	else:
 		if Input.is_action_just_pressed("shoot") and not isShooting and player.input_enabled:
-			bulletShoot.rpc()
+			bulletShoot.rpc(bulletSpeed,damage, cooldown)
 
 @rpc("call_local")
-func bulletShoot():
+func bulletShoot(bulletSpeed,damage, cooldown):
 	if not isBarrelClear(camera, gun_barrel):
 		return
 	isShooting = true
@@ -70,15 +97,11 @@ func bulletShoot():
 	animation_player.play("shoot")
 	_shootParticles()
 	shootSound.play()
-	
 	bulletInstance = bullet.instantiate()
 	bulletInstance.position = gun_barrel.global_position
 	bulletInstance.transform.basis = gun_barrel.global_transform.basis
-	
-	weapon_spawner = get_node("/root/main/multiplayerManager/"+ str(MultiplayerManager.authorityID) + "/weaponSpawner")
-	print(MultiplayerManager)
 	bulletInstance.bulletSpeed = bulletSpeed
-	bulletInstance.bulletDamage = bulletDamage
+	bulletInstance.bulletDamage = damage
 	
 	bulletInstance.set_multiplayer_authority(get_multiplayer_authority())
 	var bullet_container = get_tree().get_current_scene().get_node("Bullets")
@@ -86,7 +109,7 @@ func bulletShoot():
 	if is_multiplayer_authority():
 		crosshair_scene.makeCrosshairBigger(shrinkSpeed, growSpeed, maxSpread)
 	
-	await get_tree().create_timer(shootCooldown).timeout
+	await get_tree().create_timer(cooldown).timeout
 	isShooting = false
 
 func isBarrelClear(camera: Node3D, gun_barrel: Node3D) -> bool:
