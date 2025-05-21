@@ -12,7 +12,6 @@ var bulletDamage: float
 func _process(delta: float) -> void:
 	var camera_yaw = camera.global_rotation.y
 	global_rotation = Vector3(0, camera_yaw, 0)
-	print("globalRot ",global_rotation)
 
 func _input(event: InputEvent) -> void:
 	if not is_multiplayer_authority(): return

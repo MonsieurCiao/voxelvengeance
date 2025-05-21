@@ -27,3 +27,16 @@ func _on_sfx_volume_slider_value_changed(value: float) -> void:
 		AudioServer.get_bus_index("WeaponSounds"),
 		value
 	)
+
+
+func _on_check_button_toggled(toggled_on: bool) -> void:
+	pass # Replace with function body.
+
+
+func _on_full_screen_2_toggled(toggled_on: bool) -> void:
+	if toggled_on:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	else:
+		#minimized
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_MINIMIZED)
+	pass # Replace with function body.

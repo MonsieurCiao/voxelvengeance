@@ -73,18 +73,18 @@ theme_override_constants/margin_bottom = 50
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="hBox" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="sensitivityBox" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/separation = 200
 alignment = 1
 
-[node name="sensitivity" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/hBox"]
+[node name="sensitivity" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/sensitivityBox"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "sensitivity"
 
-[node name="sensitivitySlider" type="HSlider" parent="PanelContainer/MarginContainer/VBoxContainer/hBox"]
+[node name="sensitivitySlider" type="HSlider" parent="PanelContainer/MarginContainer/VBoxContainer/sensitivityBox"]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 min_value = 0.1
@@ -92,24 +92,38 @@ max_value = 5.0
 step = 0.1
 value = 1.0
 
-[node name="hBox2" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="sfxBox" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/separation = 200
 alignment = 1
 
-[node name="sfx volume" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/hBox2"]
+[node name="sfx volume" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/sfxBox"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "sfx volume"
 
-[node name="sfxVolumeSlider" type="HSlider" parent="PanelContainer/MarginContainer/VBoxContainer/hBox2"]
+[node name="sfxVolumeSlider" type="HSlider" parent="PanelContainer/MarginContainer/VBoxContainer/sfxBox"]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 min_value = -50.0
 max_value = 15.0
 step = 5.0
 value = -10.0
+
+[node name="fullScreenBox" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 200
+alignment = 1
+
+[node name="fullScreen" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/fullScreenBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "fullScreen"
+
+[node name="fullScreen2" type="CheckButton" parent="PanelContainer/MarginContainer/VBoxContainer/fullScreenBox"]
+layout_mode = 2
 
 [node name="Back" type="Button" parent="PanelContainer/MarginContainer"]
 layout_mode = 2
@@ -123,7 +137,8 @@ libraries = {
 &"": SubResource("AnimationLibrary_s2d1y")
 }
 
-[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/hBox/sensitivitySlider" to="." method="_on_sensitivity_slider_value_changed"]
-[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/hBox/sensitivitySlider" to="." method="_on_h_slider_value_changed"]
-[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/hBox2/sfxVolumeSlider" to="." method="_on_sfx_volume_slider_value_changed"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/sensitivityBox/sensitivitySlider" to="." method="_on_sensitivity_slider_value_changed"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/sensitivityBox/sensitivitySlider" to="." method="_on_h_slider_value_changed"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/sfxBox/sfxVolumeSlider" to="." method="_on_sfx_volume_slider_value_changed"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/fullScreenBox/fullScreen2" to="." method="_on_full_screen_2_toggled"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/Back" to="." method="_on_back_pressed"]

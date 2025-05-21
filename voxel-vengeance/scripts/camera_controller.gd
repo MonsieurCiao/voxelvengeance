@@ -20,3 +20,8 @@ func _input(event: InputEvent) -> void:
 		if event is InputEventMouseMotion:
 			#rotation.x -= event.relative.y / 1000 * sensitivity
 			rotation.y -= event.relative.x / 1000 * sensitivity
+		if Input.is_key_pressed(KEY_F11):
+			if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
+				DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_MINIMIZED)
+			else:
+				DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
