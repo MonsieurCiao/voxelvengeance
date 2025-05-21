@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://dq87arw8jeqam"]
+[gd_scene load_steps=13 format=3 uid="uid://dq87arw8jeqam"]
 
 [ext_resource type="PackedScene" uid="uid://bx603tifhkmut" path="res://assets/models/weapons/ak47.blend" id="1_b1as7"]
 [ext_resource type="PackedScene" uid="uid://ckx4hhut66byo" path="res://scenes/animation/weapon_muzzle_flash.tscn" id="1_bbty4"]
 [ext_resource type="Script" uid="uid://bibvhm7q5prgf" path="res://scripts/shoot.gd" id="1_jx0ug"]
+[ext_resource type="AudioStream" uid="uid://cr014q02o8ler" path="res://sound/ak.mp3" id="4_hh3i5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jx0ug"]
 albedo_color = Color(0.945098, 0.639216, 0, 1)
@@ -112,3 +113,9 @@ libraries = {
 [node name="RayCast3D" type="RayCast3D" parent="weapon"]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.278634, 0.0168654, -6.01044)
 target_position = Vector3(0, 0, -1)
+
+[node name="sounds" type="Node3D" parent="."]
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="sounds"]
+stream = ExtResource("4_hh3i5")
+max_polyphony = 5

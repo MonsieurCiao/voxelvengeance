@@ -3,7 +3,6 @@ extends Node3D
 @onready var animation_player: AnimationPlayer = $weapon/AnimationPlayer
 @onready var sparks: GPUParticles3D = $sparks
 @onready var camera = get_node("/root/main/CameraController/Camera3D")
-@onready var shootSound = get_node("/root/main/multiplayerManager/" + str(MultiplayerManager.authorityID) + "/Sounds/shootSound")
 
 # Bullets
 var bullet = load("res://scenes/weapons/pistolBullet.tscn")
@@ -26,6 +25,7 @@ var spawnPosition
 var autofire
 var bulletSpeed
 var damage: int
+var weaponname
 
 var shootCooldown: float
 
@@ -66,6 +66,7 @@ func _ready():
 		for item in crosshair_weapon_assignment[crosshairItem]:
 			if Main.currentWeapon == item:
 				crosshair = get_node("/root/main/Crosshairs/" + str(crosshairItem))
+				weaponname = item
 				rayLength = crosshair_weapon_assignment[crosshairItem][item]["distance"]
 				shrinkSpeed = crosshair_weapon_assignment[crosshairItem][item]["shrinkSpeed"]
 				growSpeed = crosshair_weapon_assignment[crosshairItem][item]["growSpeed"]
@@ -77,26 +78,24 @@ func _ready():
 				damage = crosshair_weapon_assignment[crosshairItem][item]["damage"]
 
 func _process(delta: float) -> void:
-	print(damage)
 	if not is_multiplayer_authority():
 		return
 	shootRay()
 	if autofire:
 		if Input.is_action_pressed("shoot") and not isShooting and player.input_enabled:
-			bulletShoot.rpc(bulletSpeed,damage, cooldown)
+			bulletShoot.rpc(bulletSpeed,damage, cooldown, multiplayer.get_unique_id(), weaponname)
 	else:
 		if Input.is_action_just_pressed("shoot") and not isShooting and player.input_enabled:
-			bulletShoot.rpc(bulletSpeed,damage, cooldown)
+			bulletShoot.rpc(bulletSpeed,damage, cooldown, multiplayer.get_unique_id(), weaponname)
 
 @rpc("call_local")
-func bulletShoot(bulletSpeed,damage, cooldown):
+func bulletShoot(bulletSpeed,damage, cooldown, shooterID, weapon):
 	if not isBarrelClear(camera, gun_barrel):
 		return
 	isShooting = true
 	
 	animation_player.play("shoot")
 	_shootParticles()
-	shootSound.play()
 	bulletInstance = bullet.instantiate()
 	bulletInstance.position = gun_barrel.global_position
 	bulletInstance.transform.basis = gun_barrel.global_transform.basis
@@ -106,6 +105,12 @@ func bulletShoot(bulletSpeed,damage, cooldown):
 	bulletInstance.set_multiplayer_authority(get_multiplayer_authority())
 	var bullet_container = get_tree().get_current_scene().get_node("Bullets")
 	bullet_container.add_child(bulletInstance)
+	
+	var sounddir = get_node("/root/main/multiplayerManager/" + str(shooterID) + "/weaponSpawner/" + weapon + "/sounds/")
+	var rnd = RandomNumberGenerator.new()
+	rnd.randomize()
+	sounddir.get_children()[rnd.randi_range(0, sounddir.get_child_count() - 1)].play()
+	
 	if is_multiplayer_authority():
 		crosshair_scene.makeCrosshairBigger(shrinkSpeed, growSpeed, maxSpread)
 	

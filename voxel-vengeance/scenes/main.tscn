@@ -10,11 +10,11 @@
 [ext_resource type="PackedScene" uid="uid://cy1w1e6sayjtj" path="res://scenes/decoration/lantern.tscn" id="4_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://b00l872ksbyw1" path="res://scenes/menus/settings_menu.tscn" id="6_jbj1t"]
 [ext_resource type="PackedScene" path="res://scenes/decoration/cactus.tscn" id="7_o6xl0"]
-[ext_resource type="PackedScene" uid="uid://cl0xeultds0dy" path="res://scenes/menus/gambling_wheel_spinning.tscn" id="9_85g3d"]
 [ext_resource type="PackedScene" uid="uid://dgtdlxwqhwve4" path="res://scenes/decoration/fence_1.tscn" id="10_trceg"]
 [ext_resource type="PackedScene" uid="uid://bxm5yatlhai6n" path="res://scenes/decoration/fence_2.tscn" id="11_a8y0u"]
 [ext_resource type="PackedScene" uid="uid://dqoj4ugmgutjt" path="res://scenes/decoration/fence_3.tscn" id="12_jkv2x"]
 [ext_resource type="PackedScene" uid="uid://b5mta4y8v464p" path="res://scenes/decoration/fence_4.tscn" id="13_jbj1t"]
+[ext_resource type="PackedScene" uid="uid://diehj6y4a73ds" path="res://scenes/decoration/wall.tscn" id="17_muem4"]
 [ext_resource type="PackedScene" uid="uid://b3we2iiulhdvh" path="res://assets/models/decoration/rail1.blend" id="19_jscy8"]
 [ext_resource type="PackedScene" uid="uid://oor8lanp1d2q" path="res://scenes/crosshairs/Crosshair.tscn" id="20_gqmmt"]
 [ext_resource type="PackedScene" uid="uid://dcnt4s1oqlckv" path="res://assets/models/decoration/rail2.blend" id="20_pm3ni"]
@@ -98,21 +98,6 @@ size = Vector3(35.9985, 1.01605, 27.9248)
 [node name="Bullets" type="Node3D" parent="."]
 
 [node name="Deko" type="Node3D" parent="."]
-
-[node name="woodbox" parent="Deko" instance=ExtResource("2_0wfyh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.05762, 1.0063, 0.0272574)
-
-[node name="barrel" parent="Deko" instance=ExtResource("2_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.18664, 0.877228, 0.980087)
-
-[node name="lantern" parent="Deko" instance=ExtResource("4_jyhfs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.19762, 0.5, 0.211462)
-
-[node name="Cactus" parent="Deko" instance=ExtResource("7_o6xl0")]
-transform = Transform3D(0.508576, 0, -0.861017, 0, 1, 0, 0.861017, 0, 0.508576, 4.81236, 0.273469, -2.09927)
-
-[node name="gamblingWheel" parent="Deko" instance=ExtResource("9_85g3d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.06478, 0.500001, -2.37131)
 
 [node name="fence1" parent="Deko" instance=ExtResource("10_trceg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.7141, 0.526163, 3.8611)
@@ -200,6 +185,51 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -9.202
 
 [node name="Node3D" parent="Deko" instance=ExtResource("22_jscy8")]
 transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, -11, 1.33858, 3)
+
+[node name="Wall" parent="Deko" instance=ExtResource("17_muem4")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2.76505, 0.505957, 1.12876)
+
+[node name="Wall2" parent="Deko" instance=ExtResource("17_muem4")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.82505, 0.505957, 1.12876)
+
+[node name="Wall3" parent="Deko" instance=ExtResource("17_muem4")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -1.82505, 0.505957, 6.36941)
+
+[node name="Wall4" parent="Deko" instance=ExtResource("17_muem4")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 5.98173, 0.505957, 2.82745)
+
+[node name="Wall5" parent="Deko" instance=ExtResource("17_muem4")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 10.7887, 0.505957, 2.82745)
+
+[node name="Wall6" parent="Deko" instance=ExtResource("17_muem4")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 10.7887, 0.505957, -1.61808)
+
+[node name="Wall7" parent="Deko" instance=ExtResource("17_muem4")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 5.58416, 0.505957, -7.43702)
+
+[node name="woodbox" parent="Deko" instance=ExtResource("2_0wfyh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.736508, 1.0063, 7.37172)
+
+[node name="woodbox2" parent="Deko" instance=ExtResource("2_0wfyh")]
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, -1.76142, 1.0063, -1.98917)
+
+[node name="lantern" parent="Deko" instance=ExtResource("4_jyhfs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.290588, 0.499999, 3.03555)
+
+[node name="lantern2" parent="Deko" instance=ExtResource("4_jyhfs")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 13.364, 0.499999, 3.90104)
+
+[node name="Cactus" parent="Deko" instance=ExtResource("7_o6xl0")]
+transform = Transform3D(0.518102, 0, -0.855319, 0, 1, 0, 0.855319, 0, 0.518102, 0.196991, 0.499999, -10.9935)
+
+[node name="barrel" parent="Deko" instance=ExtResource("2_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.50886, 0.877227, -4.67346)
+
+[node name="barrel2" parent="Deko" instance=ExtResource("2_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.92311, 0.877227, -0.756006)
+
+[node name="barrel3" parent="Deko" instance=ExtResource("2_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.92088, 0.877228, -6.40798)
 
 [node name="Crosshairs" type="Node3D" parent="."]
 

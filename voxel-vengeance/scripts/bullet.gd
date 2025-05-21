@@ -33,7 +33,6 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	var collision = move_and_collide(transform.basis * Vector3(0,0, -bulletSpeed) * delta)
-	print(self.rotation)
 	if collision and not hit:
 		var hitPlayer = collision.get_collider()
 		if hitPlayer.has_method("takeDamage"):

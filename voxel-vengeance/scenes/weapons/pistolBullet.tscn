@@ -39,7 +39,7 @@ collision_use_scale = true
 size = Vector3(0.15, 0.05, 0.05)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8dxs5"]
-albedo_color = Color(1, 0, 0, 1)
+albedo_color = Color(1, 0.578368, 0.516824, 1)
 
 [sub_resource type="Curve" id="Curve_ks1fn"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.801471, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -78,9 +78,6 @@ flatness = 0.289
 initial_velocity_min = 7.0
 initial_velocity_max = 17.0
 scale_curve = SubResource("CurveTexture_ks1fn")
-collision_mode = 1
-collision_friction = 0.5
-collision_bounce = 0.5
 
 [sub_resource type="BoxMesh" id="BoxMesh_rl4yy"]
 size = Vector3(0.1, 0.1, 0.1)
@@ -139,13 +136,14 @@ process_material = SubResource("ParticleProcessMaterial_teunt")
 draw_pass_1 = SubResource("BoxMesh_651te")
 
 [node name="wall_hit" type="GPUParticles3D" parent="particles"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.001839, 0.0215256)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.001839, 0.0164924)
 material_override = SubResource("StandardMaterial3D_88t8m")
 emitting = false
 amount = 4
 lifetime = 0.15
 one_shot = true
 explosiveness = 1.0
+fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_evuld")
 draw_pass_1 = SubResource("BoxMesh_rl4yy")
 
