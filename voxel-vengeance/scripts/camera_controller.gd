@@ -12,7 +12,6 @@ func _process(delta: float) -> void:
 		global_position = player.global_position
 	elif MultiplayerManager.authorityID:
 		player = get_node("/root/main/multiplayerManager/" + str(MultiplayerManager.authorityID))
-		print(player)
 
 func _input(event: InputEvent) -> void:
 	if player:

@@ -1,10 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://bmnfojq3xd4ad"]
+[gd_scene load_steps=10 format=3 uid="uid://bmnfojq3xd4ad"]
 
 [ext_resource type="Script" uid="uid://c5nfme3rxg3u" path="res://scripts/player.gd" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://bh0ega5rx8qi4" path="res://scripts/weaponSkript.gd" id="2_dqkch"]
 [ext_resource type="PackedScene" uid="uid://ds7nop426fpju" path="res://scenes/weapons/pistol.tscn" id="3_qlg0r"]
 [ext_resource type="PackedScene" uid="uid://dq87arw8jeqam" path="res://scenes/weapons/ak_47.tscn" id="4_tuyoq"]
-[ext_resource type="AudioStream" uid="uid://cw15ivpq2wgkt" path="res://sound/Schuss.mp3" id="5_qlg0r"]
 [ext_resource type="AudioStream" uid="uid://x7gtwvjw2y21" path="res://sound/8 Bit Hit Hurt Sound.wav" id="6_tuyoq"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_u8vuu"]
@@ -47,13 +46,12 @@ ak47 = ExtResource("4_tuyoq")
 replication_config = SubResource("SceneReplicationConfig_dqkch")
 
 [node name="Sounds" type="Node3D" parent="."]
-
-[node name="shootSound" type="AudioStreamPlayer3D" parent="Sounds"]
-stream = ExtResource("5_qlg0r")
-volume_db = -10.667
+visible = false
 
 [node name="hurtSound" type="AudioStreamPlayer3D" parent="Sounds"]
 stream = ExtResource("6_tuyoq")
 volume_db = -0.5
 
 [node name="hitSound" type="AudioStreamPlayer3D" parent="Sounds"]
+
+[node name="AudioListener3D" type="AudioListener3D" parent="."]

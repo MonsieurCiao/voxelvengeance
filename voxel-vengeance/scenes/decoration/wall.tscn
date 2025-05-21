@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://diehj6y4a73ds"]
+
+[ext_resource type="PackedScene" uid="uid://lil02lh826bm" path="res://assets/models/decoration/wall.blend" id="1_o3xrs"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_h0a4s"]
+size = Vector3(2.30023, 0.958252, 0.622803)
+
+[node name="Wall" type="Node3D"]
+
+[node name="wall" parent="." instance=ExtResource("1_o3xrs")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="wall"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="wall/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0118713, 0.485229, -0.041626)
+shape = SubResource("BoxShape3D_h0a4s")
+
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="wall"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.0116882, 0.488403, -0.0328979)
+size = Vector3(4.59363, 1.896, 1.26587)

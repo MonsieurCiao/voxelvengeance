@@ -25,8 +25,11 @@ func _enter_tree() -> void:
 
 
 func _ready() -> void:
-	position = Vector3(RandomNumberGenerator.new().randf_range(-2, 16), 1, 0)
-
+	position = Vector3(-9, 1, -6)
+	#set audiolistener
+	if is_multiplayer_authority():
+		var audio_listener: AudioListener3D = get_node("/root/main/multiplayerManager/" + str(multiplayer.get_unique_id()) + "/AudioListener3D")
+		audio_listener.make_current()
 
 func _physics_process(delta: float) -> void:
 	if is_multiplayer_authority():
