@@ -30,6 +30,7 @@ func _ready() -> void:
 	if is_multiplayer_authority():
 		var audio_listener: AudioListener3D = get_node("/root/main/multiplayerManager/" + str(multiplayer.get_unique_id()) + "/AudioListener3D")
 		audio_listener.make_current()
+#		$playerName.text = MultiplayerManager.playerlist[multiplayer.get_unique_id()].name
 
 func _physics_process(delta: float) -> void:
 	if is_multiplayer_authority():

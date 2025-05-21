@@ -134,6 +134,10 @@ theme_override_font_sizes/font_size = 30
 text = "Host
 "
 
+[node name="name" type="LineEdit" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+placeholder_text = "Name"
+
 [node name="Join" type="Button" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
