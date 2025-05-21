@@ -25,6 +25,10 @@ Main="*res://scripts/main.gd"
 window/size/viewport_width=1900
 window/size/viewport_height=1000
 
+[gui]
+
+theme/custom_font="uid://dt7ieaqxc4552"
+
 [input]
 
 forward={
