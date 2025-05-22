@@ -16,6 +16,7 @@ var input_enabled := true
 
 #Sounds
 @onready var hurtSound = $"Sounds/hurtSound"
+@onready var walkSound = $"Sounds/walkSound"
 
 func _enter_tree() -> void:
 	set_multiplayer_authority(int(str(name)))
@@ -79,6 +80,8 @@ func _physics_process(delta: float) -> void:
 		if move_dir != Vector3.ZERO:
 			velocity.x = move_dir.x * SPEED + dash_velocity.x
 			velocity.z = move_dir.z * SPEED + dash_velocity.z
+			if not walkSound.is_playing():
+				walkSound.play()
 		else:
 			velocity.x = move_toward(velocity.x, dash_velocity.x, SPEED)
 			velocity.z = move_toward(velocity.z, dash_velocity.z, SPEED)
