@@ -44,3 +44,7 @@ func send_transform(playerPosition, playerRotation, id):
 	player.position = playerPosition
 	player.rotation.y = playerRotation
 	
+func request_weapon(weaponName: String):
+	var sender_id = multiplayer.get_remote_sender_id()
+	print("REQUEST WEAPON")
+	#$"/root/server".summonWeaponWithProperties(weaponName, sender_id)

@@ -8,6 +8,10 @@ var network = ENetMultiplayerPeer.new()
 var playerlist = {}
 var movedir = {}
 
+#weapons
+@export var pistol: PackedScene
+@export var ak47: PackedScene
+
 @onready var playerScene = preload("res://scenes/player.tscn")
 
 func _ready() -> void:
@@ -79,3 +83,18 @@ func _physics_process(delta: float) -> void:
 		if serverPlayer is CharacterBody3D:
 			serverPlayer.move_and_slide()
 		MultiplayerManager.rpc_id(id, "send_transform", serverPlayer.position, serverPlayer.rotation.y, id)
+
+
+func summonWeaponWithProperties(weaponName, id):
+		#Main.currentWeapon = weaponName
+		print(weaponName)
+		var player = $players.get_node(str(id))
+		clear_all_children(player.get_node("weaponSpawner"))
+		
+		var instance = get(weaponName).instantiate()
+		instance.set_multiplayer_authority(id)
+		player.get_node("weaponSpawner").add_child(instance)
+		
+func clear_all_children(node: Node) -> void:
+	for child in node.get_children():
+		child.free()
