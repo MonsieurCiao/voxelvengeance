@@ -18,10 +18,10 @@ func _process(delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if not is_multiplayer_authority(): return
-	if Input.is_key_pressed(KEY_1) and Main.currentWeapon != "pistol":
-		summonWeaponWithProperties.rpc("pistol")
-	if Input.is_key_pressed(KEY_2) and Main.currentWeapon != "ak47":
-		summonWeaponWithProperties.rpc("ak47")
+	#if Input.is_key_pressed(KEY_1) and Main.currentWeapon != "pistol":
+		#summonWeaponWithProperties.rpc("pistol")
+	#if Input.is_key_pressed(KEY_2) and Main.currentWeapon != "ak47":
+		#summonWeaponWithProperties.rpc("ak47")
 
 func clear_all_children(node: Node) -> void:
 	for child in node.get_children():
@@ -29,7 +29,7 @@ func clear_all_children(node: Node) -> void:
 
 @rpc("call_local")
 func summonWeaponWithProperties(weaponName):
-		Main.currentWeapon = weaponName
+#		Main.currentWeapon = weaponName
 		clear_all_children(self)
 		var instance = get(weaponName).instantiate()
 		instance.set_multiplayer_authority(get_multiplayer_authority())

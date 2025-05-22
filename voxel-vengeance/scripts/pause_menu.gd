@@ -62,11 +62,3 @@ func _on_leave_pressed() -> void:
 func _process(delta: float) -> void:
 	testEsc()
 	pass
-
-#Multiplayer
-@onready var multiplayer_manager: Node3D = $"../../multiplayerManager"
-func host() -> void:
-	multiplayer_manager.host()
-
-func join() -> void:
-	multiplayer_manager.join()

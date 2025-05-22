@@ -64,7 +64,7 @@ func _ready():
 	for crosshairItem in crosshair_weapon_assignment:
 		get_node("/root/main/Crosshairs/" + str(crosshairItem)).hide()
 		for item in crosshair_weapon_assignment[crosshairItem]:
-			if Main.currentWeapon == item:
+#			if Main.currentWeapon == item:
 				crosshair = get_node("/root/main/Crosshairs/" + str(crosshairItem))
 				weaponname = item
 				rayLength = crosshair_weapon_assignment[crosshairItem][item]["distance"]
