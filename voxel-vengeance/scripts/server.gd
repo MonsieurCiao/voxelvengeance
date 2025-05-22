@@ -51,6 +51,7 @@ func _physics_process(delta: float) -> void:
 		print(id)
 		var serverPlayer = $players.get_node(str(id))
 		var move_dir := Vector3.ZERO
+		print(MultiplayerManager.inputDir)
 		var inputVect = MultiplayerManager.inputDir[id]["move"]
 		
 		if not serverPlayer.is_on_floor():
