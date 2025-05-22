@@ -14,7 +14,6 @@ var dash_timer := 0.0
 var dash_cooldown := 0.0
 var input_enabled := true
 
-@onready var camera_pivot = get_node("/root/main/CameraController/")
 @onready var mesh_instance_3d: MeshInstance3D = $MeshInstance3D
 
 #Sounds

@@ -5,6 +5,8 @@ var network = ENetMultiplayerPeer.new()
 const adress = "zocki.servebeer.com"
 const port = 1811
 
+var inputDir = {}
+
 #<Connect
 func _ready() -> void:
 	multiplayer.connected_to_server.connect(connected_to_server)
@@ -21,13 +23,23 @@ func connectionfailed():
 	print("Connection failed")
 #>
 @rpc("authority")
-func init_player(pos):
+func init_player():
 	var playerInst = PLAYER.instantiate()
-	playerInst.position = pos
 	playerInst.name = str(multiplayer.get_unique_id())
 	add_child(playerInst)
 	$"../main/CameraController".player = get_node("/root/MultiplayerManager/" + str(multiplayer.get_unique_id()))
 
-@rpc("any_peer", "call_local")
+@rpc("any_peer", "call_remote")
 func receive_input(input):
-	print(input)
+	inputDir[multiplayer.get_remote_sender_id()] = input
+
+@rpc("authority")
+func send_position(playerPosition, id):
+	print(str(id))
+	print(playerPosition)
+	var player = get_node("/root/MultiplayerManager/" + str(id))
+	var camera = get_node("/root/main/CameraController/")
+	if player.is_multiplayer_authority():
+		camera.position = playerPosition
+	player.position = playerPosition
+	

@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://ckd54v6fogkj1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e5uuo"]
+albedo_color = Color(0.569805, 0.510859, 0.357899, 1)
+
+[node name="world" type="Node3D"]
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+material_override = SubResource("StandardMaterial3D_e5uuo")
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
+size = Vector3(36, 1, 28)
+
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="CSGCombiner3D/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0306091, -0.00717163, -0.0249023)
+size = Vector3(35.9985, 1.01605, 27.9248)

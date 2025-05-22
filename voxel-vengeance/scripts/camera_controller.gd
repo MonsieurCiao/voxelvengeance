@@ -7,9 +7,9 @@ var camLock = true
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
-func _process(delta: float) -> void:
-	if player:
-		global_position = player.global_position
+#func _process(delta: float) -> void:
+	#if player:
+		#global_position = player.global_position
 	#elif :
 	#	player = get_node("/root/main/multiplayerManager/" + str(MultiplayerManager.authorityID))
 
