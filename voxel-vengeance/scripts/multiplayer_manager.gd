@@ -2,7 +2,7 @@ extends Node3D
 
 const PLAYER = preload("res://scenes/player.tscn")
 var network = ENetMultiplayerPeer.new()
-const adress = "zocki.servebeer.com"
+const adress = "localhost"
 const port = 1811
 
 var inputDir = {}
@@ -34,7 +34,7 @@ func receive_input(input):
 	inputDir[multiplayer.get_remote_sender_id()] = input
 
 @rpc("authority")
-func send_position(playerPosition, id):
+func send_transform(playerPosition, playerRotation, id):
 	print(str(id))
 	print(playerPosition)
 	var player = get_node("/root/MultiplayerManager/" + str(id))
@@ -42,4 +42,5 @@ func send_position(playerPosition, id):
 	if player.is_multiplayer_authority():
 		camera.position = playerPosition
 	player.position = playerPosition
+	player.rotation.y = playerRotation
 	

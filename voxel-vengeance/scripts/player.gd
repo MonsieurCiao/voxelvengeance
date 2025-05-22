@@ -33,7 +33,7 @@ func _ready() -> void:
 		var audio_listener: AudioListener3D = get_node("/root/MultiplayerManager/" + str(multiplayer.get_unique_id()) + "/AudioListener3D")
 		audio_listener.make_current()
 #		$playerName.text = MultiplayerManager.playerlist[multiplayer.get_unique_id()].name
-		var input_state = {"move": Vector2(0,0)}
+		var input_state = {"move": Vector2(0,0), "targetRot": 0.0}
 		MultiplayerManager.rpc_id(1, "receive_input", input_state)
 
 var last_input_state = {}
@@ -42,7 +42,8 @@ func _physics_process(_delta):
 		var input_state = {
 			"move": Vector2(
 			Input.get_action_strength("right") - Input.get_action_strength("left"),
-			Input.get_action_strength("backward") - Input.get_action_strength("forward")),
+			Input.get_action_strength("backward") - Input.get_action_strength("forward")), 
+			"targetRot": camera_pivot.global_rotation.y
 			}
 		if input_state != last_input_state:
 			MultiplayerManager.rpc_id(1, "receive_input", input_state)

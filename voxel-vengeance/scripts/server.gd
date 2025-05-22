@@ -48,19 +48,28 @@ func _physics_process(delta: float) -> void:
 	if MultiplayerManager.inputDir == {}:
 		return
 	for id in MultiplayerManager.inputDir:
-		print(id)
 		var serverPlayer = $players.get_node(str(id))
-		var move_dir := Vector3.ZERO
-		print(MultiplayerManager.inputDir)
+		print(MultiplayerManager.inputDir[id])
 		var inputVect = MultiplayerManager.inputDir[id]["move"]
 		
+		var target_rot = MultiplayerManager.inputDir[id]["targetRot"]
+		serverPlayer.rotation.y = lerp_angle(serverPlayer.rotation.y, target_rot, delta * 40) # lerp angle to prevent "jumps"
+		print(serverPlayer.rotation.y)
+		
+		#GRAVITY
 		if not serverPlayer.is_on_floor():
 			serverPlayer.velocity += serverPlayer.get_gravity() * delta
 		else:
 			serverPlayer.velocity.y = 0.0
 		
+		# Determine movement direction from camera
+		var player_basis = serverPlayer.global_transform.basis
+		var forward = player_basis.z.normalized()
+		var right = player_basis.x.normalized()
+		var move_dir := Vector3.ZERO
+		
 		if inputVect != Vector2.ZERO:
-			move_dir = Vector3(inputVect.x, 0, inputVect.y).normalized()
+			move_dir = (right * inputVect.x + forward * inputVect.y).normalized()
 			serverPlayer.velocity.x = move_dir.x * SPEED
 			serverPlayer.velocity.z = move_dir.z * SPEED
 		else:
@@ -69,4 +78,4 @@ func _physics_process(delta: float) -> void:
 			
 		if serverPlayer is CharacterBody3D:
 			serverPlayer.move_and_slide()
-		MultiplayerManager.rpc_id(id, "send_position", serverPlayer.position, id)
+		MultiplayerManager.rpc_id(id, "send_transform", serverPlayer.position, serverPlayer.rotation.y, id)
