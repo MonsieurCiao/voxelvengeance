@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://lbqtdhghsot0"]
+
+[ext_resource type="Script" uid="uid://c4dasy86dg7j" path="res://SERVER/scripts/server.gd" id="1_7y1gi"]
+[ext_resource type="PackedScene" uid="uid://ckd54v6fogkj1" path="res://scenes/world.tscn" id="2_tiy2m"]
+
+[node name="server" type="Node3D"]
+script = ExtResource("1_7y1gi")
+
+[node name="players" type="Node3D" parent="."]
+
+[node name="world" parent="." instance=ExtResource("2_tiy2m")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5394, 17.8911)

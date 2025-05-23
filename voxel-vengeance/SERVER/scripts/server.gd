@@ -12,7 +12,7 @@ var movedir = {}
 @export var pistol: PackedScene
 @export var ak47: PackedScene
 
-@onready var playerScene = preload("res://scenes/player.tscn")
+@onready var playerScene = preload("res://SERVER/assets/serverPlayer.tscn")
 
 func _ready() -> void:
 	network.peer_connected.connect(client_connected)
@@ -27,6 +27,7 @@ func client_connected(id):
 	print("Player with ID " + str(id) + " connected.")
 	playerlist[id] = {"name":"Client"}
 	print(playerlist)
+	await get_tree().process_frame
 	spawnPlayer(id)
 	
 func client_disconnected(id):
@@ -51,12 +52,13 @@ func _physics_process(delta: float) -> void:
 	if MultiplayerManager.playerKeysDir == {}:
 		return
 	for id in MultiplayerManager.playerKeysDir:
+		if !playerlist.has(id):
+			MultiplayerManager.playerKeysDir.erase(id)
+			return
 		var serverPlayer = $players.get_node(str(id))
-		print(MultiplayerManager.playerKeysDir[id])
 		var inputVect = MultiplayerManager.playerKeysDir[id]["move"]
 		var target_rot = MultiplayerManager.playerKeysDir[id]["targetRot"]
 		serverPlayer.rotation.y = lerp_angle(serverPlayer.rotation.y, target_rot, delta * 40) # lerp angle to prevent "jumps"
-		print(serverPlayer.rotation.y)
 		
 		#GRAVITY
 		if not serverPlayer.is_on_floor():
