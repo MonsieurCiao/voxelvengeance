@@ -1,7 +1,4 @@
 extends Node3D
-
-
-
 var shootCooldown
 var autofire
 var bulletSpeed: float

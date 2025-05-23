@@ -29,23 +29,27 @@ func init_player():
 	add_child(playerInst)
 	$"../main/CameraController".player = get_node("/root/MultiplayerManager/" + str(multiplayer.get_unique_id()))
 
-@rpc("any_peer", "call_remote")
+@rpc("any_peer", "call_remote","unreliable")
 func receive_input(input):
 	playerKeysDir[multiplayer.get_remote_sender_id()] = input
 
 @rpc("any_peer")
-func send_transform(playerPosition, playerRotation, id):
-	if !get_node("/root/MultiplayerManager/" + str(id)):
-		print("Create " + str(id))
+func deletePlayerBody(id):
+	get_node("/root/MultiplayerManager/" + str(id)).queue_free()
+
+@rpc("any_peer")
+func send_transform(newPlayerData):
+	if !get_node("/root/MultiplayerManager/" + str(newPlayerData["id"])):
+		print("Create " + str(newPlayerData["id"]))
 		var playerInst = PLAYER.instantiate()
-		playerInst.name = str(id)
+		playerInst.name = str(newPlayerData["id"])
 		add_child(playerInst)
-	var player = get_node("/root/MultiplayerManager/" + str(id))
+	var player = get_node("/root/MultiplayerManager/" + str(newPlayerData["id"]))
 	var camera = get_node("/root/main/CameraController/")
 	if player.is_multiplayer_authority():
-		camera.position = playerPosition
-	player.position = playerPosition
-	player.rotation.y = playerRotation
+		camera.position = newPlayerData["position"]
+	player.position = newPlayerData["position"]
+	player.rotation.y = newPlayerData["rotation"]
 
 func request_weapon(weaponName: String):
 	var sender_id = multiplayer.get_remote_sender_id()

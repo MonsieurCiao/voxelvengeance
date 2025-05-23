@@ -54,11 +54,20 @@ func _physics_process(delta: float) -> void:
 	for id in MultiplayerManager.playerKeysDir:
 		if !playerlist.has(id):
 			MultiplayerManager.playerKeysDir.erase(id)
+			MultiplayerManager.deletePlayerBody.rpc(id)
+			#delete local too
+			$players.get_node(str(id)).queue_free()
 			return
+			
 		var serverPlayer = $players.get_node(str(id))
 		var inputVect = MultiplayerManager.playerKeysDir[id]["move"]
+		var weaponSelect = MultiplayerManager.playerKeysDir[id]["weapons"]
 		var target_rot = MultiplayerManager.playerKeysDir[id]["targetRot"]
+		var newPlayerData = {}
 		serverPlayer.rotation.y = lerp_angle(serverPlayer.rotation.y, target_rot, delta * 40) # lerp angle to prevent "jumps"
+		
+		if weaponSelect.one:
+			newPlayerData["weapon"] = "pistol"
 		
 		#GRAVITY
 		if not serverPlayer.is_on_floor():
@@ -82,7 +91,10 @@ func _physics_process(delta: float) -> void:
 			
 		if serverPlayer is CharacterBody3D:
 			serverPlayer.move_and_slide()
-		MultiplayerManager.rpc("send_transform", serverPlayer.position, serverPlayer.rotation.y, id)
+		newPlayerData["position"] = serverPlayer.position
+		newPlayerData["rotation"] = serverPlayer.rotation.y
+		newPlayerData["id"] = id
+		MultiplayerManager.rpc("send_transform", newPlayerData)
 
 
 func summonWeaponWithProperties(weaponName, id):
