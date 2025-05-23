@@ -1,8 +1,8 @@
 [gd_scene load_steps=14 format=3 uid="uid://d2yfp1tb8a8o1"]
 
 [ext_resource type="PackedScene" uid="uid://ds3ieo3rb4j0a" path="res://scenes/menus/pause_menu.tscn" id="1_o6xl0"]
-[ext_resource type="Script" path="res://scripts/main.gd" id="1_yc10j"]
-[ext_resource type="PackedScene" path="res://scenes/world.tscn" id="2_tipki"]
+[ext_resource type="Script" uid="uid://fg8b618rpf31" path="res://scripts/main.gd" id="1_yc10j"]
+[ext_resource type="PackedScene" uid="uid://ckd54v6fogkj1" path="res://scenes/world.tscn" id="2_tipki"]
 [ext_resource type="Script" uid="uid://baw12ml61sky4" path="res://scripts/camera_controller.gd" id="3_tefeu"]
 [ext_resource type="Script" path="res://scripts/cameraScript.gd" id="4_choun"]
 [ext_resource type="PackedScene" uid="uid://b00l872ksbyw1" path="res://scenes/menus/settings_menu.tscn" id="6_jbj1t"]

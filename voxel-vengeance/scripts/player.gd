@@ -27,7 +27,6 @@ func _enter_tree() -> void:
 
 func _ready() -> void:
 	auth = is_multiplayer_authority()
-	position = Vector3(-9, 1, -6)
 	#set audiolistener
 	if is_multiplayer_authority():
 		var audio_listener: AudioListener3D = get_node("/root/MultiplayerManager/" + str(multiplayer.get_unique_id()) + "/AudioListener3D")

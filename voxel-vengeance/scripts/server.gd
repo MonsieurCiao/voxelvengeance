@@ -27,7 +27,6 @@ func client_connected(id):
 	print("Player with ID " + str(id) + " connected.")
 	playerlist[id] = {"name":"Client"}
 	print(playerlist)
-	await get_tree().process_frame
 	spawnPlayer(id)
 	
 func client_disconnected(id):
@@ -49,14 +48,13 @@ func spawnPlayer(id):
 	MultiplayerManager.rpc_id(id, "init_player")
 	
 func _physics_process(delta: float) -> void:
-	if MultiplayerManager.inputDir == {}:
+	if MultiplayerManager.playerKeysDir == {}:
 		return
-	for id in MultiplayerManager.inputDir:
+	for id in MultiplayerManager.playerKeysDir:
 		var serverPlayer = $players.get_node(str(id))
-		print(MultiplayerManager.inputDir[id])
-		var inputVect = MultiplayerManager.inputDir[id]["move"]
-		
-		var target_rot = MultiplayerManager.inputDir[id]["targetRot"]
+		print(MultiplayerManager.playerKeysDir[id])
+		var inputVect = MultiplayerManager.playerKeysDir[id]["move"]
+		var target_rot = MultiplayerManager.playerKeysDir[id]["targetRot"]
 		serverPlayer.rotation.y = lerp_angle(serverPlayer.rotation.y, target_rot, delta * 40) # lerp angle to prevent "jumps"
 		print(serverPlayer.rotation.y)
 		
@@ -82,7 +80,7 @@ func _physics_process(delta: float) -> void:
 			
 		if serverPlayer is CharacterBody3D:
 			serverPlayer.move_and_slide()
-		MultiplayerManager.rpc_id(id, "send_transform", serverPlayer.position, serverPlayer.rotation.y, id)
+		MultiplayerManager.rpc("send_transform", serverPlayer.position, serverPlayer.rotation.y, id)
 
 
 func summonWeaponWithProperties(weaponName, id):

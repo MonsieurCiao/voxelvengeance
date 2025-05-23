@@ -5,7 +5,7 @@ var network = ENetMultiplayerPeer.new()
 const adress = "localhost"
 const port = 1811
 
-var inputDir = {}
+var playerKeysDir = {}
 
 #<Connect
 func _ready() -> void:
@@ -31,20 +31,23 @@ func init_player():
 
 @rpc("any_peer", "call_remote")
 func receive_input(input):
-	inputDir[multiplayer.get_remote_sender_id()] = input
+	playerKeysDir[multiplayer.get_remote_sender_id()] = input
 
-@rpc("authority")
+@rpc("any_peer")
 func send_transform(playerPosition, playerRotation, id):
-	print(str(id))
-	print(playerPosition)
+	if !get_node("/root/MultiplayerManager/" + str(id)):
+		print("Create " + str(id))
+		var playerInst = PLAYER.instantiate()
+		playerInst.name = str(id)
+		add_child(playerInst)
 	var player = get_node("/root/MultiplayerManager/" + str(id))
 	var camera = get_node("/root/main/CameraController/")
 	if player.is_multiplayer_authority():
 		camera.position = playerPosition
 	player.position = playerPosition
 	player.rotation.y = playerRotation
-	
+
 func request_weapon(weaponName: String):
 	var sender_id = multiplayer.get_remote_sender_id()
-	print("REQUEST WEAPON")
+	#print("REQUEST WEAPON")
 	#$"/root/server".summonWeaponWithProperties(weaponName, sender_id)
