@@ -15,3 +15,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.343474, 0, 0.650149)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="fence1/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35144, 0.960358, -0.635803)
 shape = SubResource("BoxShape3D_c0ptl")
+
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00131226, 0.972748, 0.00717163)
+size = Vector3(0.141663, 1.98834, 4.95465)
