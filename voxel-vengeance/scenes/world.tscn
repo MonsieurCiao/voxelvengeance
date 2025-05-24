@@ -1,17 +1,90 @@
-[gd_scene load_steps=2 format=3 uid="uid://ckd54v6fogkj1"]
+[gd_scene load_steps=12 format=3 uid="uid://ckd54v6fogkj1"]
+
+[ext_resource type="PackedScene" uid="uid://diehj6y4a73ds" path="res://scenes/decoration/wall.tscn" id="1_nnsk1"]
+[ext_resource type="PackedScene" uid="uid://d0kisrunuq7ox" path="res://scenes/decoration/oilDrum.tscn" id="1_w7kh3"]
+[ext_resource type="PackedScene" uid="uid://bpa2brmcrgils" path="res://scenes/decoration/wall_w_hole.tscn" id="2_i7141"]
+[ext_resource type="PackedScene" uid="uid://cy1w1e6sayjtj" path="res://scenes/decoration/lantern.tscn" id="3_4mrxx"]
+[ext_resource type="PackedScene" uid="uid://crs8cgqy8m6li" path="res://scenes/decoration/boneInGround.tscn" id="4_7r4gi"]
+[ext_resource type="PackedScene" uid="uid://d20mph0y372ct" path="res://scenes/decoration/barrel.tscn" id="5_w7kh3"]
+[ext_resource type="PackedScene" uid="uid://f86umdorkcgd" path="res://scenes/decoration/cactus.tscn" id="6_e3hyu"]
+[ext_resource type="PackedScene" uid="uid://comlas5eo13sq" path="res://scenes/decoration/tree_stump.tscn" id="7_q5onr"]
+[ext_resource type="PackedScene" uid="uid://evqpfl5bkqbi" path="res://scenes/decoration/woodbox.tscn" id="8_7r4gi"]
+[ext_resource type="PackedScene" uid="uid://do3r03xf3nqpg" path="res://scenes/decoration/skeleton.tscn" id="9_w7kh3"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e5uuo"]
 albedo_color = Color(0.569805, 0.510859, 0.357899, 1)
 
 [node name="world" type="Node3D"]
 
-[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+[node name="ground" type="CSGCombiner3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_e5uuo")
 use_collision = true
 
-[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="ground"]
 size = Vector3(36, 1, 28)
 
-[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="CSGCombiner3D/CSGBox3D"]
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="ground/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0306091, -0.00717163, -0.0249023)
 size = Vector3(35.9985, 1.01605, 27.9248)
+
+[node name="spawnPoints" type="Node3D" parent="."]
+
+[node name="Node3D" type="Node3D" parent="spawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.69818, 2, -8.64048)
+
+[node name="Node3D2" type="Node3D" parent="spawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5116, 2, -2.6698)
+
+[node name="Node3D3" type="Node3D" parent="spawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.28624, 2, -3.87542)
+
+[node name="Node3D4" type="Node3D" parent="spawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.0295, 2, -3.99937)
+
+[node name="objects" type="Node3D" parent="."]
+
+[node name="Wall" parent="objects" instance=ExtResource("1_nnsk1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.2676, 0.511914, -5.82731)
+
+[node name="Node3D" parent="objects" instance=ExtResource("2_i7141")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.51321, 0.505957, -5.79134)
+
+[node name="Wall2" parent="objects" instance=ExtResource("1_nnsk1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.26192, 0.511792, -5.79119)
+
+[node name="Wall3" parent="objects" instance=ExtResource("1_nnsk1")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3.95553, 0.511792, -2.86326)
+
+[node name="Wall4" parent="objects" instance=ExtResource("1_nnsk1")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8.91875, 0.511792, -3.03549)
+
+[node name="lantern" parent="objects" instance=ExtResource("3_4mrxx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.82608, 0.5, -0.661435)
+
+[node name="lantern2" parent="objects" instance=ExtResource("3_4mrxx")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 6.82082, 0.5, -0.875053)
+
+[node name="Node3D2" parent="objects" instance=ExtResource("4_7r4gi")]
+transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, -3.42523, 0.5, 2.0139)
+
+[node name="barrel" parent="objects" instance=ExtResource("5_w7kh3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.80688, 0.877229, -0.439839)
+
+[node name="Cactus" parent="objects" instance=ExtResource("6_e3hyu")]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -6.73122, 0.500001, -1.42155)
+
+[node name="Node3D3" parent="objects" instance=ExtResource("7_q5onr")]
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 11.15, 0.940395, 3.14111)
+
+[node name="woodbox" parent="objects" instance=ExtResource("8_7r4gi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.44931, 1.0063, -4.77565)
+
+[node name="Node3D4" parent="objects" instance=ExtResource("9_w7kh3")]
+transform = Transform3D(0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, 12.4369, 0.65619, 7.04588)
+
+[node name="oil_drum" parent="objects" instance=ExtResource("1_w7kh3")]
+transform = Transform3D(0.866025, 0.5, 2.18557e-08, 0, -4.37114e-08, 1, 0.5, -0.866025, -3.78552e-08, -2.92059, 0.983807, -3.53654)
+
+[node name="oil_drum2" parent="objects" instance=ExtResource("1_w7kh3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.75726, 0.988163, -4.68699)

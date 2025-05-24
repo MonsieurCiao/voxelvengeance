@@ -26,7 +26,7 @@ stream_2/stream = ExtResource("8_3v2ag")
 stream_3/stream = ExtResource("9_jej6c")
 stream_4/stream = ExtResource("10_f1ej7")
 
-[node name="PLAYER" type="CharacterBody3D"]
+[node name="PLAYER2" type="CharacterBody3D"]
 script = ExtResource("1_3vyb7")
 
 [node name="playerName" type="Label3D" parent="."]

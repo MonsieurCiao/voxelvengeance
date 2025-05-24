@@ -137,8 +137,8 @@ libraries = {
 &"": SubResource("AnimationLibrary_s2d1y")
 }
 
-[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/sensitivityBox/sensitivitySlider" to="." method="_on_h_slider_value_changed"]
 [connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/sensitivityBox/sensitivitySlider" to="." method="_on_sensitivity_slider_value_changed"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/sensitivityBox/sensitivitySlider" to="." method="_on_h_slider_value_changed"]
 [connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/sfxBox/sfxVolumeSlider" to="." method="_on_sfx_volume_slider_value_changed"]
 [connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/fullScreenBox/fullScreen2" to="." method="_on_full_screen_2_toggled"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/Back" to="." method="_on_back_pressed"]

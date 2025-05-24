@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://do3r03xf3nqpg"]
+
+[ext_resource type="PackedScene" uid="uid://bfd1syxte58bq" path="res://assets/models/decoration/skeleton.blend" id="1_nbrdi"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7alpy"]
+size = Vector3(15.9122, 8.96558, 10.8701)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="skeleton" parent="." instance=ExtResource("1_nbrdi")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="skeleton"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="skeleton/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.00092, 1.42981, -0.0229493)
+shape = SubResource("BoxShape3D_7alpy")
+
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -0.0921021, 0.14144, 0.00134277)
+size = Vector3(15.9622, 8.88824, 10.9438)
