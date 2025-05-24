@@ -70,7 +70,6 @@ func _physics_process(delta: float) -> void:
 		var forward = basis.z.normalized()
 		var right = basis.x.normalized()
 		var move_dir = (right * move_input.x + forward * move_input.y).normalized()
-
 		if move_dir != Vector3.ZERO:
 			player_node.velocity.x = move_dir.x * SPEED
 			player_node.velocity.z = move_dir.z * SPEED
@@ -80,6 +79,7 @@ func _physics_process(delta: float) -> void:
 
 		player_node.move_and_slide()
 		print(player_node.position)
+		
 		MultiplayerManager.rpc("send_transform", {
 			"id": id,
 			"position": player_node.position,

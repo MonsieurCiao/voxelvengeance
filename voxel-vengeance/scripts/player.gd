@@ -20,14 +20,15 @@ var camera_pivot
 @export var input: PlayerInput
 
 func _ready() -> void:
-	print(input)
 	input.set_multiplayer_authority(int(str(name)))
+	set_multiplayer_authority(int(str(name)))
 	rollback_synchronizer.process_settings()
 
 func _gather():
 	pass
 
 func _rollback_tick(delta, tick, is_fresh):
+	print(get_multiplayer_authority())
 	if is_multiplayer_authority() and get_multiplayer_authority() != 1:
 		if not input_enabled:
 			return
