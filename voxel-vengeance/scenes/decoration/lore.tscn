@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bnn5agi3qptnr" path="res://assets/models/decoration/lore.blend" id="1_67ure"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2fm20"]
-size = Vector3(1.99658, 1.01996, 1.32336)
+size = Vector3(1.99658, 1.41125, 1.32336)
 
 [node name="Node3D" type="Node3D"]
 
@@ -12,9 +12,5 @@ size = Vector3(1.99658, 1.01996, 1.32336)
 [node name="StaticBody3D" type="StaticBody3D" parent="lore"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="lore/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0065918, -0.0798629, 0.00592041)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0065918, 0.115784, 0.00592041)
 shape = SubResource("BoxShape3D_2fm20")
-
-[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="lore/StaticBody3D/CollisionShape3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00286864, -0.000823975)
-size = Vector3(2, 1.02527, 1.33344)

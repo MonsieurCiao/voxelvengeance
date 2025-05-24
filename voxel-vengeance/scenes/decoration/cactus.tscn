@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://f86umdorkcgd"]
+[gd_scene load_steps=3 format=3 uid="uid://c16bc8sgbrxf0"]
 
 [ext_resource type="PackedScene" uid="uid://c35wjpnvvxgig" path="res://assets/models/decoration/cactus.blend" id="1_5nnt5"]
 
@@ -15,7 +15,3 @@ transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="cactus/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0628967, 1.67123, 0.0504456)
 shape = SubResource("BoxShape3D_5nnt5")
-
-[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0226746, 1.25327, 0.0447998)
-size = Vector3(0.434265, 2.46442, 1.69604)

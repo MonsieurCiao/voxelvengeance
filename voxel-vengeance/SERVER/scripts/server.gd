@@ -39,9 +39,14 @@ func client_disconnected(id):
 
 func spawnPlayer(id):
 	var playerInst = playerScene.instantiate()
-	var randoms = int(RandomNumberGenerator.new().randf_range(0, $world.get_node("spawnPoints").get_child_count()-1))
 	playerInst.name = str(id)
-	playerInst.position = $world.get_node("spawnPoints").get_children()[randoms].position
+	var rng = RandomNumberGenerator.new()
+	rng.randomize()
+	playerInst.position = Vector3(
+		rng.randf_range(-10.0, 10.0),
+		2,
+		rng.randf_range(-10.0, 10.0)
+	)
 	$players.add_child(playerInst)
 	MultiplayerManager.rpc_id(id, "init_player")
 	
