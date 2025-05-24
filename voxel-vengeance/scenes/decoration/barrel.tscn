@@ -2,7 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://bgxgyy2qk1asd" path="res://assets/models/decoration/barrel.blend" id="1_rdemj"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_rdemj"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_rdemj"]
+height = 0.77417
+radius = 0.366211
 
 [node name="barrel" type="Node3D"]
 
@@ -12,5 +14,9 @@ transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 [node name="StaticBody3D" type="StaticBody3D" parent="barrel"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="barrel/StaticBody3D"]
-transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)
-shape = SubResource("BoxShape3D_rdemj")
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0.0671387, 0)
+shape = SubResource("CylinderShape3D_rdemj")
+
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00012207, 0.00805664, 0.0012207)
+size = Vector3(0.739502, 0.766113, 0.736816)
