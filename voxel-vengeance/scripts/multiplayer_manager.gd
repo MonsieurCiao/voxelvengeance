@@ -13,12 +13,11 @@ func _ready() -> void:
 	multiplayer.connection_failed.connect(connectionfailed)
 	
 	network.create_client(adress, port)
-	network.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
+	#network.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
 	multiplayer.multiplayer_peer = network
 
 func connected_to_server():
 	print("Connected to Server")
-	MultiplayerManager.rpc_id(1, "receive_input", "input_state")
 func connectionfailed():
 	print("Connection failed")
 #>
@@ -29,9 +28,10 @@ func init_player():
 	add_child(playerInst)
 	$"../main/CameraController".player = get_node("/root/MultiplayerManager/" + str(multiplayer.get_unique_id()))
 
-@rpc("any_peer", "call_remote","unreliable")
-func receive_input(input):
-	playerKeysDir[multiplayer.get_remote_sender_id()] = input
+@rpc("any_peer", "call_remote", "unreliable")
+func receive_input(id, inputVect, targetRot):
+	playerKeysDir[multiplayer.get_remote_sender_id()]["move"] = inputVect
+	playerKeysDir[multiplayer.get_remote_sender_id()]["targetRot"] = targetRot
 
 @rpc("any_peer")
 func deletePlayerBody(id):
@@ -39,17 +39,17 @@ func deletePlayerBody(id):
 
 @rpc("any_peer")
 func send_transform(newPlayerData):
-	if !get_node("/root/MultiplayerManager/" + str(newPlayerData["id"])):
-		print("Create " + str(newPlayerData["id"]))
+	var player = get_node_or_null("/root/MultiplayerManager/" + str(newPlayerData["id"]))
+	if not player:
 		var playerInst = PLAYER.instantiate()
 		playerInst.name = str(newPlayerData["id"])
 		add_child(playerInst)
-	var player = get_node("/root/MultiplayerManager/" + str(newPlayerData["id"]))
-	var camera = get_node("/root/main/CameraController/")
-	if player.is_multiplayer_authority():
-		camera.position = newPlayerData["position"]
-	player.position = newPlayerData["position"]
-	player.rotation.y = newPlayerData["rotation"]
+		player = playerInst
+
+	if not player.is_multiplayer_authority():
+		# Nur Remote-Spieler interpolieren
+		player.position = player.position.lerp(newPlayerData["position"], 0.2)
+		player.rotation.y = lerp_angle(player.rotation.y, newPlayerData["rotation"], 0.2)
 
 func request_weapon(weaponName: String):
 	var sender_id = multiplayer.get_remote_sender_id()
