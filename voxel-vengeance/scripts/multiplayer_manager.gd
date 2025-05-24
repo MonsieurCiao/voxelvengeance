@@ -7,6 +7,11 @@ const port = 1811
 
 var playerKeysDir = {}
 
+#WEAPONS
+const pistol = preload("res://scenes/weapons/pistol.tscn")
+const ak47 = preload("res://scenes/weapons/ak_47.tscn")
+var weapon_dict = {}
+
 #<Connect
 func _ready() -> void:
 	multiplayer.connected_to_server.connect(connected_to_server)
@@ -15,6 +20,11 @@ func _ready() -> void:
 	network.create_client(adress, port)
 	network.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
 	multiplayer.multiplayer_peer = network
+	
+	weapon_dict = {
+		"pistol": pistol,
+		"ak47": ak47
+	}
 
 func connected_to_server():
 	print("Connected to Server")
@@ -51,7 +61,23 @@ func send_transform(newPlayerData):
 	player.position = newPlayerData["position"]
 	player.rotation.y = newPlayerData["rotation"]
 
-func request_weapon(weaponName: String):
-	var sender_id = multiplayer.get_remote_sender_id()
-	#print("REQUEST WEAPON")
-	#$"/root/server".summonWeaponWithProperties(weaponName, sender_id)
+#WEAPON
+@rpc("any_peer")
+func assign_weapon(weapon: String, id: int):
+	print(weapon)
+	var player = get_node("/root/MultiplayerManager/" + str(id))
+	clear_all_children(player.get_node("weaponSpawner"))
+	
+	var instance = weapon_dict[weapon].instantiate()
+	instance.weaponname = weapon
+	instance.name = weapon
+	instance.set_multiplayer_authority(int(id))
+	player.get_node("weaponSpawner").add_child(instance) 
+		
+func clear_all_children(node: Node) -> void:
+	for child in node.get_children():
+		child.free()
+
+@rpc("any_peer")
+func propagate_bullet_data():
+	pass

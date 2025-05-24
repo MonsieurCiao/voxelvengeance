@@ -32,7 +32,7 @@ func _ready() -> void:
 		var audio_listener: AudioListener3D = get_node("/root/MultiplayerManager/" + str(multiplayer.get_unique_id()) + "/AudioListener3D")
 		audio_listener.make_current()
 #		$playerName.text = MultiplayerManager.playerlist[multiplayer.get_unique_id()].name
-		var input_state = {"move": Vector2(0,0), "targetRot": 0.0, "weapons": {"one":false,"two":false,"three":false,"four":false,"five":false,"six":false,"seven":false,"eight":false,"nine":false}}
+		var input_state = {"move": Vector2(0,0), "targetRot": 0.0, "weapons": {"1":false,"2":false,"3":false,"4":false,"5":false,"6":false,"7":false,"8":false,"9":false}}
 		MultiplayerManager.rpc_id(1, "receive_input", input_state)
 
 var last_input_state = {}
@@ -44,17 +44,20 @@ func _physics_process(delta):
 			Input.get_action_strength("backward") - Input.get_action_strength("forward")), 
 			"targetRot": camera_pivot.global_rotation.y,
 			"weapons": {
-				"one":Input.is_key_pressed(KEY_1),
-				"two":Input.is_key_pressed(KEY_2),
-				"three":Input.is_key_pressed(KEY_3),
-				"four":Input.is_key_pressed(KEY_4),
-				"five":Input.is_key_pressed(KEY_5),
-				"six":Input.is_key_pressed(KEY_6),
-				"seven":Input.is_key_pressed(KEY_7),
-				"eight":Input.is_key_pressed(KEY_8),
-				"nine":Input.is_key_pressed(KEY_9),
+				"1":Input.is_key_pressed(KEY_1),
+				"2":Input.is_key_pressed(KEY_2),
+				"3":Input.is_key_pressed(KEY_3),
+				"4":Input.is_key_pressed(KEY_4),
+				"5":Input.is_key_pressed(KEY_5),
+				"6":Input.is_key_pressed(KEY_6),
+				"7":Input.is_key_pressed(KEY_7),
+				"8":Input.is_key_pressed(KEY_8),
+				"9":Input.is_key_pressed(KEY_9),
+			},
+			"mouse":{
+				"left": Input.is_action_just_pressed("shoot")
 			}
-			}
+		}
 		if input_state != last_input_state:
 			MultiplayerManager.rpc_id(1, "receive_input", input_state)
 			last_input_state = input_state

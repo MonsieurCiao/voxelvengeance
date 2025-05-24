@@ -9,8 +9,10 @@ var playerlist = {}
 var movedir = {}
 
 #weapons
-@export var pistol: PackedScene
-@export var ak47: PackedScene
+var weapon_dict = {
+		"1": "pistol",
+		"2": "ak47",
+	}
 
 @onready var playerScene = preload("res://SERVER/assets/serverPlayer.tscn")
 
@@ -62,12 +64,23 @@ func _physics_process(delta: float) -> void:
 		var serverPlayer = $players.get_node(str(id))
 		var inputVect = MultiplayerManager.playerKeysDir[id]["move"]
 		var weaponSelect = MultiplayerManager.playerKeysDir[id]["weapons"]
+		var mouseLeft = MultiplayerManager.playerKeysDir[id]["mouse"]["left"]
 		var target_rot = MultiplayerManager.playerKeysDir[id]["targetRot"]
 		var newPlayerData = {}
 		serverPlayer.rotation.y = lerp_angle(serverPlayer.rotation.y, target_rot, delta * 40) # lerp angle to prevent "jumps"
 		
-		if weaponSelect.one:
-			newPlayerData["weapon"] = "pistol"
+		#search weaponSelect (dict) for true
+		var weapon:String
+		for key in weaponSelect.keys():
+			if weaponSelect[key] == true:
+				weapon = weapon_dict.get(str(key))
+		newPlayerData["weapon"] = weapon
+		if weapon != "": summonWeaponWithProperties(weapon, id)
+		
+		if mouseLeft:
+			shootRay()
+			shoot()
+	
 		
 		#GRAVITY
 		if not serverPlayer.is_on_floor():
@@ -97,16 +110,34 @@ func _physics_process(delta: float) -> void:
 		MultiplayerManager.rpc("send_transform", newPlayerData)
 
 
-func summonWeaponWithProperties(weaponName, id):
-		#Main.currentWeapon = weaponName
-		print(weaponName)
-		var player = $players.get_node(str(id))
-		clear_all_children(player.get_node("weaponSpawner"))
-		
-		var instance = get(weaponName).instantiate()
-		instance.set_multiplayer_authority(id)
-		player.get_node("weaponSpawner").add_child(instance)
-		
-func clear_all_children(node: Node) -> void:
-	for child in node.get_children():
-		child.free()
+func summonWeaponWithProperties(weapon: String, id:int):
+		MultiplayerManager.rpc("assign_weapon", weapon, id) #save info and client player
+
+func shoot():
+	
+	MultiplayerManager.rpc("propagate_bullet_data")
+	pass
+func shootRay():
+	var space = get_world_3d().direct_space_state
+	var from = global_transform.origin
+	var direction = - global_transform.basis.z.normalized()
+	var to = from + direction * rayLength
+
+	var forward_query = PhysicsRayQueryParameters3D.create(from, to)
+	var forward_result = space.intersect_ray(forward_query)
+
+	if forward_result:
+		crosshair.hide()
+		wallCrosshair.show()
+		wallCrosshair.position = forward_result.position
+	else:
+		crosshair.show()
+		wallCrosshair.hide()
+		var down_from = to + Vector3.UP * 1.0
+		var down_to = down_from + Vector3.DOWN * rayLength
+		var down_query = PhysicsRayQueryParameters3D.create(down_from, down_to)
+		down_query.collision_mask = 0xFFFFFFFF & ~(1 << 1)
+		var down_result = space.intersect_ray(down_query)
+		if down_result:
+			crosshair.position = down_result.position + Vector3.UP * 0.01
+		crosshair.rotation = player.rotation

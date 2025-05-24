@@ -25,7 +25,7 @@ var spawnPosition
 var autofire
 var bulletSpeed
 var damage: int
-var weaponname
+var weaponname # is assigned in multiplayer_manager
 
 var shootCooldown: float
 
@@ -66,16 +66,15 @@ func _ready():
 		for item in crosshair_weapon_assignment[crosshairItem]:
 #			if Main.currentWeapon == item:
 				crosshair = get_node("/root/main/Crosshairs/" + str(crosshairItem))
-				weaponname = item
-				rayLength = crosshair_weapon_assignment[crosshairItem][item]["distance"]
-				shrinkSpeed = crosshair_weapon_assignment[crosshairItem][item]["shrinkSpeed"]
-				growSpeed = crosshair_weapon_assignment[crosshairItem][item]["growSpeed"]
-				maxSpread = crosshair_weapon_assignment[crosshairItem][item]["maxSpread"]
-				cooldown = crosshair_weapon_assignment[crosshairItem][item]["cooldown"]
-				spawnPosition = crosshair_weapon_assignment[crosshairItem][item]["spawnPosition"]
-				autofire = crosshair_weapon_assignment[crosshairItem][item]["autofire"]
-				bulletSpeed = crosshair_weapon_assignment[crosshairItem][item]["bulletSpeed"]
-				damage = crosshair_weapon_assignment[crosshairItem][item]["damage"]
+				rayLength = crosshair_weapon_assignment[crosshairItem][weaponname]["distance"]
+				shrinkSpeed = crosshair_weapon_assignment[crosshairItem][weaponname]["shrinkSpeed"]
+				growSpeed = crosshair_weapon_assignment[crosshairItem][weaponname]["growSpeed"]
+				maxSpread = crosshair_weapon_assignment[crosshairItem][weaponname]["maxSpread"]
+				cooldown = crosshair_weapon_assignment[crosshairItem][weaponname]["cooldown"]
+				spawnPosition = crosshair_weapon_assignment[crosshairItem][weaponname]["spawnPosition"]
+				autofire = crosshair_weapon_assignment[crosshairItem][weaponname]["autofire"]
+				bulletSpeed = crosshair_weapon_assignment[crosshairItem][weaponname]["bulletSpeed"]
+				damage = crosshair_weapon_assignment[crosshairItem][weaponname]["damage"]
 
 func _process(delta: float) -> void:
 	if not is_multiplayer_authority():
@@ -88,8 +87,7 @@ func _process(delta: float) -> void:
 		if Input.is_action_just_pressed("shoot") and not isShooting and player.input_enabled:
 			bulletShoot.rpc(bulletSpeed,damage, cooldown, multiplayer.get_unique_id(), weaponname)
 
-@rpc("call_local")
-func bulletShoot(bulletSpeed,damage, cooldown, shooterID, weapon):
+func bulletShoot(bulletSpeed,damage, cooldown, shooterID, weapon:String):
 	if not isBarrelClear(camera, gun_barrel):
 		return
 	isShooting = true
@@ -106,10 +104,7 @@ func bulletShoot(bulletSpeed,damage, cooldown, shooterID, weapon):
 	var bullet_container = get_tree().get_current_scene().get_node("Bullets")
 	bullet_container.add_child(bulletInstance)
 	
-	var sounddir = get_node("/root/main/multiplayerManager/" + str(shooterID) + "/weaponSpawner/" + weapon + "/sounds/AudioStreamPlayer3D")
-	#var rnd = RandomNumberGenerator.new()
-	#rnd.randomize()
-	#sounddir.get_children()[rnd.randi_range(0, sounddir.get_child_count() - 1)].play()
+	var sounddir = get_node("/root/MultiplayerManager/" + str(shooterID) + "/weaponSpawner/" + weapon + "/sounds/AudioStreamPlayer3D")
 	sounddir.play()
 	
 	if is_multiplayer_authority():
