@@ -30,8 +30,11 @@ func init_player():
 
 @rpc("any_peer", "call_remote", "unreliable")
 func receive_input(id, inputVect, targetRot):
-	playerKeysDir[multiplayer.get_remote_sender_id()]["move"] = inputVect
-	playerKeysDir[multiplayer.get_remote_sender_id()]["targetRot"] = targetRot
+	if not playerKeysDir.has(id):
+		playerKeysDir[id] = {}
+
+	playerKeysDir[id]["move"] = inputVect
+	playerKeysDir[id]["targetRot"] = targetRot
 
 @rpc("any_peer")
 func deletePlayerBody(id):

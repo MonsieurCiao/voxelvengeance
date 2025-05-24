@@ -45,7 +45,6 @@ func spawnPlayer(id):
 
 func _physics_process(delta: float) -> void:
 	for id in MultiplayerManager.playerKeysDir:
-		print(id)
 		if not playerlist.has(id):
 			continue
 
@@ -57,7 +56,6 @@ func _physics_process(delta: float) -> void:
 		var move_input = input.get("move", Vector2.ZERO)
 		var dash_input = input.get("dash", false)
 		var target_rot = input.get("targetRot", 0.0)
-
 		# Rotation
 		player_node.rotation.y = lerp_angle(player_node.rotation.y, target_rot, delta * 20)
 
@@ -81,7 +79,7 @@ func _physics_process(delta: float) -> void:
 			player_node.velocity.z = move_toward(player_node.velocity.z, 0, SPEED)
 
 		player_node.move_and_slide()
-		print("sync")
+		print(player_node.position)
 		MultiplayerManager.rpc("send_transform", {
 			"id": id,
 			"position": player_node.position,
