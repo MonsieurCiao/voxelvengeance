@@ -15,77 +15,28 @@ var bulletInstance
 var isShooting = false
 var crosshair
 
-var rayLength
-var shrinkSpeed
-var growSpeed
-var maxSpread
-var cooldown
-var spawnPosition
-var autofire
-var bulletSpeed
-var damage: int
-var weaponname
-
 var shootCooldown: float
 
-var crosshair_weapon_assignment = {
-	"std_crosshair": {
-		"ak47": {
-			"distance": 10,
-			"shrinkSpeed": 20,
-			"growSpeed": 20,
-			"maxSpread": 5,
-			"cooldown": 0.2,
-			"spawnPosition": Vector3(0.4,0,0),
-			"autofire": true,
-			"bulletSpeed":140,
-			"damage": 5
-				},
-		"pistol": {
-			"distance": 5,
-			"shrinkSpeed": 20,
-			"growSpeed": 10,
-			"maxSpread": 3,
-			"cooldown": 0.3,
-			"spawnPosition": Vector3(0,0,-.2),
-			"autofire": false,
-			"bulletSpeed":200,
-			"damage": 10
-			}
-		},
-	"pump_crosshair": {
-		}
-}
 func _ready():
 	if not is_multiplayer_authority():
 		return
-	crosshair = null
-	for crosshairItem in crosshair_weapon_assignment:
-		get_node("/root/main/Crosshairs/" + str(crosshairItem)).hide()
-		for item in crosshair_weapon_assignment[crosshairItem]:
-			if Main.currentWeapon == item:
-				crosshair = get_node("/root/main/Crosshairs/" + str(crosshairItem))
-				weaponname = item
-				rayLength = crosshair_weapon_assignment[crosshairItem][item]["distance"]
-				shrinkSpeed = crosshair_weapon_assignment[crosshairItem][item]["shrinkSpeed"]
-				growSpeed = crosshair_weapon_assignment[crosshairItem][item]["growSpeed"]
-				maxSpread = crosshair_weapon_assignment[crosshairItem][item]["maxSpread"]
-				cooldown = crosshair_weapon_assignment[crosshairItem][item]["cooldown"]
-				spawnPosition = crosshair_weapon_assignment[crosshairItem][item]["spawnPosition"]
-				autofire = crosshair_weapon_assignment[crosshairItem][item]["autofire"]
-				bulletSpeed = crosshair_weapon_assignment[crosshairItem][item]["bulletSpeed"]
-				damage = crosshair_weapon_assignment[crosshairItem][item]["damage"]
+	crosshair = WeaponData.getWeaponData()["crosshair"]
+	position = WeaponData.getWeaponData()["spawnPosition"]
 
 func _process(delta: float) -> void:
 	if not is_multiplayer_authority():
 		return
 	shootRay()
-	if autofire:
+	if not isBarrelClear($weapon/weaponEnd, gun_barrel):
+		return
+	if WeaponData.getWeaponData()["autofire"]:
 		if Input.is_action_pressed("shoot") and not isShooting and player.input_enabled:
-			bulletShoot.rpc(bulletSpeed,damage, cooldown, multiplayer.get_unique_id(), weaponname)
+			bulletShoot.rpc(WeaponData.getWeaponData()["bulletSpeed"],WeaponData.getWeaponData()["damage"], WeaponData.getWeaponData()["cooldown"], multiplayer.get_unique_id(), WeaponData.getWeaponData()["weaponname"])
+			get_node("/root/main/CameraController/").shakeCamera(WeaponData.getWeaponData()["shakeStrength"], WeaponData.getWeaponData()["shakeFade"])
 	else:
 		if Input.is_action_just_pressed("shoot") and not isShooting and player.input_enabled:
-			bulletShoot.rpc(bulletSpeed,damage, cooldown, multiplayer.get_unique_id(), weaponname)
+			bulletShoot.rpc(WeaponData.getWeaponData()["bulletSpeed"],WeaponData.getWeaponData()["damage"], WeaponData.getWeaponData()["cooldown"], multiplayer.get_unique_id(), WeaponData.getWeaponData()["weaponname"])
+			get_node("/root/main/CameraController/").shakeCamera(WeaponData.getWeaponData()["shakeStrength"], WeaponData.getWeaponData()["shakeFade"])
 
 @rpc("call_local")
 func bulletShoot(bulletSpeed,damage, cooldown, shooterID, weapon):
@@ -112,7 +63,7 @@ func bulletShoot(bulletSpeed,damage, cooldown, shooterID, weapon):
 	sounddir.play()
 	
 	if is_multiplayer_authority():
-		crosshair_scene.makeCrosshairBigger(shrinkSpeed, growSpeed, maxSpread)
+		crosshair_scene.makeCrosshairBigger(WeaponData.getWeaponData()["shrinkSpeed"], WeaponData.getWeaponData()["growSpeed"], WeaponData.getWeaponData()["maxSpread"])
 	
 	await get_tree().create_timer(cooldown).timeout
 	isShooting = false
@@ -136,7 +87,7 @@ func shootRay():
 	var space = get_world_3d().direct_space_state
 	var from = global_transform.origin
 	var direction = - global_transform.basis.z.normalized()
-	var to = from + direction * rayLength
+	var to = from + direction * WeaponData.getWeaponData()["rayLength"]
 
 	var forward_query = PhysicsRayQueryParameters3D.create(from, to)
 	var forward_result = space.intersect_ray(forward_query)
@@ -149,7 +100,7 @@ func shootRay():
 		crosshair.show()
 		wallCrosshair.hide()
 		var down_from = to + Vector3.UP * 1.0
-		var down_to = down_from + Vector3.DOWN * rayLength
+		var down_to = down_from + Vector3.DOWN * WeaponData.getWeaponData()["rayLength"]
 		var down_query = PhysicsRayQueryParameters3D.create(down_from, down_to)
 		down_query.collision_mask = 0xFFFFFFFF & ~(1 << 1)
 		var down_result = space.intersect_ray(down_query)

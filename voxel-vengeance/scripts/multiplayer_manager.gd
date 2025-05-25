@@ -48,17 +48,19 @@ func host() -> void:
 	
 
 func join() -> void:
-	peer.create_client("localhost", 1811) # ADDRESS
+	peer.create_client("localhost", 1811)
 	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
 	multiplayer.multiplayer_peer = peer
 	
 @rpc("any_peer", "call_local")
-func update_playerlist(name, id):
+func update_playerlist(id, name):
 	if !playerlist.has(id):
 		playerlist[id] = {
 			"name": name,
 			"id": id
 		}
+	print(get_node("/root/main/multiplayerManager/"))
+	print("/root/main/multiplayerManager/" + str(id))
 	print(playerlist)
 
 func add_player(nodeName):

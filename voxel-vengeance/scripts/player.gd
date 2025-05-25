@@ -19,6 +19,7 @@ var input_enabled := true
 @onready var walkSound = $"Sounds/walkSound"
 
 func _enter_tree() -> void:
+	randomSpawn()
 	set_multiplayer_authority(int(str(name)))
 	MultiplayerManager.authorityID = int(str(name))
 	$weaponSpawner.set_multiplayer_authority(int(str(name)))
@@ -26,7 +27,6 @@ func _enter_tree() -> void:
 
 
 func _ready() -> void:
-	position = Vector3(-9, 1, -6)
 	#set audiolistener
 	if is_multiplayer_authority():
 		var audio_listener: AudioListener3D = get_node("/root/main/multiplayerManager/" + str(multiplayer.get_unique_id()) + "/AudioListener3D")
@@ -95,5 +95,17 @@ func takeDamage(damage:float):
 	if hurtSound: print("hurt sound")
 	if health <= 0:
 		health = max_health
-		position = Vector3(0, 1, 0)
+		randomSpawn()
 	
+func randomSpawn():
+	var spawn_locations_parent = get_node("/root/main/world/spawnLocations")
+	var spawn_points := []
+	for child in spawn_locations_parent.get_children():
+		if child is Node3D:
+			spawn_points.append(child)
+	
+	if spawn_points.size() > 0:
+		var random_index = randi() % spawn_points.size()
+		global_position = spawn_points[random_index].global_position
+	else:
+		push_warning("No spawnpoints")

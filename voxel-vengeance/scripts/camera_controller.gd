@@ -3,15 +3,24 @@ extends Node3D
 var sensitivity := 1
 var player
 
+#shake
+var rng = RandomNumberGenerator.new()
+var shake_strength = 0
+var shakeFade = 0
+
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	pass
 
 func _process(delta: float) -> void:
 	if player:
 		global_position = player.global_position
 	elif MultiplayerManager.authorityID:
 		player = get_node("/root/main/multiplayerManager/" + str(MultiplayerManager.authorityID))
+		
+	if shake_strength > 0:
+		shake_strength = lerpf(shake_strength,0,shakeFade * delta)
+		$Camera3D.h_offset = randomOffset().x
+		$Camera3D.v_offset = randomOffset().y
 
 func _input(event: InputEvent) -> void:
 	if player:
@@ -25,3 +34,10 @@ func _input(event: InputEvent) -> void:
 				DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_MINIMIZED)
 			else:
 				DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+
+func shakeCamera(randomStrength,Fade):
+	shake_strength = randomStrength
+	shakeFade = Fade
+	
+func randomOffset() -> Vector2:
+	return Vector2(rng.randf_range(-shake_strength, shake_strength), rng.randf_range(-shake_strength, shake_strength))
