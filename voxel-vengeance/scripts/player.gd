@@ -1,7 +1,6 @@
 extends CharacterBody3D
 
 const SPEED = 5.0
-const JUMP_VELOCITY = 4.5
 const max_health := 50.0
 var health: float
 @export var dash_speed := 10.0
@@ -23,6 +22,7 @@ func _enter_tree() -> void:
 	MultiplayerManager.authorityID = int(str(name))
 	$weaponSpawner.set_multiplayer_authority(int(str(name)))
 	health = max_health
+	
 
 
 func _ready() -> void:
@@ -31,8 +31,10 @@ func _ready() -> void:
 	if is_multiplayer_authority():
 		var audio_listener: AudioListener3D = get_node("/root/main/multiplayerManager/" + str(multiplayer.get_unique_id()) + "/AudioListener3D")
 		audio_listener.make_current()
-#		$playerName.text = MultiplayerManager.playerlist[multiplayer.get_unique_id()].name
-
+		#connect to signal
+		#MultiplayerManager.playerAdded.connect(setName)
+		setName()
+		
 func _physics_process(delta: float) -> void:
 	if is_multiplayer_authority():
 		if not input_enabled:
@@ -96,4 +98,11 @@ func takeDamage(damage:float):
 	if health <= 0:
 		health = max_health
 		position = Vector3(0, 1, 0)
-	
+		
+func setName():
+	print("called SETNAME")
+	print(get_node("/root/main/multiplayerManager").playerlist)
+	if get_node("/root/main/multiplayerManager").playerlist.has(multiplayer.get_unique_id()):
+		get_node("/root/main/multiplayerManager/" + str(multiplayer.get_unique_id())+"/playerName").text = get_node("/root/main/multiplayerManager").playerlist[multiplayer.get_unique_id()].name
+	else:
+		print("kacke verdammt")

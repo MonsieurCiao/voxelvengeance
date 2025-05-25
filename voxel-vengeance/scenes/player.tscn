@@ -48,7 +48,6 @@ script = ExtResource("1_3vyb7")
 [node name="playerName" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.51627, 0)
 billboard = 2
-text = "Client"
 font_size = 112
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
