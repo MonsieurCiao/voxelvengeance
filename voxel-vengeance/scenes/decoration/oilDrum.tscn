@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://d0kisrunuq7ox"]
+
+[ext_resource type="PackedScene" uid="uid://d36tb4bgr2aop" path="res://assets/models/decoration/oil_drum.blend" id="1_k1q4m"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_fkdpy"]
+height = 2.39673
+radius = 1.00391
+
+[node name="oil_drum" type="Node3D"]
+
+[node name="oil_drum" parent="." instance=ExtResource("1_k1q4m")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="oil_drum"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="oil_drum/StaticBody3D"]
+shape = SubResource("CylinderShape3D_fkdpy")
+
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="oil_drum"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00280762, 0)
+size = Vector3(2, 2.41724, 2)

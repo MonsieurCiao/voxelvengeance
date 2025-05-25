@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpa2brmcrgils"]
+
+[ext_resource type="PackedScene" uid="uid://d3nbcja25ioax" path="res://assets/models/decoration/wall_w_hole.blend" id="1_ddq32"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="wall_w_hole" parent="." instance=ExtResource("1_ddq32")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="wall_w_hole"]
+
+[node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="wall_w_hole/StaticBody3D"]
+depth = 0.39
+polygon = PackedVector2Array(-1.12867, 0.00813648, 1.22299, 0.00134632, 1.15735, 0.956495, 0.553029, 0.963286, 0.562082, 0.363488, -0.510763, 0.379332, -0.537924, 0.956495, -1.10603, 0.945178)
+
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="wall_w_hole"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0313721, 0.189026, -0.04953)
+size = Vector3(2.3313, 0.363159, 0.477234)
+
+[node name="GPUParticlesCollisionBox3D2" type="GPUParticlesCollisionBox3D" parent="wall_w_hole"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -0.830704, 0.666229, -0.04953)
+size = Vector3(0.585266, 0.594208, 0.477234)
+
+[node name="GPUParticlesCollisionBox3D3" type="GPUParticlesCollisionBox3D" parent="wall_w_hole"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0.85368, 0.666229, -0.04953)
+size = Vector3(0.585266, 0.594208, 0.477234)
