@@ -2,7 +2,6 @@ extends Node3D
 
 @onready var animation_player: AnimationPlayer = $weapon/AnimationPlayer
 @onready var sparks: GPUParticles3D = $sparks
-@onready var camera = get_node("/root/main/CameraController/Camera3D")
 
 # Bullets
 var bullet = load("res://scenes/weapons/pistolBullet.tscn")
@@ -90,7 +89,7 @@ func _process(delta: float) -> void:
 
 @rpc("call_local")
 func bulletShoot(bulletSpeed,damage, cooldown, shooterID, weapon):
-	if not isBarrelClear(camera, gun_barrel):
+	if not isBarrelClear($weapon/weaponEnd, gun_barrel):
 		return
 	isShooting = true
 	

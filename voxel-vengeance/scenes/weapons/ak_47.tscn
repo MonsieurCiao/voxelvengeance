@@ -119,6 +119,9 @@ libraries = {
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.278634, 0.0168654, -6.01044)
 target_position = Vector3(0, 0, -1)
 
+[node name="weaponEnd" type="Node3D" parent="weapon"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.69909)
+
 [node name="sounds" type="Node3D" parent="."]
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="sounds"]
