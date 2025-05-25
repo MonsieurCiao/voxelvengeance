@@ -5,6 +5,7 @@ var peer = ENetMultiplayerPeer.new()
 var authorityID
 
 var playerlist = {}
+signal playerAdded
 
 func _ready():
 	#function called to server, not to the other clients (not sure if this is supposed to be here)
@@ -40,7 +41,8 @@ func host() -> void:
 			add_player(str(peerID))
 	)
 	#host
-	update_playerlist.rpc(multiplayer.get_unique_id(), get_node("/root/main/CanvasLayer/PauseMenu/PanelContainer/VBoxContainer/name").text)
+	var name = get_node("/root/main/CanvasLayer/PauseMenu/PanelContainer/VBoxContainer/name").text
+	update_playerlist.rpc(multiplayer.get_unique_id(), name)
 	add_player(str(multiplayer.get_unique_id()))
 	
 	#disconnection
@@ -53,11 +55,12 @@ func join() -> void:
 	multiplayer.multiplayer_peer = peer
 	
 @rpc("any_peer", "call_local")
-func update_playerlist(id, name):
+func update_playerlist(id, name:String):
 	if !playerlist.has(id):
-		playerlist[id] = {
+		print(name)
+		playerlist[int(id)] = {
 			"name": name,
-			"id": id
+			"id": int(id)
 		}
 	print(get_node("/root/main/multiplayerManager/"))
 	print("/root/main/multiplayerManager/" + str(id))
@@ -80,7 +83,8 @@ func remove_player(peer_id):
 
 func connected_to_server():
 	print("Succesfully connected to Server.")
-	update_playerlist.rpc(multiplayer.get_unique_id(), get_node("/root/main/CanvasLayer/PauseMenu/PanelContainer/VBoxContainer/name").text)
+	var name = get_node("/root/main/CanvasLayer/PauseMenu/PanelContainer/VBoxContainer/name").text
+	update_playerlist.rpc(multiplayer.get_unique_id(), name)
 func connection_failed():
 	print("You can't connect to this Server.")
 func peer_disconnected(id):
