@@ -1,0 +1,187 @@
+[gd_scene load_steps=17 format=3 uid="uid://dyumnimgsckml"]
+
+[ext_resource type="PackedScene" uid="uid://cop250e0s63tj" path="res://assets/models/weapons/Shotgun.blend" id="1_lbead"]
+[ext_resource type="Script" uid="uid://bibvhm7q5prgf" path="res://scripts/shoot.gd" id="1_uukpr"]
+[ext_resource type="PackedScene" uid="uid://ckx4hhut66byo" path="res://scenes/animation/weapon_muzzle_flash.tscn" id="2_278ir"]
+[ext_resource type="AudioStream" uid="uid://b0bxk37qflswm" path="res://sound/pumpgun.mp3" id="3_278ir"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_0frcf"]
+size = Vector3(0.765, 0.6, 2.75)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_278ir"]
+albedo_color = Color(0.32549, 0.188235, 0.113725, 1)
+
+[sub_resource type="Animation" id="Animation_qn8fy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("weapon:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("weapon:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("weapon/MeshInstance3D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.129368, -2.55428)]
+}
+
+[sub_resource type="Animation" id="Animation_uukpr"]
+resource_name = "shoot"
+length = 0.8
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("weapon:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.552057),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.705113, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("weapon:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0834027, 0.552057),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.818388), Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("weapon/MeshInstance3D:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.415748, 0.60157, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0.129368, -2.55428), Vector3(0, 0.129368, -4.75276), Vector3(0, 0.129368, -2.55428)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xtykv"]
+_data = {
+&"RESET": SubResource("Animation_qn8fy"),
+&"shoot": SubResource("Animation_uukpr")
+}
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_844j2"]
+random_pitch = 1.3
+streams_count = 1
+stream_0/stream = ExtResource("3_278ir")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qn8fy"]
+albedo_color = Color(0.945098, 0.639216, 0, 1)
+emission_enabled = true
+emission = Color(1, 0.786441, 0.254763, 1)
+emission_energy_multiplier = 3.0
+
+[sub_resource type="Curve" id="Curve_xtykv"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.174797), -0.918903, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ivc8v"]
+curve = SubResource("Curve_xtykv")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vx5qo"]
+spread = 90.0
+initial_velocity_min = 13.0
+initial_velocity_max = 20.0
+scale_min = 0.2
+scale_curve = SubResource("CurveTexture_ivc8v")
+
+[sub_resource type="BoxMesh" id="BoxMesh_xeb56"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uukpr"]
+albedo_color = Color(1, 0.286275, 0, 1)
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
+
+[node name="shotgun" type="Node3D"]
+script = ExtResource("1_uukpr")
+
+[node name="weapon" parent="." instance=ExtResource("1_lbead")]
+transform = Transform3D(0.143, 0, 0, 0, 0.143, 0, 0, 0, 0.125, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="weapon"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.129368, -2.55428)
+mesh = SubResource("BoxMesh_0frcf")
+surface_material_override/0 = SubResource("StandardMaterial3D_278ir")
+
+[node name="RayCast3D" type="RayCast3D" parent="weapon"]
+transform = Transform3D(-8.74228e-08, -2, 0, 2, -8.74228e-08, 0, 0, 0, 2, 0.00142261, 0.428673, -7.71593)
+target_position = Vector3(0, 0, -1)
+
+[node name="weaponEnd" type="Node3D" parent="weapon"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0.546286, 6.89015)
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="weapon"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_xtykv")
+}
+
+[node name="sounds" type="Node3D" parent="."]
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="sounds"]
+stream = SubResource("AudioStreamRandomizer_844j2")
+attenuation_model = 3
+max_polyphony = 5
+bus = &"WeaponSounds"
+
+[node name="particles" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.0839606, -1.02553)
+
+[node name="sparks" parent="particles" instance=ExtResource("2_278ir")]
+material_override = SubResource("StandardMaterial3D_qn8fy")
+amount = 8
+lifetime = 0.1
+randomness = 0.37
+trail_lifetime = 10.0
+process_material = SubResource("ParticleProcessMaterial_vx5qo")
+draw_pass_1 = SubResource("BoxMesh_xeb56")
+
+[node name="sparks2" parent="particles" instance=ExtResource("2_278ir")]
+material_override = SubResource("StandardMaterial3D_uukpr")
+amount = 8
+lifetime = 0.1
+randomness = 0.37
+trail_lifetime = 10.0
+process_material = SubResource("ParticleProcessMaterial_vx5qo")
+draw_pass_1 = SubResource("BoxMesh_xeb56")
+
+[node name="sparks3" parent="particles" instance=ExtResource("2_278ir")]
+transform = Transform3D(1, 0, -7.10543e-15, 0, 1, 0, 7.10543e-15, 0, 1, -0.0504416, -0.0839606, -2.20487e-09)

@@ -1,14 +1,12 @@
 extends Node3D
 
-@onready var animation_player: AnimationPlayer = $weapon/AnimationPlayer
-@onready var sparks: GPUParticles3D = $sparks
-
 # Bullets
 var bullet = load("res://scenes/weapons/pistolBullet.tscn")
 var bulletInstance
 @onready var gun_barrel = $weapon/RayCast3D
 @onready var player: CharacterBody3D = $"../.."
 @onready var weapon_spawner: Node3D = $".."
+var animation_player
 
 @onready var crosshair_scene = get_node("/root/main/Crosshairs/std_crosshair")
 @onready var wallCrosshair = get_node("/root/main/Crosshairs/wallCrosshair/")
@@ -18,6 +16,13 @@ var crosshair
 var shootCooldown: float
 
 func _ready():
+	if Main.currentWeapon == "shotgun":
+		animation_player = $weapon/AnimationPlayer2
+	else:
+		animation_player = $weapon/AnimationPlayer
+	
+	for item in get_node("/root/main/Crosshairs").get_children():
+		item.hide()
 	if not is_multiplayer_authority():
 		return
 	crosshair = WeaponData.getWeaponData()["crosshair"]
@@ -68,8 +73,8 @@ func bulletShoot(bulletSpeed,damage, cooldown, shooterID, weapon):
 	await get_tree().create_timer(cooldown).timeout
 	isShooting = false
 
-func isBarrelClear(camera: Node3D, gun_barrel: Node3D) -> bool:
-	var from = camera.global_transform.origin
+func isBarrelClear(weaponend, gun_barrel: Node3D) -> bool:
+	var from = weaponend.global_transform.origin
 	var to = gun_barrel.global_transform.origin
 	var space_state = get_world_3d().direct_space_state
 	var query = PhysicsRayQueryParameters3D.create(from, to)
@@ -78,10 +83,13 @@ func isBarrelClear(camera: Node3D, gun_barrel: Node3D) -> bool:
 	return not result
 
 func _shootParticles() -> void:
-	sparks.restart()
-	sparks.emitting = true
-	await get_tree().create_timer(0.7).timeout
-	sparks.emitting = false
+	#get_node("particles/sparks").emitting = true
+	for item in $particles.get_children():
+		item.restart()
+		item.emitting = true
+	await get_tree().create_timer(WeaponData.getWeaponData()["cooldown"]).timeout
+	for item in $particles.get_children():
+		item.emitting = false
 
 func shootRay():
 	var space = get_world_3d().direct_space_state

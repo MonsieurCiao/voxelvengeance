@@ -2,6 +2,7 @@ extends Node3D
 
 @export var pistol: PackedScene
 @export var ak47: PackedScene
+@export var shotgun: PackedScene
 
 var shootCooldown
 var autofire
@@ -22,6 +23,8 @@ func _input(event: InputEvent) -> void:
 		summonWeaponWithProperties.rpc("pistol")
 	if Input.is_key_pressed(KEY_2) and Main.currentWeapon != "ak47":
 		summonWeaponWithProperties.rpc("ak47")
+	if Input.is_key_pressed(KEY_3) and Main.currentWeapon != "shotgun":
+		summonWeaponWithProperties.rpc("shotgun")
 
 func clear_all_children(node: Node) -> void:
 	for child in node.get_children():

@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://scripts/cameraScript.gd" id="4_choun"]
 [ext_resource type="PackedScene" uid="uid://b00l872ksbyw1" path="res://scenes/menus/settings_menu.tscn" id="6_jbj1t"]
 [ext_resource type="PackedScene" uid="uid://v11idaphqgrb" path="res://scenes/world.tscn" id="9_85g3d"]
-[ext_resource type="PackedScene" path="res://scenes/decoration/tree_stump.tscn" id="10_choun"]
+[ext_resource type="PackedScene" uid="uid://comlas5eo13sq" path="res://scenes/decoration/tree_stump.tscn" id="10_choun"]
 [ext_resource type="PackedScene" uid="uid://oor8lanp1d2q" path="res://scenes/crosshairs/Crosshair.tscn" id="20_gqmmt"]
 [ext_resource type="PackedScene" uid="uid://d2qbbiqybvvob" path="res://scenes/crosshairs/pump_crosshair.tscn" id="22_pm3ni"]
 

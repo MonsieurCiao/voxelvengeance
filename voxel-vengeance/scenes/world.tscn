@@ -13,9 +13,9 @@
 [ext_resource type="PackedScene" uid="uid://cy1w1e6sayjtj" path="res://scenes/decoration/lantern.tscn" id="11_kpybi"]
 [ext_resource type="PackedScene" uid="uid://c16bc8sgbrxf0" path="res://scenes/decoration/cactus.tscn" id="12_ctatt"]
 [ext_resource type="PackedScene" uid="uid://d20mph0y372ct" path="res://scenes/decoration/barrel.tscn" id="13_xgqkh"]
-[ext_resource type="PackedScene" path="res://scenes/decoration/wall_w_hole.tscn" id="14_7t5mc"]
-[ext_resource type="PackedScene" path="res://scenes/decoration/skeleton.tscn" id="15_lakw3"]
-[ext_resource type="PackedScene" path="res://scenes/decoration/oilDrum.tscn" id="16_pm21f"]
+[ext_resource type="PackedScene" uid="uid://bpa2brmcrgils" path="res://scenes/decoration/wall_w_hole.tscn" id="14_7t5mc"]
+[ext_resource type="PackedScene" uid="uid://do3r03xf3nqpg" path="res://scenes/decoration/skeleton.tscn" id="15_lakw3"]
+[ext_resource type="PackedScene" uid="uid://d0kisrunuq7ox" path="res://scenes/decoration/oilDrum.tscn" id="16_pm21f"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_munwf"]
 albedo_color = Color(0.569805, 0.510859, 0.357899, 1)

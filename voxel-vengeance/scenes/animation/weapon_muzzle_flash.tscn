@@ -19,6 +19,9 @@ gravity = Vector3(0, -3, 0)
 scale_min = 0.2
 scale_max = 0.4
 scale_curve = SubResource("CurveTexture_56h6w")
+collision_mode = 1
+collision_friction = 0.3
+collision_bounce = 0.5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_56h6w"]
 albedo_color = Color(1, 0.407843, 0, 1)
@@ -61,8 +64,8 @@ emission_shape = 1
 emission_sphere_radius = 1.0
 direction = Vector3(1, -1, 0)
 spread = 90.0
-initial_velocity_min = 2.0
-initial_velocity_max = 4.0
+initial_velocity_min = 4.0
+initial_velocity_max = 8.0
 gravity = Vector3(0, 5, 0)
 scale_min = 0.4
 scale_max = 0.8
@@ -76,6 +79,7 @@ radial_segments = 8
 rings = 4
 
 [node name="sparks" type="GPUParticles3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 emitting = false
 amount = 10
 lifetime = 0.7
@@ -86,10 +90,8 @@ process_material = SubResource("ParticleProcessMaterial_t1ept")
 draw_pass_1 = SubResource("CylinderMesh_afkxc")
 
 [node name="muzzleFlash" type="Node3D" parent="."]
-visible = false
 
 [node name="fire" type="GPUParticles3D" parent="muzzleFlash"]
-visible = false
 material_override = SubResource("StandardMaterial3D_t1ept")
 emitting = false
 amount = 12

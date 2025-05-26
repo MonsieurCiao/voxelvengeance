@@ -28,7 +28,7 @@ window/size/viewport_height=1000
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/netfox.internals/plugin.cfg", "res://addons/netfox/plugin.cfg")
+enabled=PackedStringArray()
 
 [gui]
 

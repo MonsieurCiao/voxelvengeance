@@ -28,7 +28,21 @@ var weaponDict = {
 		"damage": 10,
 		"shakeStrength": 0.15,
 		"shakeFade": 20
-		}
+		},
+	"shotgun": {
+		"crosshair": "pump_crosshair",
+		"distance": 3,
+		"shrinkSpeed": 5,
+		"growSpeed": 20,
+		"maxSpread": 10,
+		"cooldown": 0.8,
+		"spawnPosition": Vector3(0.4,0,0),
+		"autofire": false,
+		"bulletSpeed":200,
+		"damage": 20,
+		"shakeStrength": 0.4,
+		"shakeFade": 5
+	}
 }
 var tempDict = {}
 func getWeaponData():
