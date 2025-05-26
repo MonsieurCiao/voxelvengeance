@@ -39,10 +39,12 @@ func host() -> void:
 			#client
 			print("A Player for " + str(peerID) + " was succesfully created.")
 			add_player(str(peerID))
+			await get_tree().process_frame 
 	)
-	#host
+	print("PLAYER CONNECTING AÖLSDKFJ")
 	var name = get_node("/root/main/CanvasLayer/PauseMenu/PanelContainer/VBoxContainer/name").text
-	update_playerlist.rpc(multiplayer.get_unique_id(), name)
+	update_playerlist.rpc(multiplayer.get_unique_id(), name, playerlist)
+	#host
 	add_player(str(multiplayer.get_unique_id()))
 	
 	#disconnection
@@ -55,16 +57,19 @@ func join() -> void:
 	multiplayer.multiplayer_peer = peer
 	
 @rpc("any_peer", "call_local")
-func update_playerlist(id, name:String):
-	if !playerlist.has(id):
+func update_playerlist(id, name:String,list):
+	#get the player list from host
+	playerlist = list
+	var ID = multiplayer.get_unique_id()
+	print("id id id", ID)
+	if !playerlist.has(ID):
 		print(name)
-		playerlist[int(id)] = {
+		playerlist[int(ID)] = {
 			"name": name,
-			"id": int(id)
+			"id": int(ID)
 		}
-	print(get_node("/root/main/multiplayerManager/"))
-	print("/root/main/multiplayerManager/" + str(id))
 	print(playerlist)
+	#fetch names for all players
 
 func add_player(nodeName):
 	#prevent duplicate players
@@ -84,7 +89,7 @@ func remove_player(peer_id):
 func connected_to_server():
 	print("Succesfully connected to Server.")
 	var name = get_node("/root/main/CanvasLayer/PauseMenu/PanelContainer/VBoxContainer/name").text
-	update_playerlist.rpc(multiplayer.get_unique_id(), name)
+	update_playerlist.rpc(multiplayer.get_unique_id(), name, playerlist)
 func connection_failed():
 	print("You can't connect to this Server.")
 func peer_disconnected(id):

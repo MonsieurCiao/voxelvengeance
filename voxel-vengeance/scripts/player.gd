@@ -115,7 +115,7 @@ func randomSpawn():
 		
 func setName():
 	print("called SETNAME")
-	print(get_node("/root/main/multiplayerManager").playerlist)
+	print("name", get_node("/root/main/multiplayerManager").playerlist)
 	if get_node("/root/main/multiplayerManager").playerlist.has(multiplayer.get_unique_id()):
 		get_node("/root/main/multiplayerManager/" + str(multiplayer.get_unique_id())+"/playerName").text = get_node("/root/main/multiplayerManager").playerlist[multiplayer.get_unique_id()].name
 	else:
