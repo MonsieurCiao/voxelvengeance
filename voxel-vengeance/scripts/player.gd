@@ -29,7 +29,7 @@ func _enter_tree() -> void:
 func _ready() -> void:
 	#set audiolistener
 	if is_multiplayer_authority():
-		var audio_listener: AudioListener3D = get_node("/root/main/multiplayerManager/" + str(multiplayer.get_unique_id()) + "/AudioListener3D")
+		var audio_listener: AudioListener3D = get_node("/root/main/players/" + str(multiplayer.get_unique_id()) + "/AudioListener3D")
 		audio_listener.make_current()
 		#connect to signal
 		#MultiplayerManager.playerAdded.connect(setName)
@@ -115,8 +115,8 @@ func randomSpawn():
 		
 func setName():
 	print("called SETNAME")
-	print("name", get_node("/root/main/multiplayerManager").playerlist)
-	if get_node("/root/main/multiplayerManager").playerlist.has(multiplayer.get_unique_id()):
-		get_node("/root/main/multiplayerManager/" + str(multiplayer.get_unique_id())+"/playerName").text = get_node("/root/main/multiplayerManager").playerlist[multiplayer.get_unique_id()].name
+	print("name", MultiplayerManager.playerlist)
+	if MultiplayerManager.playerlist.has(multiplayer.get_unique_id()):
+		get_node("/root/main/players/" + str(multiplayer.get_unique_id())+"/playerName").text = MultiplayerManager.playerlist[multiplayer.get_unique_id()].name
 	else:
 		print("kacke verdammt")

@@ -61,7 +61,7 @@ func bulletShoot(bulletSpeed,damage, cooldown, shooterID, weapon):
 	var bullet_container = get_tree().get_current_scene().get_node("Bullets")
 	bullet_container.add_child(bulletInstance)
 	
-	var sounddir = get_node("/root/main/multiplayerManager/" + str(shooterID) + "/weaponSpawner/" + weapon + "/sounds/AudioStreamPlayer3D")
+	var sounddir = get_node("/root/main/players/" + str(shooterID) + "/weaponSpawner/" + weapon + "/sounds/AudioStreamPlayer3D")
 	#var rnd = RandomNumberGenerator.new()
 	#rnd.randomize()
 	#sounddir.get_children()[rnd.randi_range(0, sounddir.get_child_count() - 1)].play()

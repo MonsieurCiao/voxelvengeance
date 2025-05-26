@@ -15,7 +15,7 @@ func _process(delta: float) -> void:
 	if player:
 		global_position = player.global_position
 	elif MultiplayerManager.authorityID:
-		player = get_node("/root/main/multiplayerManager/" + str(MultiplayerManager.authorityID))
+		player = get_node("/root/main/players/" + str(MultiplayerManager.authorityID))
 		
 	if shake_strength > 0:
 		shake_strength = lerpf(shake_strength,0,shakeFade * delta)

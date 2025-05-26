@@ -63,10 +63,8 @@ func _process(delta: float) -> void:
 	testEsc()
 	pass
 
-#Multiplayer
-@onready var multiplayer_manager: Node3D = $"../../multiplayerManager"
 func host() -> void:
-	multiplayer_manager.host()
+	MultiplayerManager.host()
 
 func join() -> void:
-	multiplayer_manager.join()
+	MultiplayerManager.join()
