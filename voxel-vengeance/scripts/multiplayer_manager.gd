@@ -4,8 +4,8 @@ const PLAYER = preload("res://scenes/player.tscn")
 var peer = ENetMultiplayerPeer.new()
 var authorityID
 
-var playerlist = {}
 signal playerAdded
+var playerlist = {}
 
 func _ready():
 	#function called to server, not to the other clients (not sure if this is supposed to be here)
@@ -41,7 +41,6 @@ func host() -> void:
 			add_player(str(peerID))
 			await get_tree().process_frame 
 	)
-	print("PLAYER CONNECTING AÖLSDKFJ")
 	var name = get_node("/root/main/CanvasLayer/PauseMenu/PanelContainer/VBoxContainer/name").text
 	update_playerlist.rpc(multiplayer.get_unique_id(), name, playerlist)
 	#host
@@ -57,18 +56,16 @@ func join() -> void:
 	multiplayer.multiplayer_peer = peer
 	
 @rpc("any_peer", "call_local")
-func update_playerlist(id, name:String,list):
+func update_playerlist(id, name:String, list: Dictionary):
 	#get the player list from host
-	playerlist = list
-	var ID = multiplayer.get_unique_id()
-	print("id id id", ID)
-	if !playerlist.has(ID):
+	
+	if !MultiplayerManager.playerlist.has(id):
 		print(name)
-		playerlist[int(ID)] = {
+		MultiplayerManager.playerlist[int(id)] = {
 			"name": name,
-			"id": int(ID)
+			"id": int(id)
 		}
-	print(playerlist)
+	print("MultiplayerManager.playerlist", MultiplayerManager.playerlist)
 	#fetch names for all players
 
 func add_player(nodeName):
