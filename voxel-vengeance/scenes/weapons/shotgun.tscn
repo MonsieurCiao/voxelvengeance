@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dyumnimgsckml"]
+[gd_scene load_steps=18 format=3 uid="uid://dyumnimgsckml"]
 
 [ext_resource type="PackedScene" uid="uid://cop250e0s63tj" path="res://assets/models/weapons/Shotgun.blend" id="1_lbead"]
 [ext_resource type="Script" uid="uid://bibvhm7q5prgf" path="res://scripts/shoot.gd" id="1_uukpr"]
@@ -130,6 +130,10 @@ albedo_color = Color(1, 0.286275, 0, 1)
 emission_enabled = true
 emission = Color(1, 0, 0, 1)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_uukpr"]
+margin = 0.0
+size = Vector3(0.2, 0.2, 0.2)
+
 [node name="shotgun" type="Node3D"]
 script = ExtResource("1_uukpr")
 
@@ -182,3 +186,8 @@ randomness = 0.37
 trail_lifetime = 10.0
 process_material = SubResource("ParticleProcessMaterial_vx5qo")
 draw_pass_1 = SubResource("BoxMesh_xeb56")
+
+[node name="ShapeCast3D" type="ShapeCast3D" parent="."]
+transform = Transform3D(-7.23998e-07, -0.2, 0, 0.2, -7.23998e-07, 0, 0, 0, 0.2, 0, 0, -0.704912)
+shape = SubResource("BoxShape3D_uukpr")
+target_position = Vector3(0, 0, -1)

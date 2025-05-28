@@ -33,14 +33,10 @@ adjustment_saturation = 1.25
 [sub_resource type="SphereMesh" id="SphereMesh_yc10j"]
 radius = 0.1
 height = 0.2
-radial_segments = 8
-rings = 8
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_choun"]
-albedo_color = Color(0.559523, 1.27546e-06, 3.36915e-07, 1)
-emission_enabled = true
-emission = Color(1, 0, 0, 1)
-emission_energy_multiplier = 4.7
+shading_mode = 0
+albedo_color = Color(0.976471, 0.32549, 0.329412, 1)
 
 [node name="main" type="Node3D"]
 script = ExtResource("1_yc10j")
