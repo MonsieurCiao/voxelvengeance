@@ -37,6 +37,7 @@ func _process(delta: float) -> void:
 	if WeaponData.getWeaponData(Main.currentWeapon)["autofire"]:
 		if Input.is_action_pressed("shoot") and not isShooting and player.input_enabled:
 			isShooting = true
+			get_node("/root/main/CanvasLayer/UI").setCooldown(WeaponData.getWeaponData(Main.currentWeapon)["cooldown"])
 			bulletShoot.rpc(
 				WeaponData.getWeaponData(Main.currentWeapon)["bulletSpeed"],
 				WeaponData.getWeaponData(Main.currentWeapon)["damage"],
@@ -54,6 +55,7 @@ func _process(delta: float) -> void:
 	else:
 		if Input.is_action_just_pressed("shoot") and not isShooting and player.input_enabled:
 			isShooting = true
+			get_node("/root/main/CanvasLayer/UI").setCooldown(WeaponData.getWeaponData(Main.currentWeapon)["cooldown"])
 			bulletShoot.rpc(
 				WeaponData.getWeaponData(Main.currentWeapon)["bulletSpeed"],
 				WeaponData.getWeaponData(Main.currentWeapon)["damage"],
