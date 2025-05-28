@@ -67,9 +67,9 @@ var weaponDict = {
 	}
 }
 var tempDict = {}
-func getWeaponData():
+func getWeaponData(weaponName):
 	for item in weaponDict:
-		if Main.currentWeapon == item:
+		if weaponName == item:
 			tempDict["crosshair"] = get_node("/root/main/Crosshairs/" + str(weaponDict[item]["crosshair"]))
 			tempDict["weaponname"] = item
 			tempDict["rayLength"] = weaponDict[item]["distance"]

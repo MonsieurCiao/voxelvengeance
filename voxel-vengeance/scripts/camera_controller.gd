@@ -6,7 +6,7 @@ var current_offset := Vector3.ZERO
 var current_rot_x := 0.0
 var cam_rotation_y := 0.0
 
-var aim_offset := Vector3(1, -5, -5)
+var aim_offset := Vector3(0, 5, 1)
 var default_offset := Vector3(0, 0, 0)
 var aim_rot_x := deg_to_rad(20)
 var default_rot_x := deg_to_rad(0)
