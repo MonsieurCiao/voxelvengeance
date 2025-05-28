@@ -35,6 +35,7 @@ func _physics_process(delta: float) -> void:
 		var hitPlayer = collision.get_collider()
 		if hitPlayer.has_method("takeDamage") and hitPlayer.get_multiplayer_authority() != multiplayer.get_unique_id():
 			if(str(multiplayer.get_unique_id()) == str(shooter)):
+				print("Player " + str(shooter) + " dealed " + str(bulletDamage) + " to Player " + str(hitPlayer.get_multiplayer_authority()))
 				$hitSound.play()
 			hitPlayer.takeDamage.rpc_id(hitPlayer.get_multiplayer_authority(), bulletDamage)
 			player_hit.emitting = true

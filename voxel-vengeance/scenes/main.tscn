@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://d2yfp1tb8a8o1"]
+[gd_scene load_steps=16 format=3 uid="uid://d2yfp1tb8a8o1"]
 
 [ext_resource type="PackedScene" uid="uid://ds3ieo3rb4j0a" path="res://scenes/menus/pause_menu.tscn" id="1_o6xl0"]
-[ext_resource type="Script" path="res://scripts/main.gd" id="1_yc10j"]
+[ext_resource type="Script" uid="uid://fg8b618rpf31" path="res://scripts/main.gd" id="1_yc10j"]
 [ext_resource type="Script" uid="uid://baw12ml61sky4" path="res://scripts/camera_controller.gd" id="3_tefeu"]
 [ext_resource type="Script" path="res://scripts/cameraScript.gd" id="4_choun"]
+[ext_resource type="PackedScene" uid="uid://c0qeoo6mubcti" path="res://scenes/menus/UI.tscn" id="4_ya4ey"]
 [ext_resource type="PackedScene" uid="uid://b00l872ksbyw1" path="res://scenes/menus/settings_menu.tscn" id="6_jbj1t"]
 [ext_resource type="PackedScene" uid="uid://v11idaphqgrb" path="res://scenes/world.tscn" id="9_85g3d"]
 [ext_resource type="PackedScene" uid="uid://comlas5eo13sq" path="res://scenes/decoration/tree_stump.tscn" id="10_choun"]
@@ -56,6 +57,8 @@ transform = Transform3D(1, 0, 0, 0, 0.5779, 0.816107, 0, -0.816107, 0.5779, 0, 9
 script = ExtResource("4_choun")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UI" parent="CanvasLayer" instance=ExtResource("4_ya4ey")]
 
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("1_o6xl0")]
 

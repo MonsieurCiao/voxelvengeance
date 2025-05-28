@@ -25,6 +25,7 @@ WeaponData="*res://scripts/weaponData.gd"
 
 window/size/viewport_width=1900
 window/size/viewport_height=1000
+window/stretch/mode="canvas_items"
 
 [editor_plugins]
 

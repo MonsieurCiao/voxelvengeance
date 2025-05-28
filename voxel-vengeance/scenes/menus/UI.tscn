@@ -1,0 +1,59 @@
+[gd_scene load_steps=5 format=3 uid="uid://c0qeoo6mubcti"]
+
+[ext_resource type="Script" uid="uid://dn6pos2mkmbd0" path="res://scripts/ui.gd" id="1_vow1w"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vow1w"]
+bg_color = Color(0.6, 0, 0, 1)
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_be73u"]
+bg_color = Color(0.468764, 0.670608, 0.271369, 1)
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nky1s"]
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="UI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vow1w")
+
+[node name="healthbarRed" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_top = 975.0
+offset_right = 1901.0
+offset_bottom = 1000.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_vow1w")
+max_value = 50.0
+value = 50.0
+show_percentage = false
+
+[node name="healthbar" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_top = 975.0
+offset_right = 1901.0
+offset_bottom = 1000.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_be73u")
+max_value = 50.0
+value = 50.0
+show_percentage = false
+
+[node name="dashBar" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_top = 87.0
+offset_right = 14.0
+offset_bottom = 918.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_nky1s")
+max_value = 1.5
+value = 1.5
+fill_mode = 3
+show_percentage = false

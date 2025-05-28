@@ -10,6 +10,7 @@ var dash_direction := Vector3.ZERO
 var dash_timer := 0.0
 var dash_cooldown := 0.0
 var input_enabled := true
+var deadStare
 @onready var camera_pivot = get_node("/root/main/CameraController/")
 @onready var mesh_instance_3d: MeshInstance3D = $MeshInstance3D
 
@@ -37,6 +38,8 @@ func _ready() -> void:
 		
 func _physics_process(delta: float) -> void:
 	if is_multiplayer_authority():
+		if deadStare:
+			return
 		if not input_enabled:
 			return
 		# Add the gravity.
@@ -94,11 +97,16 @@ func _physics_process(delta: float) -> void:
 func takeDamage(damage:float):
 	print(multiplayer.get_unique_id())
 	health -= damage
+	get_node("/root/main/CanvasLayer/UI").setHealthbar(health)
 	hurtSound.play()
-	if hurtSound: print("hurt sound")
 	if health <= 0:
 		health = max_health
+		deadStare = true
+		$AnimationPlayer.play("fall")
+		await get_tree().create_timer(3).timeout
+		$AnimationPlayer.play("RESET")
 		randomSpawn()
+		deadStare = false
 		
 func randomSpawn():
 	var spawn_locations_parent = get_node("/root/main/world/spawnLocations")
