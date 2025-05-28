@@ -24,6 +24,7 @@ func _ready():
 				if multiplayer.is_server():
 					print("PeerID " + str(peerID) + " joined.")
 					add_player(str(peerID))
+					
 		)
 		
 		#disconnection
@@ -40,6 +41,8 @@ func host() -> void:
 			print("A Player for " + str(peerID) + " was succesfully created.")
 			add_player(str(peerID))
 			await get_tree().process_frame 
+			
+			update_playerlist.rpc_id(peerID, multiplayer.get_unique_id(), name, playerlist)
 	)
 	var name = get_node("/root/main/CanvasLayer/PauseMenu/PanelContainer/VBoxContainer/name").text
 	update_playerlist.rpc(multiplayer.get_unique_id(), name, playerlist)
@@ -58,7 +61,7 @@ func join() -> void:
 @rpc("any_peer", "call_local")
 func update_playerlist(id, name:String, list: Dictionary):
 	#get the player list from host
-	
+	print("From " + str(multiplayer.get_unique_id()) + " list " + str(list))
 	if !MultiplayerManager.playerlist.has(id):
 		print(name)
 		MultiplayerManager.playerlist[int(id)] = {
@@ -67,6 +70,13 @@ func update_playerlist(id, name:String, list: Dictionary):
 		}
 	print("MultiplayerManager.playerlist", MultiplayerManager.playerlist)
 	#fetch names for all players
+	if multiplayer.get_unique_id() == 1:
+		for peer_id in MultiplayerManager.playerlist:
+			var player_node = get_node_or_null("/root/main/players/" + str(peer_id))
+			if player_node:
+				player_node.setName.rpc_id(peer_id)
+		#if player_node and player_node.has_method("setName"):
+			#player_node.setName()
 
 func add_player(nodeName):
 	#prevent duplicate players
@@ -84,11 +94,11 @@ func remove_player(peer_id):
 
 func connected_to_server():
 	print("Succesfully connected to Server.")
-	var name = get_node("/root/main/CanvasLayer/PauseMenu/PanelContainer/VBoxContainer/name").text
-	update_playerlist.rpc(multiplayer.get_unique_id(), name, playerlist)
 func connection_failed():
 	print("You can't connect to this Server.")
 func peer_disconnected(id):
 	print("Player with ID " + str(id) + "disconnected from the game.")
 func peer_connected(id):
+	var name = get_node("/root/main/CanvasLayer/PauseMenu/PanelContainer/VBoxContainer/name").text
+	update_playerlist.rpc(multiplayer.get_unique_id(), name, playerlist)
 	print("Player with ID " + str(id) + " joined the game.")
