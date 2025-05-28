@@ -95,7 +95,7 @@ func _physics_process(delta: float) -> void:
 
 @rpc("any_peer")
 func takeDamage(damage:float):
-	print(multiplayer.get_unique_id())
+	get_node("/root/main/CameraController/").shakeCamera(1, 50)
 	health -= damage
 	get_node("/root/main/CanvasLayer/UI").setHealthbar(health)
 	hurtSound.play()

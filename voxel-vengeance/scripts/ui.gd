@@ -21,6 +21,5 @@ func _process(delta: float) -> void:
 		$dashBar.modulate.a = 1
 	else:
 		$dashBar.modulate.a = 0.5
-		
 	if player:
 		$dashBar.value = move_toward($dashBar.value,$dashBar.max_value-player.dash_cooldown, 40*delta)
