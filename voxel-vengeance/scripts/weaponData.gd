@@ -13,7 +13,9 @@ var weaponDict = {
 		"bulletSpeed":140,
 		"damage": 5,
 		"shakeStrength": 0.1,
-		"shakeFade": 15
+		"shakeFade": 15,
+		"angle": 0,
+		"bulletNum": 1,
 			},
 	"pistol": {
 		"crosshair": "std_crosshair",
@@ -27,7 +29,9 @@ var weaponDict = {
 		"bulletSpeed":200,
 		"damage": 10,
 		"shakeStrength": 0.15,
-		"shakeFade": 20
+		"shakeFade": 20,
+		"angle": 0,
+		"bulletNum": 1,
 		},
 	"shotgun": {
 		"crosshair": "pump_crosshair",
@@ -35,13 +39,15 @@ var weaponDict = {
 		"shrinkSpeed": 5,
 		"growSpeed": 20,
 		"maxSpread": 10,
-		"cooldown": 0.8,
+		"cooldown": 1,
 		"spawnPosition": Vector3(0.4,0,0),
 		"autofire": false,
-		"bulletSpeed":200,
-		"damage": 20,
+		"bulletSpeed":80,
+		"damage": 15,
 		"shakeStrength": 0.4,
-		"shakeFade": 5
+		"shakeFade": 5,
+		"angle": 45,
+		"bulletNum": 5,
 	}
 }
 var tempDict = {}
@@ -61,4 +67,6 @@ func getWeaponData():
 			tempDict["damage"] = weaponDict[item]["damage"]
 			tempDict["shakeStrength"] = weaponDict[item]["shakeStrength"]
 			tempDict["shakeFade"] = weaponDict[item]["shakeFade"]
+			tempDict["angle"] = weaponDict[item]["angle"]
+			tempDict["bulletNum"] = weaponDict[item]["bulletNum"]
 	return tempDict

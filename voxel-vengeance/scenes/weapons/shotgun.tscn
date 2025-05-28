@@ -182,6 +182,3 @@ randomness = 0.37
 trail_lifetime = 10.0
 process_material = SubResource("ParticleProcessMaterial_vx5qo")
 draw_pass_1 = SubResource("BoxMesh_xeb56")
-
-[node name="sparks3" parent="particles" instance=ExtResource("2_278ir")]
-transform = Transform3D(1, 0, -7.10543e-15, 0, 1, 0, 7.10543e-15, 0, 1, -0.0504416, -0.0839606, -2.20487e-09)

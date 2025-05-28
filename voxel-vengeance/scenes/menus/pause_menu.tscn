@@ -90,7 +90,6 @@ grow_vertical = 2
 script = ExtResource("1_7unhi")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-visible = false
 material = SubResource("ShaderMaterial_7unhi")
 layout_mode = 1
 anchors_preset = 15

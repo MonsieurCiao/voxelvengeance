@@ -14,6 +14,7 @@ var hit := false
 var bulletSpeed: float
 var bulletDamage: int
 var shooter
+var shootAngle: float
 
 var animationTime
 
@@ -26,7 +27,8 @@ func _enter_tree() -> void:
 func _ready() -> void:
 	case.emitting = true
 	animationTime = case.lifetime
-	rotation = Vector3(rotation.x,rotation.y, 0)
+	rotation = Vector3(0,rotation.y+deg_to_rad(shootAngle), 0)
+	
 	
 
 func _physics_process(delta: float) -> void:

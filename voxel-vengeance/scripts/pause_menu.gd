@@ -4,6 +4,8 @@ var paused = false
 var inPauseMenu = false
 var inGame = true
 
+@onready var UI: Control = get_node("/root/main/CanvasLayer/UI/")
+
 func _ready() -> void:
 	$PanelPlayer.play("RESET")
 	$BlurPlayer.play("RESET")
@@ -21,6 +23,7 @@ func resume():
 		
 	$PanelPlayer.play_backwards("panel")
 	$BlurPlayer.play_backwards("blur")
+	#UI.visible = true
 	await [ $BlurPlayer.animation_finished, $PanelPlayer.animation_finished ]
 	hide()
 	
@@ -33,6 +36,7 @@ func pause():
 	show()
 	$BlurPlayer.play("blur")
 	$PanelPlayer.play("panel")
+	#UI.visible = false
 	var player = get_tree().get_first_node_in_group("Player")
 	
 	if player:

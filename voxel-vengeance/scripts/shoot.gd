@@ -28,6 +28,7 @@ func _ready():
 	crosshair = WeaponData.getWeaponData()["crosshair"]
 	position = WeaponData.getWeaponData()["spawnPosition"]
 
+
 func _process(delta: float) -> void:
 	if not is_multiplayer_authority():
 		return
@@ -36,44 +37,79 @@ func _process(delta: float) -> void:
 		return
 	if WeaponData.getWeaponData()["autofire"]:
 		if Input.is_action_pressed("shoot") and not isShooting and player.input_enabled:
-			bulletShoot.rpc(WeaponData.getWeaponData()["bulletSpeed"],WeaponData.getWeaponData()["damage"], WeaponData.getWeaponData()["cooldown"], multiplayer.get_unique_id(), WeaponData.getWeaponData()["weaponname"])
-			get_node("/root/main/CameraController/").shakeCamera(WeaponData.getWeaponData()["shakeStrength"], WeaponData.getWeaponData()["shakeFade"])
+			isShooting = true
+			bulletShoot.rpc(
+				WeaponData.getWeaponData()["bulletSpeed"],
+				WeaponData.getWeaponData()["damage"],
+				WeaponData.getWeaponData()["cooldown"],
+				multiplayer.get_unique_id(),
+				WeaponData.getWeaponData()["weaponname"],
+				WeaponData.getWeaponData()["bulletNum"],
+				WeaponData.getWeaponData()["angle"])
+			await get_tree().create_timer(WeaponData.getWeaponData()["cooldown"]).timeout
+			isShooting = false
+			get_node("/root/main/CameraController/").shakeCamera(
+				WeaponData.getWeaponData()["shakeStrength"],
+				WeaponData.getWeaponData()["shakeFade"]
+				)
 	else:
 		if Input.is_action_just_pressed("shoot") and not isShooting and player.input_enabled:
-			bulletShoot.rpc(WeaponData.getWeaponData()["bulletSpeed"],WeaponData.getWeaponData()["damage"], WeaponData.getWeaponData()["cooldown"], multiplayer.get_unique_id(), WeaponData.getWeaponData()["weaponname"])
-			get_node("/root/main/CameraController/").shakeCamera(WeaponData.getWeaponData()["shakeStrength"], WeaponData.getWeaponData()["shakeFade"])
-
+			isShooting = true
+			bulletShoot.rpc(
+				WeaponData.getWeaponData()["bulletSpeed"],
+				WeaponData.getWeaponData()["damage"],
+				WeaponData.getWeaponData()["cooldown"],
+				multiplayer.get_unique_id(),
+				WeaponData.getWeaponData()["weaponname"],
+				WeaponData.getWeaponData()["bulletNum"],
+				WeaponData.getWeaponData()["angle"])
+			await get_tree().create_timer(WeaponData.getWeaponData()["cooldown"]).timeout
+			isShooting = false
+			get_node("/root/main/CameraController/").shakeCamera(
+				WeaponData.getWeaponData()["shakeStrength"],
+				WeaponData.getWeaponData()["shakeFade"]
+				)
+				
 @rpc("call_local")
-func bulletShoot(bulletSpeed,damage, cooldown, shooterID, weapon):
+func bulletShoot(bulletSpeed,damage, cooldown, shooterID, weapon, num, maxangle):
 	if not isBarrelClear($weapon/weaponEnd, gun_barrel):
 		return
-	isShooting = true
+	var targetAngles = generate_angle_array(num, maxangle)
+	print(targetAngles)
+		
+	for angle in targetAngles:
+		bulletInstance = bullet.instantiate()
+		bulletInstance.position = gun_barrel.global_position
+		bulletInstance.transform.basis = gun_barrel.global_transform.basis
+		bulletInstance.bulletSpeed = bulletSpeed
+		bulletInstance.bulletDamage = damage
+		bulletInstance.shooter = shooterID
+		bulletInstance.shootAngle = angle
+		
+		bulletInstance.set_multiplayer_authority(get_multiplayer_authority())
+		var bullet_container = get_tree().get_current_scene().get_node("Bullets")
+		bullet_container.add_child(bulletInstance)
 	
 	animation_player.play("shoot")
 	_shootParticles()
-	bulletInstance = bullet.instantiate()
-	bulletInstance.position = gun_barrel.global_position
-	bulletInstance.transform.basis = gun_barrel.global_transform.basis
-	bulletInstance.bulletSpeed = bulletSpeed
-	bulletInstance.bulletDamage = damage
-	bulletInstance.shooter = shooterID
-	
-	bulletInstance.set_multiplayer_authority(get_multiplayer_authority())
-	var bullet_container = get_tree().get_current_scene().get_node("Bullets")
-	bullet_container.add_child(bulletInstance)
-	
-	var sounddir = get_node("/root/main/players/" + str(shooterID) + "/weaponSpawner/" + weapon + "/sounds/AudioStreamPlayer3D")
-	#var rnd = RandomNumberGenerator.new()
-	#rnd.randomize()
-	#sounddir.get_children()[rnd.randi_range(0, sounddir.get_child_count() - 1)].play()
-	#print("/root/main/players/" + str(shooterID) + "/weaponSpawner/" + weapon + "/sounds/AudioStreamPlayer3D")
-	sounddir.play()
+	var audio = get_node_or_null("/root/main/players/" + str(shooterID) + "/weaponSpawner/" + weapon + "/sounds/AudioStreamPlayer3D")
+	if audio:
+		audio.play()
 	
 	if is_multiplayer_authority():
 		crosshair_scene.makeCrosshairBigger(WeaponData.getWeaponData()["shrinkSpeed"], WeaponData.getWeaponData()["growSpeed"], WeaponData.getWeaponData()["maxSpread"])
 	
 	await get_tree().create_timer(cooldown).timeout
-	isShooting = false
+	
+func generate_angle_array(n: int, max_angle: float) -> Array:
+	if n <= 1:
+		return [0.0]  # Nur ein Element → Mittelpunkt
+	var angles = []
+	var start_angle = -max_angle / 2.0
+	var step = max_angle / (n - 1)
+	for i in range(n):
+		angles.append(start_angle + i * step)
+	return angles
 
 func isBarrelClear(weaponend, gun_barrel: Node3D) -> bool:
 	var from = weaponend.global_transform.origin
