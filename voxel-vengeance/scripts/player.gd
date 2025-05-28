@@ -115,9 +115,14 @@ func randomSpawn():
 		position = Vector3(0, 1, 0)
 		
 func setName():
-	print("called SETNAME")
-	print("name", MultiplayerManager.playerlist)
-	if MultiplayerManager.playerlist.has(multiplayer.get_unique_id()):
-		get_node("/root/main/players/" + str(multiplayer.get_unique_id())+"/playerName").text = MultiplayerManager.playerlist[multiplayer.get_unique_id()].name
-	else:
-		print("kacke verdammt")
+	await get_tree().process_frame
+	print("called SETNAMES from" + str(multiplayer.get_unique_id())+ " with list " + str(MultiplayerManager.playerlist))
+	#if MultiplayerManager.playerlist.has(multiplayer.get_unique_id()):
+		#get_node("/root/main/players/" + str(multiplayer.get_unique_id())+"/playerName").text = MultiplayerManager.playerlist[multiplayer.get_unique_id()].name
+	#else:
+		#print("kacke verdammt")
+	#set each players name
+	for playerID in MultiplayerManager.playerlist:
+		print("doing player " + str(playerID))
+		var playerData = MultiplayerManager.playerlist[playerID]
+		get_node("/root/main/players/" + str(playerID) + "/playerName").text = playerData.name
