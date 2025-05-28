@@ -13,6 +13,7 @@ var weapon_spawner
 var hit := false
 var bulletSpeed: float
 var bulletDamage: int
+var shooter
 
 var animationTime
 
@@ -32,7 +33,9 @@ func _physics_process(delta: float) -> void:
 	var collision = move_and_collide(transform.basis * Vector3(0,0, -bulletSpeed) * delta)
 	if collision and not hit:
 		var hitPlayer = collision.get_collider()
-		if hitPlayer.has_method("takeDamage"):
+		if hitPlayer.has_method("takeDamage") and hitPlayer.get_multiplayer_authority() != multiplayer.get_unique_id():
+			if(str(multiplayer.get_unique_id()) == str(shooter)):
+				$hitSound.play()
 			hitPlayer.takeDamage.rpc_id(hitPlayer.get_multiplayer_authority(), bulletDamage)
 			player_hit.emitting = true
 			var damageNumbersInst = DAMAGE_NUMBERS.instantiate()

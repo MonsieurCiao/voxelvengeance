@@ -92,13 +92,14 @@ func _physics_process(delta: float) -> void:
 
 @rpc("any_peer")
 func takeDamage(damage:float):
+	print(multiplayer.get_unique_id())
 	health -= damage
 	hurtSound.play()
 	if hurtSound: print("hurt sound")
 	if health <= 0:
 		health = max_health
 		randomSpawn()
-	
+		
 func randomSpawn():
 	var spawn_locations_parent = get_node("/root/main/world/spawnLocations")
 	var spawn_points := []

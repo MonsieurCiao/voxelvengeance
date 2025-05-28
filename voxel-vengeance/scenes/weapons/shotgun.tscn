@@ -158,7 +158,7 @@ libraries = {
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="sounds"]
 stream = SubResource("AudioStreamRandomizer_844j2")
-attenuation_model = 3
+attenuation_model = 2
 max_polyphony = 5
 bus = &"WeaponSounds"
 

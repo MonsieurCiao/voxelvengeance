@@ -1,6 +1,7 @@
-[gd_scene load_steps=20 format=3 uid="uid://ckvtt1kjkumus"]
+[gd_scene load_steps=22 format=3 uid="uid://ckvtt1kjkumus"]
 
 [ext_resource type="Script" uid="uid://c3jjeqlu6i0y8" path="res://scripts/bullet.gd" id="1_ks1fn"]
+[ext_resource type="AudioStream" uid="uid://bnuuv6n06fjoc" path="res://sound/hurtSound.wav" id="2_88t8m"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_m73g3"]
 size = Vector3(0.25, 0.25, 0.5)
@@ -82,6 +83,11 @@ scale_curve = SubResource("CurveTexture_ks1fn")
 [sub_resource type="BoxMesh" id="BoxMesh_rl4yy"]
 size = Vector3(0.1, 0.1, 0.1)
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_88t8m"]
+random_pitch = 1.5
+streams_count = 1
+stream_0/stream = ExtResource("2_88t8m")
+
 [node name="Bullet" type="CharacterBody3D"]
 collision_layer = 2
 slide_on_ceiling = false
@@ -140,11 +146,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.001839, 0.0164924)
 material_override = SubResource("StandardMaterial3D_88t8m")
 emitting = false
 amount = 4
-lifetime = 0.15
+lifetime = 0.3
 one_shot = true
 explosiveness = 1.0
 fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_evuld")
 draw_pass_1 = SubResource("BoxMesh_rl4yy")
+
+[node name="hitSound" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_88t8m")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
