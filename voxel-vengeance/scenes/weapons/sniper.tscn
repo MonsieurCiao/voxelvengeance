@@ -96,7 +96,6 @@ scale_curve = SubResource("CurveTexture_ivc8v")
 size = Vector3(0.1, 0.1, 0.1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_aip7g"]
-margin = 0.0
 size = Vector3(0.2, 0.2, 0.2)
 
 [node name="sniper" type="Node3D"]
@@ -142,6 +141,6 @@ process_material = SubResource("ParticleProcessMaterial_60a84")
 draw_pass_1 = SubResource("BoxMesh_ivc8v")
 
 [node name="ShapeCast3D" type="ShapeCast3D" parent="."]
-transform = Transform3D(-7.23998e-07, -0.2, 0, 0.2, -7.23998e-07, 0, 0, 0, 0.2, 0, 0, -0.704912)
+transform = Transform3D(-7.23998e-07, -0.2, 0, 0.2, -7.23998e-07, 0, 0, 0, 0.2, 0.0791235, -2.86426e-07, -1.09305)
 shape = SubResource("BoxShape3D_aip7g")
 target_position = Vector3(0, 0, -1)

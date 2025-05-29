@@ -49,7 +49,7 @@ script = ExtResource("1_yc10j")
 environment = SubResource("Environment_0wfyh")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 15.8957, 0)
 light_color = Color(1, 0.923881, 0.910825, 1)
 shadow_enabled = true
 
@@ -73,8 +73,10 @@ script = ExtResource("4_choun")
 [node name="Crosshairs" type="Node3D" parent="."]
 
 [node name="std_crosshair" parent="Crosshairs" instance=ExtResource("20_gqmmt")]
+visible = false
 
 [node name="pump_crosshair" parent="Crosshairs" instance=ExtResource("22_pm3ni")]
+visible = false
 
 [node name="wallCrosshair" type="MeshInstance3D" parent="Crosshairs"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.17054, 0.660289, 2.05646)
@@ -83,6 +85,8 @@ cast_shadow = 0
 mesh = SubResource("SphereMesh_yc10j")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_choun")
+
+[node name="SniperSegmentsContainer" type="Node3D" parent="Crosshairs"]
 
 [node name="world" parent="." instance=ExtResource("9_85g3d")]
 
