@@ -42,7 +42,6 @@ func host() -> void:
 			var name = get_node("/root/main/CanvasLayer/PauseMenu/PanelContainer/VBoxContainer/name").text
 			print(multiplayer.get_unique_id()) #1
 			await get_tree().process_frame 
-			
 			update_playerlist.rpc_id(peerID, multiplayer.get_unique_id(), name, MultiplayerManager.playerlist)
 	)
 	var name = get_node("/root/main/CanvasLayer/PauseMenu/PanelContainer/VBoxContainer/name").text
