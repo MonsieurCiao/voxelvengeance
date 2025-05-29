@@ -21,6 +21,11 @@ MultiplayerManager="*res://scripts/multiplayer_manager.gd"
 Main="*res://scripts/main.gd"
 WeaponData="*res://scripts/weaponData.gd"
 
+[debug_draw_3d]
+
+settings/addon_root_folder="res://addons/debug_draw_3d"
+settings/3d/volumetric_defaults/thickness=0.2
+
 [display]
 
 window/size/viewport_width=1920
@@ -85,9 +90,6 @@ common/physics_interpolation=true
 
 [rendering]
 
-rendering_device/driver.ios="vulkan"
-rendering_device/driver.macos="vulkan"
-renderer/rendering_method="mobile"
 textures/vram_compression/import_etc2_astc=true
 lights_and_shadows/directional_shadow/size=8192
 anti_aliasing/quality/msaa_3d=3

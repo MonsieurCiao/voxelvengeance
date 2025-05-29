@@ -131,32 +131,27 @@ func _shootParticles(weaponName) -> void:
 		item.emitting = false
 
 @onready var shape_cast = $ShapeCast3D
-
 func shootRay():
 	var space = get_world_3d().direct_space_state
-	shape_cast.target_position = Vector3(0, 0, -WeaponData.getWeaponData(Main.currentWeapon)["rayLength"] * 5)
+	var from = global_transform.origin
+	var direction = - global_transform.basis.z.normalized()
+	var to = from + direction * WeaponData.getWeaponData(Main.currentWeapon)["rayLength"]
 
-	if shape_cast.is_colliding():
-		var collision_point = shape_cast.get_collision_point(0)
-		wallCrosshair.show()
+	var forward_query = PhysicsRayQueryParameters3D.create(from, to)
+	var forward_result = space.intersect_ray(forward_query)
+
+	if forward_result:
 		crosshair.hide()
-
-		# wallCrosshair als Weltposition, damit Größe stabil bleibt
-		wallCrosshair.global_position = collision_point + Vector3.UP * 0.01
-
+		wallCrosshair.show()
+		wallCrosshair.position = forward_result.position
 	else:
-		wallCrosshair.hide()
 		crosshair.show()
-
-		var target_point = shape_cast.global_transform.origin + shape_cast.global_transform.basis * shape_cast.target_position
-		var down_from = target_point + Vector3.UP * 1.0
-		var down_to = down_from + Vector3.DOWN * 10.0
-
+		wallCrosshair.hide()
+		var down_from = to + Vector3.UP * 1.0
+		var down_to = down_from + Vector3.DOWN * WeaponData.getWeaponData(Main.currentWeapon)["rayLength"]
 		var down_query = PhysicsRayQueryParameters3D.create(down_from, down_to)
 		down_query.collision_mask = 0xFFFFFFFF & ~(1 << 1)
 		var down_result = space.intersect_ray(down_query)
-
 		if down_result:
 			crosshair.position = down_result.position + Vector3.UP * 0.01
-
 		crosshair.rotation = player.rotation

@@ -10,7 +10,7 @@ var curName = ""
 
 func _ready():
 	#function called to server, not to the other clients (not sure if this is supposed to be here)
-	multiplayer.connected_to_server.connect(connected_to_server)	
+	multiplayer.connected_to_server.connect(connected_to_server)
 	multiplayer.connection_failed.connect(connection_failed)
 	multiplayer.peer_disconnected.connect(peer_disconnected)
 	multiplayer.peer_connected.connect(peer_connected)
@@ -44,9 +44,8 @@ func host() -> void:
 			#client
 			await _wait_for_players_node()
 			add_player(str(peerID))
-			print(multiplayer.get_unique_id()) #1
-			await get_tree().process_frame 
-			
+			print(multiplayer.get_unique_id()) # 1
+			await get_tree().process_frame
 			update_playerlist.rpc_id(peerID, multiplayer.get_unique_id(), curName, MultiplayerManager.playerlist)
 	)
 	await _wait_for_players_node()
@@ -65,7 +64,7 @@ func join() -> void:
 	multiplayer.multiplayer_peer = peer
 	
 @rpc("any_peer", "call_local")
-func update_playerlist(id, name:String, list: Dictionary):
+func update_playerlist(id, name: String, list: Dictionary):
 	#get the player list from host
 	print("From " + str(multiplayer.get_unique_id()) + " list " + str(list))
 	if !MultiplayerManager.playerlist.has(id):
@@ -93,7 +92,7 @@ func disperseNames():
 func add_player(nodeName):
 	#prevent duplicate players
 	if has_node(nodeName):
-		print("Player ",nodeName," already exists.")
+		print("Player ", nodeName, " already exists.")
 		return
 	var playerinstance = PLAYER.instantiate()
 	playerinstance.name = nodeName

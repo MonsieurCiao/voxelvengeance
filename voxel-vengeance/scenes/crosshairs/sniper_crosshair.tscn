@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://djshwq6xuh63a"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ya4ey"]
+albedo_color = Color(0.665604, 8.0619e-07, 4.33177e-07, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ipvk7"]
+material = SubResource("StandardMaterial3D_ya4ey")
+size = Vector2(0.045, 0.5)
+
+[node name="sniperCrosshair" type="Node3D"]
+
+[node name="sniperCrosshair" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.501059, 0)
+mesh = SubResource("PlaneMesh_ipvk7")
+skeleton = NodePath("../..")
