@@ -91,6 +91,7 @@ _data = {
 }
 
 [node name="PLAYER" type="CharacterBody3D"]
+axis_lock_linear_y = true
 script = ExtResource("1_3vyb7")
 dash_cooldownTime = 1.5
 
