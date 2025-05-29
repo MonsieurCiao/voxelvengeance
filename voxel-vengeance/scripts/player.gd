@@ -21,6 +21,7 @@ var deadStare
 func _enter_tree() -> void:
 	randomSpawn()
 	set_multiplayer_authority(int(str(name)))
+	print("authorityID" + str(name))
 	MultiplayerManager.authorityID = int(str(name))
 	$weaponSpawner.set_multiplayer_authority(int(str(name)))
 	health = max_health
@@ -34,7 +35,7 @@ func _ready() -> void:
 		audio_listener.make_current()
 		#connect to signal
 		#MultiplayerManager.playerAdded.connect(setName)
-		setName()
+		#setName()
 		
 func _physics_process(delta: float) -> void:
 	if is_multiplayer_authority():
@@ -122,8 +123,8 @@ func randomSpawn():
 		push_warning("No spawnpoints")
 		position = Vector3(0, 1, 0)
 
-@rpc("call_local")		
-func setName():
+@rpc("any_peer")
+func setName(playerlist: Dictionary):
 	await get_tree().process_frame
 	print("called SETNAMES from" + str(multiplayer.get_unique_id())+ " with list " + str(MultiplayerManager.playerlist))
 	#if MultiplayerManager.playerlist.has(multiplayer.get_unique_id()):
@@ -131,7 +132,7 @@ func setName():
 	#else:
 		#print("kacke verdammt")
 	#set each players name
-	for playerID in MultiplayerManager.playerlist:
+	for playerID in playerlist:
 		print("doing player " + str(playerID))
-		var playerData = MultiplayerManager.playerlist[playerID]
+		var playerData = playerlist[playerID]
 		get_node("/root/main/players/" + str(playerID) + "/playerName").text = playerData.name

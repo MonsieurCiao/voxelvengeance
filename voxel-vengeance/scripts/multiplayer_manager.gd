@@ -35,15 +35,11 @@ func host() -> void:
 	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
 	multiplayer.multiplayer_peer = peer
 	#function called to all other clients
-	multiplayer.peer_connected.connect(
-		func(peerID):
-			#client
-			print("A Player for " + str(peerID) + " was succesfully created.")
-			add_player(str(peerID))
-			await get_tree().process_frame 
-			
-			update_playerlist.rpc_id(peerID, multiplayer.get_unique_id(), name, playerlist)
-	)
+	#multiplayer.peer_connected.connect(
+		#func(peerID):
+			##client
+			#pass
+	#)
 	var name = get_node("/root/main/CanvasLayer/PauseMenu/PanelContainer/VBoxContainer/name").text
 	update_playerlist.rpc(multiplayer.get_unique_id(), name, playerlist)
 	#host
@@ -69,12 +65,12 @@ func update_playerlist(id, name:String, list: Dictionary):
 			"id": int(id)
 		}
 	print("MultiplayerManager.playerlist", MultiplayerManager.playerlist)
-	#fetch names for all players
+	#make host loop over each peer and call their setName with host's playerlist
 	if multiplayer.get_unique_id() == 1:
 		for peer_id in MultiplayerManager.playerlist:
 			var player_node = get_node_or_null("/root/main/players/" + str(peer_id))
 			if player_node:
-				player_node.setName.rpc_id(peer_id)
+				player_node.setName.rpc_id(peer_id, MultiplayerManager.playerlist)
 		#if player_node and player_node.has_method("setName"):
 			#player_node.setName()
 
@@ -98,7 +94,11 @@ func connection_failed():
 	print("You can't connect to this Server.")
 func peer_disconnected(id):
 	print("Player with ID " + str(id) + "disconnected from the game.")
-func peer_connected(id):
+func peer_connected(peerID):
+	add_player(str(peerID))
 	var name = get_node("/root/main/CanvasLayer/PauseMenu/PanelContainer/VBoxContainer/name").text
-	update_playerlist.rpc(multiplayer.get_unique_id(), name, playerlist)
-	print("Player with ID " + str(id) + " joined the game.")
+	print("A Player for " + str(peerID) + " was succesfully created.")
+	print(multiplayer.get_unique_id()) #1
+	await get_tree().process_frame 
+	
+	update_playerlist.rpc_id(peerID, multiplayer.get_unique_id(), name, MultiplayerManager.playerlist)
