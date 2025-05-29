@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://c0qeoo6mubcti"]
+[gd_scene load_steps=9 format=3 uid="uid://c0qeoo6mubcti"]
 
 [ext_resource type="Script" uid="uid://dn6pos2mkmbd0" path="res://scripts/ui.gd" id="1_vow1w"]
+[ext_resource type="Texture2D" uid="uid://4t8dm8dnlgwv" path="res://assets/progressBar.png" id="2_nky1s"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vow1w"]
 
@@ -38,6 +39,23 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_vow1w")
+
+[node name="weaponCooldown" type="TextureProgressBar" parent="."]
+modulate = Color(1, 1, 1, 0.498039)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -29.0
+grow_horizontal = 2
+grow_vertical = 0
+max_value = 0.1
+step = 0.01
+value = 0.1
+fill_mode = 6
+nine_patch_stretch = true
+texture_progress = ExtResource("2_nky1s")
 
 [node name="healthbarRed" type="ProgressBar" parent="."]
 layout_mode = 1

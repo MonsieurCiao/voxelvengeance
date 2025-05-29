@@ -3,6 +3,7 @@ extends Node3D
 @export var pistol: PackedScene
 @export var ak47: PackedScene
 @export var shotgun: PackedScene
+@export var sniper: PackedScene
 
 var shootCooldown
 var autofire
@@ -20,11 +21,17 @@ func _process(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if not is_multiplayer_authority(): return
 	if Input.is_key_pressed(KEY_1) and Main.currentWeapon != "pistol":
+		Main.currentWeapon = "pistol"
 		summonWeaponWithProperties.rpc("pistol")
 	if Input.is_key_pressed(KEY_2) and Main.currentWeapon != "ak47":
+		Main.currentWeapon = "ak47"
 		summonWeaponWithProperties.rpc("ak47")
 	if Input.is_key_pressed(KEY_3) and Main.currentWeapon != "shotgun":
+		Main.currentWeapon = "shotgun"
 		summonWeaponWithProperties.rpc("shotgun")
+	if Input.is_key_pressed(KEY_4) and Main.currentWeapon != "sniper":
+		Main.currentWeapon = "sniper"
+		summonWeaponWithProperties.rpc("sniper")
 
 func clear_all_children(node: Node) -> void:
 	for child in node.get_children():
@@ -32,8 +39,8 @@ func clear_all_children(node: Node) -> void:
 
 @rpc("call_local")
 func summonWeaponWithProperties(weaponName):
-		Main.currentWeapon = weaponName
 		clear_all_children(self)
 		var instance = get(weaponName).instantiate()
+		instance.position = WeaponData.getWeaponData(weaponName)["spawnPosition"]
 		instance.set_multiplayer_authority(get_multiplayer_authority())
 		add_child(instance)

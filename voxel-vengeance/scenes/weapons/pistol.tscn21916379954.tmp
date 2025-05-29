@@ -66,6 +66,9 @@ _data = {
 &"shoot": SubResource("Animation_rpfgx")
 }
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_ivc8v"]
+size = Vector3(0.3, 0.3, 0.3)
+
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ivc8v"]
 random_pitch = 1.24
 streams_count = 1
@@ -95,10 +98,6 @@ scale_curve = SubResource("CurveTexture_ivc8v")
 [sub_resource type="BoxMesh" id="BoxMesh_ivc8v"]
 size = Vector3(0.1, 0.1, 0.1)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_ivc8v"]
-margin = 0.0
-size = Vector3(0.2, 0.2, 0.2)
-
 [node name="pistol" type="Node3D"]
 script = ExtResource("2_r3071")
 
@@ -112,6 +111,11 @@ libraries = {
 
 [node name="RayCast3D" type="RayCast3D" parent="weapon"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.404414, -1.46398e-06, -2.18479)
+target_position = Vector3(0, 0, -1)
+
+[node name="ShapeCast3D" type="ShapeCast3D" parent="weapon"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.396088, -1.43383e-06, -2.1503)
+shape = SubResource("BoxShape3D_ivc8v")
 target_position = Vector3(0, 0, -1)
 
 [node name="weaponEnd" type="Node3D" parent="weapon"]
@@ -138,8 +142,3 @@ randomness = 0.37
 trail_lifetime = 10.0
 process_material = SubResource("ParticleProcessMaterial_60a84")
 draw_pass_1 = SubResource("BoxMesh_ivc8v")
-
-[node name="ShapeCast3D" type="ShapeCast3D" parent="."]
-transform = Transform3D(-7.23998e-07, -0.2, 0, 0.2, -7.23998e-07, 0, 0, 0, 0.2, 0, 0, -0.704912)
-shape = SubResource("BoxShape3D_ivc8v")
-target_position = Vector3(0, 0, -1)

@@ -48,12 +48,28 @@ var weaponDict = {
 		"shakeFade": 5,
 		"angle": 45,
 		"bulletNum": 5,
+	},
+	"sniper": {
+		"crosshair": "std_crosshair",
+		"distance": 50,
+		"shrinkSpeed": 50,
+		"growSpeed": 50,
+		"maxSpread": 50,
+		"cooldown": 2,
+		"spawnPosition": Vector3(0.4,0,0),
+		"autofire": false,
+		"bulletSpeed":400,
+		"damage": 50,
+		"shakeStrength": 0.5,
+		"shakeFade": 5,
+		"angle": 0,
+		"bulletNum": 1,
 	}
 }
 var tempDict = {}
-func getWeaponData():
+func getWeaponData(weaponName):
 	for item in weaponDict:
-		if Main.currentWeapon == item:
+		if weaponName == item:
 			tempDict["crosshair"] = get_node("/root/main/Crosshairs/" + str(weaponDict[item]["crosshair"]))
 			tempDict["weaponname"] = item
 			tempDict["rayLength"] = weaponDict[item]["distance"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dq87arw8jeqam"]
+[gd_scene load_steps=15 format=3 uid="uid://dq87arw8jeqam"]
 
 [ext_resource type="Script" uid="uid://bibvhm7q5prgf" path="res://scripts/shoot.gd" id="1_gsxud"]
 [ext_resource type="PackedScene" uid="uid://bx603tifhkmut" path="res://assets/models/weapons/ak47.blend" id="2_hybat"]
@@ -95,6 +95,10 @@ scale_curve = SubResource("CurveTexture_60a84")
 [sub_resource type="BoxMesh" id="BoxMesh_0jdrn"]
 size = Vector3(0.1, 0.1, 0.1)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_gsxud"]
+margin = 0.0
+size = Vector3(0.2, 0.2, 0.2)
+
 [node name="ak47" type="Node3D"]
 script = ExtResource("1_gsxud")
 
@@ -132,3 +136,8 @@ randomness = 0.37
 trail_lifetime = 10.0
 process_material = SubResource("ParticleProcessMaterial_r88qr")
 draw_pass_1 = SubResource("BoxMesh_0jdrn")
+
+[node name="ShapeCast3D" type="ShapeCast3D" parent="."]
+transform = Transform3D(-7.23998e-07, -0.2, 0, 0.2, -7.23998e-07, 0, 0, 0, 0.2, 0, 0, -0.704912)
+shape = SubResource("BoxShape3D_gsxud")
+target_position = Vector3(0, 0, -1)
