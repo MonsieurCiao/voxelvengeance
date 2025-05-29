@@ -1,0 +1,179 @@
+[gd_scene load_steps=11 format=3 uid="uid://clesqr260mrde"]
+
+[ext_resource type="Script" uid="uid://byb2epgcanu4o" path="res://scripts/main_menu.gd" id="1_ng0o5"]
+[ext_resource type="PackedScene" uid="uid://diehj6y4a73ds" path="res://scenes/decoration/wall.tscn" id="1_xqga4"]
+[ext_resource type="PackedScene" uid="uid://bpa2brmcrgils" path="res://scenes/decoration/wall_w_hole.tscn" id="2_2o76q"]
+[ext_resource type="PackedScene" uid="uid://d20mph0y372ct" path="res://scenes/decoration/barrel.tscn" id="3_6bivr"]
+[ext_resource type="PackedScene" uid="uid://evqpfl5bkqbi" path="res://scenes/decoration/woodbox.tscn" id="4_imvie"]
+[ext_resource type="PackedScene" uid="uid://cy1w1e6sayjtj" path="res://scenes/decoration/lantern.tscn" id="5_ng0o5"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ovrgc"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_2o76q"]
+sky_material = SubResource("ProceduralSkyMaterial_ovrgc")
+
+[sub_resource type="Environment" id="Environment_6bivr"]
+background_mode = 2
+sky = SubResource("Sky_2o76q")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vn8vg"]
+albedo_color = Color(0.569805, 0.510859, 0.357899, 1)
+
+[node name="MainMenu" type="CanvasLayer"]
+script = ExtResource("1_ng0o5")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.814454, -0.249867, 0.523671, 0.284564, 0.614519, 0.735792, -0.505656, 0.748287, -0.429394, 0, 4.93342, 0)
+light_color = Color(0.999434, 0.731904, 0.519099, 1)
+light_energy = 0.427
+light_angular_distance = 2.73
+light_specular = 0.0
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_6bivr")
+
+[node name="Background" type="Node3D" parent="."]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Background"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_right = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="Background/SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="Background/SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.63645, 0)
+
+[node name="background" type="Node3D" parent="Background"]
+
+[node name="COMBINER" type="CSGCombiner3D" parent="Background/background"]
+material_override = SubResource("StandardMaterial3D_vn8vg")
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Background/background/COMBINER"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8.18592)
+size = Vector3(36, 1, 28)
+
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="Background/background/COMBINER/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0306091, -0.00717163, -0.0249023)
+size = Vector3(35.9985, 1.01605, 27.9248)
+
+[node name="Wall5" parent="Background/background/COMBINER" instance=ExtResource("1_xqga4")]
+transform = Transform3D(-0.617627, 0, 0.786472, 0, 1, 0, -0.786472, 0, -0.617627, 7.41663, 0.505957, -3.06446)
+
+[node name="Wall7" parent="Background/background/COMBINER" instance=ExtResource("1_xqga4")]
+transform = Transform3D(-0.907103, 0, 0.420909, 0, 1, 0, -0.420909, 0, -0.907103, 7.66008, 0.505958, -14.2132)
+
+[node name="Wall8" parent="Background/background/COMBINER" instance=ExtResource("1_xqga4")]
+transform = Transform3D(-0.907103, 0, 0.420909, 0, 1, 0, -0.420909, 0, -0.907103, 12.3957, 0.505957, -15.0096)
+
+[node name="Wall9" parent="Background/background/COMBINER" instance=ExtResource("1_xqga4")]
+transform = Transform3D(-0.992373, 0, 0.123273, 0, 1, 0, -0.123273, 0, -0.992373, -1.32123, 0.505957, -15.4988)
+
+[node name="Wall10" parent="Background/background/COMBINER" instance=ExtResource("1_xqga4")]
+transform = Transform3D(-0.698765, 0, -0.715352, 0, 1, 0, 0.715352, 0, -0.698765, -12.443, 0.505957, -7.96976)
+
+[node name="Wall11" parent="Background/background/COMBINER" instance=ExtResource("1_xqga4")]
+transform = Transform3D(-0.698765, 0, -0.715352, 0, 1, 0, 0.715352, 0, -0.698765, -8.67383, 0.505956, -11.1697)
+
+[node name="Wall12" parent="Background/background/COMBINER" instance=ExtResource("1_xqga4")]
+transform = Transform3D(-0.698765, 0, -0.715352, 0, 1, 0, 0.715352, 0, -0.698765, -6.03416, 0.505957, -14.4878)
+
+[node name="Wall13" parent="Background/background/COMBINER" instance=ExtResource("1_xqga4")]
+transform = Transform3D(0.275788, 0, -0.961219, 0, 1, 0, 0.961219, 0, 0.275788, 12.0236, 0.505957, -9.26555)
+
+[node name="Wall14" parent="Background/background/COMBINER" instance=ExtResource("1_xqga4")]
+transform = Transform3D(0.961007, 0, -0.276527, 0, 1, 0, 0.276527, 0, 0.961007, 3.45524, 0.505957, -20.0609)
+
+[node name="Wall15" parent="Background/background/COMBINER" instance=ExtResource("1_xqga4")]
+transform = Transform3D(0.961007, 0, -0.276527, 0, 1, 0, 0.276527, 0, 0.961007, 8.2856, 0.505957, -20.0609)
+
+[node name="Wall6" parent="Background/background/COMBINER" instance=ExtResource("1_xqga4")]
+transform = Transform3D(-0.979287, 0, -0.20248, 0, 1, 0, 0.20248, 0, -0.979287, -1.18499, 0.505957, -5.87263)
+
+[node name="Node3D21" parent="Background/background/COMBINER" instance=ExtResource("2_2o76q")]
+transform = Transform3D(0.950689, 0, -0.310145, 0, 1, 0, 0.310145, 0, 0.950689, 3.47468, 0.511915, -5.52682)
+
+[node name="barrel3" parent="Background/background/COMBINER" instance=ExtResource("3_6bivr")]
+transform = Transform3D(-0.617627, 0, 0.786472, 0, 1, 0, -0.786472, 0, -0.617627, -3.66623, 0.937818, -2.82544)
+
+[node name="barrel4" parent="Background/background/COMBINER" instance=ExtResource("3_6bivr")]
+transform = Transform3D(-0.617627, 0, 0.786472, 0, 1, 0, -0.786472, 0, -0.617627, -2.97837, 0.937818, -3.36563)
+
+[node name="barrel5" parent="Background/background/COMBINER" instance=ExtResource("3_6bivr")]
+transform = Transform3D(-0.617627, 0, 0.786472, 0, 1, 0, -0.786472, 0, -0.617627, -3.30591, 1.67937, -3.10841)
+
+[node name="barrel6" parent="Background/background/COMBINER" instance=ExtResource("3_6bivr")]
+transform = Transform3D(-0.992848, 0.119392, -5.21878e-09, 0, -4.37114e-08, -1, -0.119392, -0.992848, 4.33987e-08, -2.94366, 0.916706, -2.46506)
+
+[node name="woodbox2" parent="Background/background/COMBINER" instance=ExtResource("4_imvie")]
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, -2.13326, 1.0063, -4.40163)
+
+[node name="woodbox3" parent="Background/background/COMBINER" instance=ExtResource("4_imvie")]
+transform = Transform3D(0.77809, -0.628153, -2.72026e-08, -4.26587e-08, -9.53535e-09, -1, 0.628153, 0.77809, -3.42155e-08, 2.043, 1, -4.826)
+
+[node name="lantern" parent="Background/background/COMBINER" instance=ExtResource("5_ng0o5")]
+transform = Transform3D(0.786051, 0, -0.618161, 0, 1, 0, 0.618161, 0, 0.786051, -2.48364, 0.480059, -3.37984)
+
+[node name="Menu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="PlayActions" type="VBoxContainer" parent="Menu/MarginContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_constants/separation = 10
+
+[node name="name" type="LineEdit" parent="Menu/MarginContainer/PlayActions"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+placeholder_text = "name"
+
+[node name="HostMargin" type="MarginContainer" parent="Menu/MarginContainer/PlayActions"]
+clip_contents = true
+layout_mode = 2
+theme_override_constants/margin_top = -10
+theme_override_constants/margin_bottom = -10
+
+[node name="Host" type="Button" parent="Menu/MarginContainer/PlayActions/HostMargin"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Host"
+
+[node name="Join" type="Button" parent="Menu/MarginContainer/PlayActions"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Join"
+
+[connection signal="button_up" from="Menu/MarginContainer/PlayActions/HostMargin/Host" to="." method="_on_host_button_up"]
+[connection signal="pressed" from="Menu/MarginContainer/PlayActions/Join" to="." method="_on_join_pressed"]

@@ -6,6 +6,7 @@ var authorityID
 
 signal playerAdded
 var playerlist = {}
+var curName = ""
 
 func _ready():
 	#function called to server, not to the other clients (not sure if this is supposed to be here)
@@ -30,6 +31,9 @@ func _ready():
 		#disconnection
 		multiplayer.peer_disconnected.connect(remove_player)
 
+func receive_name(name: String) -> void:
+	curName = name
+
 func host() -> void:
 	peer.create_server(1811)
 	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
@@ -38,15 +42,15 @@ func host() -> void:
 	multiplayer.peer_connected.connect(
 		func(peerID):
 			#client
+			await _wait_for_players_node()
 			add_player(str(peerID))
-			var name = get_node("/root/main/CanvasLayer/PauseMenu/PanelContainer/VBoxContainer/name").text
 			print(multiplayer.get_unique_id()) #1
 			await get_tree().process_frame 
 			
-			update_playerlist.rpc_id(peerID, multiplayer.get_unique_id(), name, MultiplayerManager.playerlist)
+			update_playerlist.rpc_id(peerID, multiplayer.get_unique_id(), curName, MultiplayerManager.playerlist)
 	)
-	var name = get_node("/root/main/CanvasLayer/PauseMenu/PanelContainer/VBoxContainer/name").text
-	update_playerlist.rpc(multiplayer.get_unique_id(), name, playerlist)
+	await _wait_for_players_node()
+	update_playerlist.rpc(multiplayer.get_unique_id(), curName, playerlist)
 	#host
 	add_player(str(multiplayer.get_unique_id()))
 	
@@ -55,7 +59,8 @@ func host() -> void:
 	
 
 func join() -> void:
-	peer.create_client("localhost", 1811)
+	await _wait_for_players_node()
+	peer.create_client("zocki.servebeer.com", 1811)
 	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
 	multiplayer.multiplayer_peer = peer
 	
@@ -108,5 +113,9 @@ func peer_disconnected(id):
 	print("Player with ID " + str(id) + "disconnected from the game.")
 func peer_connected(peerID):
 	print("A Player for " + str(peerID) + " was succesfully created.")
-	var name = get_node("/root/main/CanvasLayer/PauseMenu/PanelContainer/VBoxContainer/name").text
-	update_playerlist.rpc_id(peerID, multiplayer.get_unique_id(), name, MultiplayerManager.playerlist)
+	update_playerlist.rpc_id(peerID, multiplayer.get_unique_id(), curName, MultiplayerManager.playerlist)
+
+func _wait_for_players_node():
+	while get_node_or_null("/root/main/players") == null:
+		await get_tree().process_frame
+	return

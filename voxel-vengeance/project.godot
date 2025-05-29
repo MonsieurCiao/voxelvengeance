@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Voxel-Vengeance"
-run/main_scene="uid://d2yfp1tb8a8o1"
+run/main_scene="uid://clesqr260mrde"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -23,8 +23,8 @@ WeaponData="*res://scripts/weaponData.gd"
 
 [display]
 
-window/size/viewport_width=1900
-window/size/viewport_height=1000
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 window/stretch/mode="canvas_items"
 
 [editor_plugins]
