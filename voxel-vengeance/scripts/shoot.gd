@@ -131,68 +131,27 @@ func _shootParticles(weaponName) -> void:
 		item.emitting = false
 
 @onready var shape_cast = $ShapeCast3D
-
 func shootRay():
 	var space = get_world_3d().direct_space_state
-	var ray_length = WeaponData.getWeaponData(Main.currentWeapon)["rayLength"] * 25
-	shape_cast.target_position = -shape_cast.transform.basis.z * ray_length
-	
-	var collision_point : Vector3
-	var hit = shape_cast.is_colliding()
-	if hit:
-		collision_point = shape_cast.get_collision_point(0)
-		wallCrosshair.show()
-		crosshair.hide()
-		wallCrosshair.global_position = collision_point + Vector3.UP * 0.01
-	else:
-		wallCrosshair.hide()
-		crosshair.show()
-		var target_point = shape_cast.global_transform.origin + shape_cast.global_transform.basis * shape_cast.target_position
-		var down_from = target_point + Vector3.UP * 1.0
-		var down_to = down_from + Vector3.DOWN * 10.0
+	var from = global_transform.origin
+	var direction = - global_transform.basis.z.normalized()
+	var to = from + direction * WeaponData.getWeaponData(Main.currentWeapon)["rayLength"]
 
+	var forward_query = PhysicsRayQueryParameters3D.create(from, to)
+	var forward_result = space.intersect_ray(forward_query)
+
+	if forward_result:
+		crosshair.hide()
+		wallCrosshair.show()
+		wallCrosshair.position = forward_result.position
+	else:
+		crosshair.show()
+		wallCrosshair.hide()
+		var down_from = to + Vector3.UP * 1.0
+		var down_to = down_from + Vector3.DOWN * WeaponData.getWeaponData(Main.currentWeapon)["rayLength"]
 		var down_query = PhysicsRayQueryParameters3D.create(down_from, down_to)
 		down_query.collision_mask = 0xFFFFFFFF & ~(1 << 1)
 		var down_result = space.intersect_ray(down_query)
 		if down_result:
 			crosshair.position = down_result.position + Vector3.UP * 0.01
 		crosshair.rotation = player.rotation
-
-	update_sniper_crosshair(
-		shape_cast.global_transform.origin,
-		ray_length,
-		collision_point if hit else null
-	)
-		
-
-func update_sniper_crosshair(start: Vector3, max_length: float, collision_point: Variant = null):
-	if Main.currentWeapon != "sniper":
-		return
-
-	var ground_start = Vector3(start.x, 0, start.z)
-	var forward = (-global_transform.basis.z).normalized()
-	var ground_end = collision_point if collision_point != null else ground_start + forward * max_length
-
-	var container = get_node("/root/main/Crosshairs/SniperSegmentsContainer")
-	var crosshair_template = preload("res://scenes/crosshairs/sniper_crosshair.tscn")
-	free_children(container)
-	container.show()
-
-	var segment_spacing = 0.5
-	var ray_length = ground_start.distance_to(ground_end)
-	var segment_count = int(ray_length / segment_spacing)
-
-	for i in range(segment_count):
-		if i % 2 == 0:
-			var segment = crosshair_template.instantiate()
-			segment.name = "sniperSegment_%d" % i
-			container.add_child(segment)
-			
-			var position = ground_start + forward * (i * segment_spacing + 2.0)
-			position.y = 0
-			segment.global_position = position
-			segment.look_at_from_position(position, position + forward, Vector3.UP)
-
-func free_children(node: Node):
-	for child in node.get_children():
-		child.queue_free()

@@ -24,6 +24,7 @@ WeaponData="*res://scripts/weaponData.gd"
 [debug_draw_3d]
 
 settings/addon_root_folder="res://addons/debug_draw_3d"
+settings/3d/volumetric_defaults/thickness=0.2
 
 [display]
 

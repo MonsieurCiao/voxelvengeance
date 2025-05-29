@@ -51,7 +51,7 @@ var weaponDict = {
 	},
 	"sniper": {
 		"crosshair": "std_crosshair",
-		"distance": 50,
+		"distance": 55,
 		"shrinkSpeed": 50,
 		"growSpeed": 50,
 		"maxSpread": 50,

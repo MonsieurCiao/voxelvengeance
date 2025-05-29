@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://v11idaphqgrb"]
+[gd_scene load_steps=19 format=3 uid="uid://v11idaphqgrb"]
 
 [ext_resource type="PackedScene" uid="uid://dgtdlxwqhwve4" path="res://scenes/decoration/fence_1.tscn" id="1_jhx03"]
 [ext_resource type="PackedScene" uid="uid://bxm5yatlhai6n" path="res://scenes/decoration/fence_2.tscn" id="2_o8fc1"]
@@ -19,6 +19,9 @@
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_munwf"]
 albedo_color = Color(0.569805, 0.510859, 0.357899, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dss4m"]
+size = Vector3(36.5336, 1.02356, 16.0917)
 
 [node name="world" type="Node3D"]
 
@@ -184,6 +187,24 @@ size = Vector3(36, 1, 28)
 [node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="objects/CSGCombiner3D/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0306091, -0.00717163, -0.0249023)
 size = Vector3(35.9985, 1.01605, 27.9248)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="objects/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -0.205, 0, 1, -8.96083e-09, 0, 0.137466, 0)
+material_override = SubResource("StandardMaterial3D_munwf")
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="objects/CSGCombiner3D/CSGCombiner3D"]
+size = Vector3(36, 1, 28)
+
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="objects/CSGCombiner3D/CSGCombiner3D/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0306091, -0.00717163, -0.0249023)
+size = Vector3(35.9985, 1.01605, 27.9248)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="objects/CSGCombiner3D/CSGCombiner3D/CSGBox3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="objects/CSGCombiner3D/CSGCombiner3D/CSGBox3D/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.244568, 0.0117798, -6.20648)
+shape = SubResource("BoxShape3D_dss4m")
 
 [node name="Node3D21" parent="objects" instance=ExtResource("14_7t5mc")]
 transform = Transform3D(0.747485, 0, 0.664279, 0, 1, 0, -0.664279, 0, 0.747485, -6.14778, 0.511915, -4.55069)

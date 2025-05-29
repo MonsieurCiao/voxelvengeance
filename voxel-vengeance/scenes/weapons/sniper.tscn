@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bibvhm7q5prgf" path="res://scripts/shoot.gd" id="1_aip7g"]
 [ext_resource type="PackedScene" uid="uid://c42ma5wbv4hgv" path="res://assets/models/weapons/sniper.blend" id="2_aip7g"]
-[ext_resource type="AudioStream" uid="uid://iwjt28x3e1d3" path="res://sound/pistol.mp3" id="3_jv70f"]
+[ext_resource type="AudioStream" uid="uid://bc5y2ob45322h" path="res://sound/sniper.mp3" id="3_aip7g"]
 [ext_resource type="PackedScene" uid="uid://ckx4hhut66byo" path="res://scenes/animation/weapon_muzzle_flash.tscn" id="4_7oc6u"]
 
 [sub_resource type="Animation" id="Animation_37wq5"]
@@ -69,7 +69,7 @@ _data = {
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ivc8v"]
 random_pitch = 1.24
 streams_count = 1
-stream_0/stream = ExtResource("3_jv70f")
+stream_0/stream = ExtResource("3_aip7g")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_60a84"]
 albedo_color = Color(0.945098, 0.639216, 0, 1)
@@ -96,7 +96,7 @@ scale_curve = SubResource("CurveTexture_ivc8v")
 size = Vector3(0.1, 0.1, 0.1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_aip7g"]
-size = Vector3(0.2, 0.2, 0.2)
+size = Vector3(0.15, 0.15, 0.15)
 
 [node name="sniper" type="Node3D"]
 transform = Transform3D(-3.61999e-06, -1, 0, 1, -3.61999e-06, 0, 0, 0, 1, 0, 0, 0)
@@ -141,6 +141,6 @@ process_material = SubResource("ParticleProcessMaterial_60a84")
 draw_pass_1 = SubResource("BoxMesh_ivc8v")
 
 [node name="ShapeCast3D" type="ShapeCast3D" parent="."]
-transform = Transform3D(-7.23998e-07, -0.2, 0, 0.2, -7.23998e-07, 0, 0, 0, 0.2, 0.0791235, -2.86426e-07, -1.09305)
+transform = Transform3D(-3.61999e-06, -1, 0, 1, -3.61999e-06, 0, 0, 0, 1, 0.0791235, -2.86426e-07, -1.09305)
 shape = SubResource("BoxShape3D_aip7g")
 target_position = Vector3(0, 0, -1)
