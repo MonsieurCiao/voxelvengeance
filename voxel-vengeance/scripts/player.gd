@@ -108,6 +108,8 @@ func takeDamage(damage:float):
 		$AnimationPlayer.play("RESET")
 		randomSpawn()
 		deadStare = false
+		get_node("/root/main/CanvasLayer/UI").setHealthbar(50)
+		
 		
 func randomSpawn():
 	var spawn_locations_parent = get_node("/root/main/world/spawnLocations")
