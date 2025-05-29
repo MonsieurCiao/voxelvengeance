@@ -123,7 +123,7 @@ func randomSpawn():
 		push_warning("No spawnpoints")
 		position = Vector3(0, 1, 0)
 
-@rpc("any_peer")
+@rpc("any_peer", "call_local")
 func setName(playerlist: Dictionary):
 	await get_tree().process_frame
 	print("called SETNAMES from" + str(multiplayer.get_unique_id())+ " with list " + str(MultiplayerManager.playerlist))

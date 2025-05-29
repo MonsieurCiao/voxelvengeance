@@ -35,11 +35,16 @@ func host() -> void:
 	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
 	multiplayer.multiplayer_peer = peer
 	#function called to all other clients
-	#multiplayer.peer_connected.connect(
-		#func(peerID):
-			##client
-			#pass
-	#)
+	multiplayer.peer_connected.connect(
+		func(peerID):
+			#client
+			add_player(str(peerID))
+			var name = get_node("/root/main/CanvasLayer/PauseMenu/PanelContainer/VBoxContainer/name").text
+			print(multiplayer.get_unique_id()) #1
+			await get_tree().process_frame 
+			
+			update_playerlist.rpc_id(peerID, multiplayer.get_unique_id(), name, MultiplayerManager.playerlist)
+	)
 	var name = get_node("/root/main/CanvasLayer/PauseMenu/PanelContainer/VBoxContainer/name").text
 	update_playerlist.rpc(multiplayer.get_unique_id(), name, playerlist)
 	#host
@@ -65,14 +70,20 @@ func update_playerlist(id, name:String, list: Dictionary):
 			"id": int(id)
 		}
 	print("MultiplayerManager.playerlist", MultiplayerManager.playerlist)
+	disperseNames.rpc()
 	#make host loop over each peer and call their setName with host's playerlist
+		#if player_node and player_node.has_method("setName"):
+			#player_node.setName()
+
+@rpc("any_peer", "call_local")
+func disperseNames():
+	print("DISPERSING NAMES")
+	await get_tree().process_frame
 	if multiplayer.get_unique_id() == 1:
 		for peer_id in MultiplayerManager.playerlist:
 			var player_node = get_node_or_null("/root/main/players/" + str(peer_id))
 			if player_node:
 				player_node.setName.rpc_id(peer_id, MultiplayerManager.playerlist)
-		#if player_node and player_node.has_method("setName"):
-			#player_node.setName()
 
 func add_player(nodeName):
 	#prevent duplicate players
@@ -90,15 +101,12 @@ func remove_player(peer_id):
 
 func connected_to_server():
 	print("Succesfully connected to Server.")
+	disperseNames.rpc()
 func connection_failed():
 	print("You can't connect to this Server.")
 func peer_disconnected(id):
 	print("Player with ID " + str(id) + "disconnected from the game.")
 func peer_connected(peerID):
-	add_player(str(peerID))
-	var name = get_node("/root/main/CanvasLayer/PauseMenu/PanelContainer/VBoxContainer/name").text
 	print("A Player for " + str(peerID) + " was succesfully created.")
-	print(multiplayer.get_unique_id()) #1
-	await get_tree().process_frame 
-	
+	var name = get_node("/root/main/CanvasLayer/PauseMenu/PanelContainer/VBoxContainer/name").text
 	update_playerlist.rpc_id(peerID, multiplayer.get_unique_id(), name, MultiplayerManager.playerlist)
