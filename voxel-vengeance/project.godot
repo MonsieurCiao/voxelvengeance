@@ -21,6 +21,10 @@ MultiplayerManager="*res://scripts/multiplayer_manager.gd"
 Main="*res://scripts/main.gd"
 WeaponData="*res://scripts/weaponData.gd"
 
+[debug_draw_3d]
+
+settings/addon_root_folder="res://addons/debug_draw_3d"
+
 [display]
 
 window/size/viewport_width=1900

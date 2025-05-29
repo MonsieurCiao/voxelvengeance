@@ -134,20 +134,19 @@ func _shootParticles(weaponName) -> void:
 
 func shootRay():
 	var space = get_world_3d().direct_space_state
-	shape_cast.target_position = -shape_cast.transform.basis.z * WeaponData.getWeaponData(Main.currentWeapon)["rayLength"] * 5
+	var ray_length = WeaponData.getWeaponData(Main.currentWeapon)["rayLength"] * 25
+	shape_cast.target_position = -shape_cast.transform.basis.z * ray_length
 	
-	var collision_point
-	if shape_cast.is_colliding():
+	var collision_point : Vector3
+	var hit = shape_cast.is_colliding()
+	if hit:
 		collision_point = shape_cast.get_collision_point(0)
 		wallCrosshair.show()
 		crosshair.hide()
-
 		wallCrosshair.global_position = collision_point + Vector3.UP * 0.01
-
 	else:
 		wallCrosshair.hide()
 		crosshair.show()
-
 		var target_point = shape_cast.global_transform.origin + shape_cast.global_transform.basis * shape_cast.target_position
 		var down_from = target_point + Vector3.UP * 1.0
 		var down_to = down_from + Vector3.DOWN * 10.0
@@ -155,42 +154,32 @@ func shootRay():
 		var down_query = PhysicsRayQueryParameters3D.create(down_from, down_to)
 		down_query.collision_mask = 0xFFFFFFFF & ~(1 << 1)
 		var down_result = space.intersect_ray(down_query)
-
 		if down_result:
 			crosshair.position = down_result.position + Vector3.UP * 0.01
-
 		crosshair.rotation = player.rotation
-		
-	update_sniper_crosshair()
-	
 
-func update_sniper_crosshair():
+	update_sniper_crosshair(
+		shape_cast.global_transform.origin,
+		ray_length,
+		collision_point if hit else null
+	)
+		
+
+func update_sniper_crosshair(start: Vector3, max_length: float, collision_point: Variant = null):
 	if Main.currentWeapon != "sniper":
 		return
-	var start = shape_cast.global_transform.origin
-	var end = start + shape_cast.global_transform.basis * shape_cast.target_position
-	print("Start:", start, " → End:", end)
-	
+
+	var ground_start = Vector3(start.x, 0, start.z)
+	var forward = (-global_transform.basis.z).normalized()
+	var ground_end = collision_point if collision_point != null else ground_start + forward * max_length
+
 	var container = get_node("/root/main/Crosshairs/SniperSegmentsContainer")
 	var crosshair_template = preload("res://scenes/crosshairs/sniper_crosshair.tscn")
 	free_children(container)
 	container.show()
 
-	var weapon_data = WeaponData.getWeaponData(Main.currentWeapon)
-	var default_ray_length = weapon_data["rayLength"]
-	var segment_spacing = .5
-	
-	var origin = global_position
-	var forward = -global_transform.basis.z.normalized()
-
-	var space = get_world_3d().direct_space_state
-	var shape_end = shape_cast.global_transform.origin + shape_cast.global_transform.basis * shape_cast.target_position
-	
-	var ray_length = default_ray_length
-	if shape_cast.is_colliding():
-		var collision_point = shape_cast.get_collision_point(0)
-		ray_length = origin.distance_to(collision_point)
-	
+	var segment_spacing = 0.5
+	var ray_length = ground_start.distance_to(ground_end)
 	var segment_count = int(ray_length / segment_spacing)
 
 	for i in range(segment_count):
@@ -198,35 +187,12 @@ func update_sniper_crosshair():
 			var segment = crosshair_template.instantiate()
 			segment.name = "sniperSegment_%d" % i
 			container.add_child(segment)
-
-			var position = origin + forward * (i * segment_spacing + 2.0)
+			
+			var position = ground_start + forward * (i * segment_spacing + 2.0)
+			position.y = 0
 			segment.global_position = position
-			segment.look_at_from_position(Vector3(position.x, 0, position.z), Vector3(position.x, 0, position.z) + forward, Vector3.UP)
-
+			segment.look_at_from_position(position, position + forward, Vector3.UP)
 
 func free_children(node: Node):
 	for child in node.get_children():
 		child.queue_free()
-		
-func draw_debug_line(start: Vector3, end: Vector3):
-	var mesh = ImmediateMesh.new()
-	mesh.clear_surfaces()
-	
-	mesh.surface_begin(Mesh.PRIMITIVE_LINES)
-	mesh.surface_add_color(Color(1, 0, 0)) # Rot
-	mesh.surface_add_vertex(start)
-	mesh.surface_add_color(Color(1, 0, 0))
-	mesh.surface_add_vertex(end)
-	mesh.surface_end()
-
-	var instance = MeshInstance3D.new()
-	instance.mesh = mesh
-	instance.name = "debug_line"
-	instance.set_lifetime(0.1) # Optional – wenn du eigene Logik schreibst
-
-	# Vorherige Debuglinie löschen (optional)
-	var old = get_node_or_null("debug_line")
-	if old:
-		old.queue_free()
-
-	add_child(instance)
