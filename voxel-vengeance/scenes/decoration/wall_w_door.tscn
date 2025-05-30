@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://dyg2jjouv3xc7"]
+
+[ext_resource type="PackedScene" uid="uid://beywxh1wc0d3b" path="res://assets/models/decoration/wall_w_door.blend" id="1_eq2o4"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7hft7"]
+size = Vector3(0.699852, 0.958252, 0.405273)
+
+[node name="wall_w_door" type="Node3D"]
+
+[node name="wall_w_door" parent="." instance=ExtResource("1_eq2o4")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="wall_w_door"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="wall_w_door/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.788318, 0.485229, -0.0311525)
+shape = SubResource("BoxShape3D_7hft7")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="wall_w_door/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.874891, 0.485229, -0.0311525)
+shape = SubResource("BoxShape3D_7hft7")
+
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="wall_w_door"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.785057, 0.488403, -0.0328979)
+size = Vector3(1.40665, 1.896, 0.795898)
+
+[node name="GPUParticlesCollisionBox3D2" type="GPUParticlesCollisionBox3D" parent="wall_w_door"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.880792, 0.488403, -0.0328979)
+size = Vector3(1.40665, 1.896, 0.795898)

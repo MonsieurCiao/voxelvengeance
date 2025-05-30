@@ -1,9 +1,39 @@
-[gd_scene load_steps=15 format=3 uid="uid://ds7nop426fpju"]
+[gd_scene load_steps=14 format=3 uid="uid://ds7nop426fpju"]
 
 [ext_resource type="PackedScene" uid="uid://blq43804hderl" path="res://assets/models/weapons/pistol.blend" id="1_bmquw"]
 [ext_resource type="Script" uid="uid://bibvhm7q5prgf" path="res://scripts/shoot.gd" id="2_r3071"]
 [ext_resource type="PackedScene" uid="uid://ckx4hhut66byo" path="res://scenes/animation/weapon_muzzle_flash.tscn" id="3_60a84"]
 [ext_resource type="AudioStream" uid="uid://iwjt28x3e1d3" path="res://sound/pistol.mp3" id="5_61dc8"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ivc8v"]
+random_pitch = 1.24
+random_volume_offset_db = 3.0
+streams_count = 1
+stream_0/stream = ExtResource("5_61dc8")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_60a84"]
+albedo_color = Color(0.945098, 0.639216, 0, 1)
+emission_enabled = true
+emission = Color(1, 0.786441, 0.254763, 1)
+emission_energy_multiplier = 10.0
+
+[sub_resource type="Curve" id="Curve_60a84"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.174797), -0.918903, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ivc8v"]
+curve = SubResource("Curve_60a84")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_60a84"]
+spread = 24.398
+initial_velocity_min = 13.0
+initial_velocity_max = 20.0
+scale_min = 0.5
+scale_max = 1.2
+scale_curve = SubResource("CurveTexture_ivc8v")
+
+[sub_resource type="BoxMesh" id="BoxMesh_ivc8v"]
+size = Vector3(0.1, 0.1, 0.1)
 
 [sub_resource type="Animation" id="Animation_37wq5"]
 length = 0.001
@@ -66,54 +96,11 @@ _data = {
 &"shoot": SubResource("Animation_rpfgx")
 }
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ivc8v"]
-random_pitch = 1.24
-random_volume_offset_db = 3.0
-streams_count = 1
-stream_0/stream = ExtResource("5_61dc8")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_60a84"]
-albedo_color = Color(0.945098, 0.639216, 0, 1)
-emission_enabled = true
-emission = Color(1, 0.786441, 0.254763, 1)
-emission_energy_multiplier = 10.0
-
-[sub_resource type="Curve" id="Curve_60a84"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.174797), -0.918903, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_ivc8v"]
-curve = SubResource("Curve_60a84")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_60a84"]
-spread = 24.398
-initial_velocity_min = 13.0
-initial_velocity_max = 20.0
-scale_min = 0.5
-scale_max = 1.2
-scale_curve = SubResource("CurveTexture_ivc8v")
-
-[sub_resource type="BoxMesh" id="BoxMesh_ivc8v"]
-size = Vector3(0.1, 0.1, 0.1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_ivc8v"]
-margin = 0.0
-size = Vector3(0.2, 0.2, 0.2)
-
 [node name="pistol" type="Node3D"]
 script = ExtResource("2_r3071")
 
 [node name="weapon" parent="." instance=ExtResource("1_bmquw")]
 transform = Transform3D(-7.23998e-07, -0.2, 0, 0.2, -7.23998e-07, 0, 0, 0, 0.2, 0, 0, 0)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="weapon"]
-libraries = {
-&"": SubResource("AnimationLibrary_ps2nd")
-}
-
-[node name="RayCast3D" type="RayCast3D" parent="weapon"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.404414, -1.46398e-06, -2.18479)
-target_position = Vector3(0, 0, -1)
 
 [node name="weaponEnd" type="Node3D" parent="weapon"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.83901)
@@ -140,7 +127,12 @@ trail_lifetime = 10.0
 process_material = SubResource("ParticleProcessMaterial_60a84")
 draw_pass_1 = SubResource("BoxMesh_ivc8v")
 
-[node name="ShapeCast3D" type="ShapeCast3D" parent="."]
-transform = Transform3D(-7.23998e-07, -0.2, 0, 0.2, -7.23998e-07, 0, 0, 0, 0.2, 0, 0, -0.704912)
-shape = SubResource("BoxShape3D_ivc8v")
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(-1.086e-06, -0.3, 0, 0.3, -1.086e-06, 0, 0, 0, 0.3, 1.0516e-12, 0.0808828, -0.436958)
 target_position = Vector3(0, 0, -1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../weapon")
+libraries = {
+&"": SubResource("AnimationLibrary_ps2nd")
+}

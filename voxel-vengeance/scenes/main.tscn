@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://d2yfp1tb8a8o1"]
+[gd_scene load_steps=16 format=3 uid="uid://d2yfp1tb8a8o1"]
 
 [ext_resource type="PackedScene" uid="uid://ds3ieo3rb4j0a" path="res://scenes/menus/pause_menu.tscn" id="1_o6xl0"]
 [ext_resource type="Script" uid="uid://fg8b618rpf31" path="res://scripts/main.gd" id="1_yc10j"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c0qeoo6mubcti" path="res://scenes/menus/UI.tscn" id="4_ya4ey"]
 [ext_resource type="PackedScene" uid="uid://b00l872ksbyw1" path="res://scenes/menus/settings_menu.tscn" id="6_jbj1t"]
 [ext_resource type="PackedScene" uid="uid://v11idaphqgrb" path="res://scenes/world.tscn" id="9_85g3d"]
+[ext_resource type="PackedScene" uid="uid://dyg2jjouv3xc7" path="res://scenes/decoration/wall_w_door.tscn" id="10_choun"]
 [ext_resource type="PackedScene" uid="uid://oor8lanp1d2q" path="res://scenes/crosshairs/Crosshair.tscn" id="20_gqmmt"]
 [ext_resource type="PackedScene" uid="uid://d2qbbiqybvvob" path="res://scenes/crosshairs/pump_crosshair.tscn" id="22_pm3ni"]
 
@@ -14,12 +15,12 @@
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
 ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
 
-[sub_resource type="Sky" id="Sky_o5qli"]
+[sub_resource type="Sky" id="Sky_85g3d"]
 sky_material = SubResource("ProceduralSkyMaterial_sgp6g")
 
 [sub_resource type="Environment" id="Environment_0wfyh"]
 background_mode = 2
-sky = SubResource("Sky_o5qli")
+sky = SubResource("Sky_85g3d")
 sdfgi_enabled = true
 glow_enabled = true
 fog_mode = 1
@@ -94,3 +95,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.97019, -1.29287, 0.162612)
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="players"]
 _spawnable_scenes = PackedStringArray("uid://bmnfojq3xd4ad")
 spawn_path = NodePath("..")
+
+[node name="wall_w_door" parent="." instance=ExtResource("10_choun")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -10.0316, -0.791892, 9.34862)

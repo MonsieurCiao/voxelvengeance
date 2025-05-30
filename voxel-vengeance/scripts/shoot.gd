@@ -3,7 +3,7 @@ extends Node3D
 # Bullets
 var bullet = load("res://scenes/weapons/pistolBullet.tscn")
 var bulletInstance
-@onready var gun_barrel = $weapon/RayCast3D
+@onready var gun_barrel = $RayCast3D
 @onready var player: CharacterBody3D = $"../.."
 @onready var weapon_spawner: Node3D = $".."
 var animation_player
